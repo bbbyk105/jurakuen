@@ -8,7 +8,7 @@ import {
 import Image from "next/image";
 import { Button } from "../components/ui/button";
 
-const ProductSection = () => {
+const Product = () => {
   return (
     <>
       <div className="py-20 bg-white">
@@ -122,4 +122,4 @@ const ProductSection = () => {
   );
 };
 
-export default ProductSection;
+export default Product;

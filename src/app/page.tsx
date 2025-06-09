@@ -1,12 +1,12 @@
 "use client";
 import React, { useEffect } from "react";
-import HeroSection from "./(landing)/HeroSection";
-import AboutUsSection from "./(landing)/AboutUsSection";
-import ProductSection from "./(landing)/ProductSection";
-import SustainabilitySection from "./(landing)/SustainabilitySection";
+import Hero from "./(landing)/Hero";
+import AboutUs from "./(landing)/AboutUs";
+import Product from "./(landing)/Product";
+import Sustainability from "./(landing)/Sustainability";
 import Footer from "./(landing)/Footer";
-import ContactSection from "./(landing)/ContactSection";
-import InstagramSection from "./(landing)/InstagramSection";
+import Contact from "./(landing)/Contact";
+import Instagram from "./(landing)/Instagram";
 
 // AOS初期化カスタムフック
 const useAOS = () => {
@@ -127,12 +127,12 @@ const JurakuEnLanding = () => {
         }
       `}</style>
 
-      <HeroSection />
-      <AboutUsSection />
-      <ProductSection />
-      <SustainabilitySection />
-      <InstagramSection />
-      <ContactSection />
+      <Hero />
+      <AboutUs />
+      <Product />
+      <Sustainability />
+      <Instagram />
+      <Contact />
       <Footer />
     </div>
   );

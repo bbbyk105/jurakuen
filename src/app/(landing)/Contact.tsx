@@ -10,7 +10,7 @@ import { Textarea } from "../components/ui/textarea";
 import { Button } from "../components/ui/button";
 import { FaEnvelope, FaMapMarkerAlt, FaPhone } from "react-icons/fa";
 
-const ContactSection = () => {
+const Contact = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -128,4 +128,4 @@ const ContactSection = () => {
   );
 };
 
-export default ContactSection;
+export default Contact;

@@ -3,7 +3,7 @@ import React from "react";
 import { FaInstagram } from "react-icons/fa";
 import { Button } from "../components/ui/button";
 
-const InstagramSection = () => {
+const Instagram = () => {
   return (
     <div className="py-20 bg-washi-beige">
       <div className="max-w-6xl mx-auto px-4">
@@ -54,4 +54,4 @@ const InstagramSection = () => {
   );
 };
 
-export default InstagramSection;
+export default Instagram;

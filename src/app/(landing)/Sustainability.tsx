@@ -1,7 +1,7 @@
 import React from "react";
 import { FaAward, FaCalendarAlt, FaLeaf, FaUsers } from "react-icons/fa";
 
-const SustainabilitySection = () => {
+const Sustainability = () => {
   return (
     <div className="py-20 bg-washi-beige">
       <div className="max-w-6xl mx-auto px-4">
@@ -57,4 +57,4 @@ const SustainabilitySection = () => {
   );
 };
 
-export default SustainabilitySection;
+export default Sustainability;

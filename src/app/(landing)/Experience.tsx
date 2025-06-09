@@ -29,7 +29,7 @@ const experiences = [
   },
 ];
 
-const ExperienceSection = () => {
+const Experience = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [formData, setFormData] = useState({
     name: "",
@@ -187,4 +187,4 @@ const ExperienceSection = () => {
   );
 };
 
-export default ExperienceSection;
+export default Experience;
