@@ -3,6 +3,7 @@ import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Link } from "@/i18n/routing";
 
 /**
  * About – Manufacturing‑focused layout for 無農薬抹茶「かがやき」
@@ -109,16 +110,18 @@ const About = () => {
 
       {/* CTA */}
       <div className="mt-24 text-center">
-        <Button
-          variant="outline"
-          className="group border-gray-400 px-8 py-3 rounded text-sm font-normal"
-        >
-          もっと詳しく
-          <ArrowRight
-            size={16}
-            className="ml-2 transition-transform duration-300 group-hover:translate-x-1"
-          />
-        </Button>
+        <Link href={"/about"}>
+          <Button
+            variant="outline"
+            className="group border-gray-400 px-8 py-3 rounded text-sm font-normal"
+          >
+            もっと詳しく
+            <ArrowRight
+              size={16}
+              className="ml-2 transition-transform duration-300 group-hover:translate-x-1"
+            />
+          </Button>
+        </Link>
       </div>
     </section>
   );
