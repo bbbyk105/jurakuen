@@ -95,11 +95,11 @@ const Contact = () => {
                 <div className="space-y-3 text-gray-700">
                   <div className="flex items-center space-x-3">
                     <FaMapMarkerAlt className="w-5 h-5 text-matcha-light" />
-                    <span>〒416-0000 静岡県富士市○○町○○番地</span>
+                    <span>〒417-0812 静岡県富士市境485-2</span>
                   </div>
                   <div className="flex items-center space-x-3">
                     <FaPhone className="w-5 h-5 text-matcha-light" />
-                    <span>0545-XX-XXXX</span>
+                    <span>0545-34-0614</span>
                   </div>
                   <div className="flex items-center space-x-3">
                     <FaEnvelope className="w-5 h-5 text-matcha-light" />
@@ -112,7 +112,7 @@ const Contact = () => {
             {/* Google Maps */}
             <div className="rounded-2xl overflow-hidden shadow-lg">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3269.123456789!2d138.6764123!3d35.1612345!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2s%E5%AF%8C%E5%A3%AB%E5%B1%B1!5e0!3m2!1sja!2sjp!4v1234567890"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3282.6242223143734!2d138.6759925!3d35.1464575!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x601be4f4e004ae09%3A0xb1cbb30d33efce5b!2z5oi45byP5aSn!5e0!3m2!1sja!2sjp!4v1717916643144"
                 width="100%"
                 height="300"
                 style={{ border: 0 }}
