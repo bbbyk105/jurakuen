@@ -12,7 +12,7 @@ export const products: Product[] = [
     category: "Junmai Daiginjo",
     label: "Amachi Hoshisora",
     image: {
-      url: "/720.webp",
+      url: "/images/maccha.jpg",
       alt: "Amachi Hoshisora Junmai Daiginjo 720ml",
       width: 400,
       height: 400,
@@ -39,7 +39,7 @@ export const products: Product[] = [
     category: "Junmai Daiginjo",
     label: "Amachi Hoshisora",
     image: {
-      url: "/500.webp",
+      url: "/images/cha.jpg",
       alt: "Amachi Hoshisora Junmai Daiginjo 500ml",
       width: 400,
       height: 400,
@@ -66,7 +66,7 @@ export const products: Product[] = [
     category: "Matcha",
     label: "Fujinishiki",
     image: {
-      url: "/maccha.webp",
+      url: "/images/cha2.jpg",
       alt: "Premium Matcha",
       width: 400,
       height: 400,

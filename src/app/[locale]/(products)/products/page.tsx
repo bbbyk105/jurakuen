@@ -1,12 +1,16 @@
-// src/app/[locale]/(products)/products/page.tsx - 国際化対応版
+// src/app/[locale]/(products)/products/page.tsx – Minimal Rustic Style (機能そのまま)
 "use client";
 import React, { useState } from "react";
-import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { useRouter, useParams } from "next/navigation";
-import { ShoppingCart, Share2, SortDesc, Check } from "lucide-react";
+import { ShoppingCart, Check, Plus, ChevronDown } from "lucide-react";
+import { useTranslations } from "next-intl";
 
+// UI ライブラリ
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+
+// アプリケーションロジック
 import { Product } from "@/data/types";
 import { useCart } from "@/store/cart";
 import {
@@ -17,280 +21,198 @@ import {
   getSortOptions,
   sortProducts,
 } from "@/data/utils";
-import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/routing";
 
+/* ------------------------------------------------------
+ *  UI — Product Card
+ * ---------------------------------------------------- */
 interface ProductCardProps {
   product: Product;
   locale: string;
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ product, locale }) => {
-  const { addToCart } = useCart();
   const router = useRouter();
+  const { addToCart } = useCart();
   const [isAdding, setIsAdding] = useState(false);
   const [justAdded, setJustAdded] = useState(false);
 
-  // 翻訳フック
-  const tCommon = useTranslations("productList");
-
-  const handleAddToCart = async (e: React.MouseEvent) => {
+  const handleAddToCart = (e: React.MouseEvent) => {
     e.stopPropagation();
     setIsAdding(true);
     addToCart(product, 1);
-
     setTimeout(() => {
       setIsAdding(false);
       setJustAdded(true);
-      setTimeout(() => {
-        setJustAdded(false);
-      }, 2000);
-    }, 500);
-  };
-
-  const handleShareClick = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    // シェア機能の実装
-  };
-
-  const handleCardClick = () => {
-    router.push(`/${locale}/products/${product.id}`);
+      setTimeout(() => setJustAdded(false), 1500);
+    }, 400);
   };
 
   return (
     <Card
-      className="group border-none shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02] overflow-hidden cursor-pointer"
-      onClick={handleCardClick}
+      className="group bg-transparent border-none shadow-none cursor-pointer"
+      onClick={() => router.push(`/${locale}/products/${product.id}`)}
     >
       <CardContent className="p-0">
-        {/* 商品画像エリア */}
-        <div className="relative aspect-square bg-gray-50 overflow-hidden">
+        {/* Image */}
+        <div className="relative aspect-square bg-[#eeedeb] overflow-hidden">
           <Image
             src={product.image.url}
             alt={product.image.alt}
             fill
-            className="object-cover group-hover:scale-105 transition-transform duration-300"
+            className="object-contain transition-transform duration-300 group-hover:scale-105"
             sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+            priority
           />
 
-          {/* アクションボタン */}
-          <div className="absolute top-3 right-3 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-            <Button
-              size="sm"
-              variant="ghost"
-              className="w-8 h-8 rounded-full bg-white/90 hover:bg-white p-0"
-              onClick={handleShareClick}
-            >
-              <Share2 className="w-4 h-4 text-gray-600" />
-            </Button>
-          </div>
+          {/* Add‑to‑Cart (hover で表示) */}
+          <Button
+            size="icon"
+            onClick={handleAddToCart}
+            disabled={isAdding}
+            className="absolute bottom-3 right-3 w-8 h-8 rounded-full bg-black text-white opacity-0 group-hover:opacity-100 transition-opacity"
+          >
+            {isAdding ? (
+              <div className="w-3 h-3 border-2 border-white border-t-transparent rounded-full animate-spin" />
+            ) : justAdded ? (
+              <Check className="w-4 h-4" />
+            ) : (
+              <Plus className="w-4 h-4" />
+            )}
+          </Button>
         </div>
 
-        {/* 商品情報エリア */}
-        <div className="p-4 space-y-3">
-          {/* カテゴリ・ラベル */}
-          <div className="flex items-center justify-between">
-            <span className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded">
-              {product.category}
-            </span>
-            <span className="text-xs text-blue-600 bg-blue-100 px-2 py-1 rounded">
-              {product.label}
-            </span>
-          </div>
-
-          {/* 商品名 */}
-          <h3 className="font-medium text-gray-900 text-sm lg:text-base leading-tight line-clamp-2">
+        {/* Details */}
+        <div className="pt-3">
+          <h3 className="text-xs sm:text-sm font-normal text-gray-900 leading-snug line-clamp-2">
             {product.name}
           </h3>
 
-          {/* 説明 */}
-          <p className="text-xs text-gray-600 line-clamp-2">
-            {product.description}
-          </p>
-
-          {/* 商品詳細 */}
-          <div className="space-y-1 text-xs text-gray-500">
+          {/* Optionally show up to 2 spec lines */}
+          <div className="mt-1 space-y-0.5 text-[10px] text-gray-500">
             {getProductDetails(product, locale)
-              .slice(0, 3)
-              .map((detail, index) => (
-                <p key={index}>
-                  {detail.label}: {detail.value}
+              .slice(0, 2)
+              .map((d, i) => (
+                <p key={i}>
+                  {d.label}: {d.value}
                 </p>
               ))}
           </div>
 
-          {/* 価格とボタン */}
-          <div className="flex items-center justify-between pt-2">
-            <div className="flex items-center gap-2">
-              <span className="text-lg font-bold text-gray-900">
-                {formatPrice(product.price)}
-              </span>
-              {product.originalPrice && (
-                <span className="text-sm text-gray-400 line-through">
-                  {formatPrice(product.originalPrice)}
-                </span>
-              )}
-            </div>
-            <Button
-              size="sm"
-              onClick={handleAddToCart}
-              disabled={isAdding}
-              className={`transition-all duration-300 ${
-                justAdded
-                  ? "bg-green-600 hover:bg-green-700 text-white"
-                  : "bg-gray-900 hover:bg-gray-800 text-white"
-              }`}
-            >
-              {isAdding ? (
-                <div className="flex items-center">
-                  <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-1" />
-                  {tCommon("adding")}
-                </div>
-              ) : justAdded ? (
-                <div className="flex items-center">
-                  <Check className="w-4 h-4 mr-1" />
-                  {tCommon("added")}
-                </div>
-              ) : (
-                <div className="flex items-center">
-                  <ShoppingCart className="w-4 h-4 mr-1" />
-                  {tCommon("add")}
-                </div>
-              )}
-            </Button>
-          </div>
+          <p className="mt-2 text-sm font-medium text-gray-900">
+            {formatPrice(product.price)}
+          </p>
         </div>
       </CardContent>
     </Card>
   );
 };
 
+/* ------------------------------------------------------
+ *  UI — Page Layout
+ * ---------------------------------------------------- */
 const ProductPage = () => {
   const params = useParams();
   const locale = params.locale as string;
-
-  // 翻訳フック
   const t = useTranslations("productList");
-
-  const [selectedCategory, setSelectedCategory] = useState(() => {
-    const categories = getCategories(locale);
-    return categories[0]; // "すべて" or "All"
-  });
-  const [sortBy, setSortBy] = useState(() => {
-    const sortOptions = getSortOptions(locale);
-    return sortOptions[0]; // "おすすめ順" or "Recommended"
-  });
-
   const { getTotalQuantity } = useCart();
 
-  // ロケール対応データの取得
+  // state
   const categories = getCategories(locale);
   const sortOptions = getSortOptions(locale);
+  const [selectedCategory, setSelectedCategory] = useState(categories[0]);
+  const [sortBy, setSortBy] = useState(sortOptions[0]);
 
-  // フィルタリング
-  const filteredProducts = getProductsByCategory(selectedCategory, locale);
-
-  // ソート
-  const sortedProducts = sortProducts(filteredProducts, sortBy, locale);
+  // data
+  const filtered = getProductsByCategory(selectedCategory, locale);
+  const products = sortProducts(filtered, sortBy, locale);
 
   return (
-    <div className="min-h-screen bg-gray-50 pt-16">
-      {/* ヘロセクション */}
-      <section className="bg-gradient-to-r from-gray-900 via-gray-800 to-black text-white py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center space-y-4">
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-light tracking-wider">
-              {locale === "en" ? "PRODUCTS" : "PRODUCT"}
-            </h1>
-            <p className="text-lg text-gray-300 max-w-2xl mx-auto">
-              {t("heroDescription")}
-            </p>
-            {/* カート情報表示 */}
-            {getTotalQuantity() > 0 && (
-              <div className="inline-flex items-center bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 text-sm">
-                <ShoppingCart className="w-4 h-4 mr-2" />
-                {t("cartInfo", { count: getTotalQuantity() })}
-              </div>
-            )}
-          </div>
+    <main className="bg-white min-h-screen">
+      {/* Header */}
+      <header className="max-w-screen-xl mx-auto px-6 pt-12 pb-8">
+        <h1 className="text-lg sm:text-xl font-medium tracking-wide text-gray-900">
+          {locale === "en" ? "All Products" : "すべての製品"}
+        </h1>
+        <p className="text-[10px] sm:text-xs text-gray-500 mt-1">
+          {locale === "en" ? "Explore our collection" : "All Products"}
+        </p>
+      </header>
+      <hr className="border-gray-200" />
+
+      {/* Filter / Sort */}
+      <section className="max-w-screen-xl mx-auto px-6 py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-sm">
+        <div className="flex items-center gap-2 overflow-x-auto">
+          {categories.map((cat) => (
+            <Button
+              key={cat}
+              size="sm"
+              variant="ghost"
+              onClick={() => setSelectedCategory(cat)}
+              className={
+                selectedCategory === cat
+                  ? "underline underline-offset-4"
+                  : "text-gray-600 hover:text-gray-900"
+              }
+            >
+              {cat}
+            </Button>
+          ))}
         </div>
-      </section>
 
-      {/* フィルター・ソートセクション */}
-      <section className="bg-white border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex flex-col sm:flex-row gap-4 justify-between items-start sm:items-center">
-            {/* カテゴリフィルター */}
-            <div className="flex flex-wrap gap-2">
-              {categories.map((category) => (
-                <Button
-                  key={category}
-                  variant={
-                    selectedCategory === category ? "default" : "outline"
-                  }
-                  size="sm"
-                  onClick={() => setSelectedCategory(category)}
-                  className={`${
-                    selectedCategory === category
-                      ? "bg-gray-900 text-white"
-                      : "text-gray-600 hover:text-gray-900"
-                  }`}
-                >
-                  {category}
-                </Button>
-              ))}
-            </div>
-
-            {/* ソート */}
-            <div className="flex items-center gap-4">
-              <div className="flex items-center gap-2">
-                <SortDesc className="w-4 h-4 text-gray-600" />
-                <select
-                  value={sortBy}
-                  onChange={(e) => setSortBy(e.target.value)}
-                  className="border border-gray-300 rounded-md px-3 py-1 text-sm bg-white"
-                >
-                  {sortOptions.map((option) => (
-                    <option key={option} value={option}>
-                      {option}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              <span className="text-sm text-gray-600">
-                {sortedProducts.length}
-                {t("itemsCount")}
-              </span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 商品一覧 */}
-      <section className="py-8 lg:py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-8">
-            {sortedProducts.map((product) => (
-              <ProductCard key={product.id} product={product} locale={locale} />
+        {/* Sort dropdown */}
+        <div className="flex items-center gap-1 text-gray-600 mt-1 sm:mt-0">
+          <select
+            value={sortBy}
+            onChange={(e) => setSortBy(e.target.value)}
+            className="appearance-none bg-transparent pr-4 pl-1 py-1 text-gray-800 focus:outline-none"
+          >
+            {sortOptions.map((o) => (
+              <option key={o}>{o}</option>
             ))}
-          </div>
-
-          {/* 商品が見つからない場合 */}
-          {sortedProducts.length === 0 && (
-            <div className="text-center py-16">
-              <p className="text-gray-500 text-lg">{t("noProductsFound")}</p>
-              <Button
-                variant="outline"
-                onClick={() => setSelectedCategory(categories[0])}
-                className="mt-4"
-              >
-                {t("showAllProducts")}
-              </Button>
-            </div>
-          )}
+          </select>
+          <ChevronDown className="w-4 h-4" />
         </div>
       </section>
-    </div>
+      <hr className="border-gray-200" />
+
+      {/* Item count */}
+      <div className="max-w-screen-xl mx-auto px-6 py-4 text-xs text-gray-600">
+        {t("itemsCount", { count: products.length })}
+      </div>
+
+      {/* Grid */}
+      <section className="max-w-screen-xl mx-auto px-6 pb-20">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-12">
+          {products.map((p) => (
+            <ProductCard key={p.id} product={p} locale={locale} />
+          ))}
+        </div>
+
+        {/* Empty */}
+        {products.length === 0 && (
+          <div className="text-center py-16 text-gray-500 text-sm">
+            {t("noProductsFound")}
+          </div>
+        )}
+      </section>
+
+      {/* Floating Cart indicator (右下) */}
+      {getTotalQuantity() > 0 && (
+        <Link href={"/cart"}>
+          <Button
+            onClick={() => {}}
+            className="fixed bottom-6 right-6 rounded-full w-12 h-12 bg-black text-white hover:opacity-90 shadow-lg"
+          >
+            <span className="sr-only">Cart</span>
+            <ShoppingCart className="w-5 h-5" />
+            <span className="absolute -top-1 -right-1 inline-flex items-center justify-center w-5 h-5 text-[10px] font-medium bg-red-600 text-white rounded-full">
+              {getTotalQuantity()}
+            </span>
+          </Button>
+        </Link>
+      )}
+    </main>
   );
 };
 
