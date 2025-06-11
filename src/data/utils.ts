@@ -24,12 +24,6 @@ export const getHeroData = (locale: string = "ja") => {
   return data.heroData;
 };
 
-export const getTopicsData = (locale: string = "ja") => {
-  const data =
-    dataByLocale[locale as keyof typeof dataByLocale] || dataByLocale.ja;
-  return data.topicsData;
-};
-
 export const getCategories = (locale: string = "ja"): string[] => {
   const data =
     dataByLocale[locale as keyof typeof dataByLocale] || dataByLocale.ja;
