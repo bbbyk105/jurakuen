@@ -18,7 +18,6 @@ export interface Product {
   price: number; // Price in AUD (e.g., 88 = $88.00 AUD)
   originalPrice?: number | null;
   category: string;
-  label: string;
   image: Image;
   details: {
     alcoholContent?: string;

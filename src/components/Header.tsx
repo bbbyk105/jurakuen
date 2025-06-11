@@ -21,7 +21,7 @@ import { Link } from "@/i18n/routing";
 const navItems = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
-  { label: "Product", href: "/products" },
+  { label: "Products", href: "/products" },
 ];
 
 // Recent product preview (optional)

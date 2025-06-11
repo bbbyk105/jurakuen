@@ -144,9 +144,6 @@ const ProductDetailPage = () => {
                 <span className="text-sm text-gray-500 bg-gray-100 px-3 py-1 rounded-full">
                   {product.category}
                 </span>
-                <span className="text-sm text-gray-500 bg-blue-100 px-3 py-1 rounded-full">
-                  {product.label}
-                </span>
               </div>
 
               <h1 className="text-2xl lg:text-3xl font-bold text-gray-900">

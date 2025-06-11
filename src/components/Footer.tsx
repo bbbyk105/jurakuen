@@ -1,4 +1,5 @@
 "use client";
+import { Link } from "@/i18n/routing";
 import React from "react";
 import { FaInstagram } from "react-icons/fa";
 
@@ -103,15 +104,24 @@ export const Footer: React.FC = () => {
             <div className="flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-6 text-sm text-green-200">
               <p>&copy; 2025 聚楽苑. All rights reserved.</p>
               <div className="flex space-x-4">
-                <a href="#" className="hover:text-white transition-colors">
+                <Link
+                  href="/privacy"
+                  className="hover:text-white transition-colors"
+                >
                   プライバシーポリシー
-                </a>
-                <a href="#" className="hover:text-white transition-colors">
+                </Link>
+                <Link
+                  href="/terms"
+                  className="hover:text-white transition-colors"
+                >
                   利用規約
-                </a>
-                <a href="#" className="hover:text-white transition-colors">
+                </Link>
+                <Link
+                  href="/commerce"
+                  className="hover:text-white transition-colors"
+                >
                   特定商取引法
-                </a>
+                </Link>
               </div>
             </div>
           </div>
