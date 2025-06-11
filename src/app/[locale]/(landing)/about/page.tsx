@@ -13,11 +13,12 @@ import {
   AccordionTrigger,
   AccordionContent,
 } from "@/components/ui/accordion";
+import Image from "next/image";
 
 const faqs = [
   {
     q: "有機JASって何？",
-    a: "農薬・化学肥料を使用せず、厳格な基準を満たした農産物にのみ付与される日本の有機認証です。『かがやき』は富士市で初めて抹茶としてこの認証を取得しました。",
+    a: "農薬・化学肥料を使用せず、厳格な基準を満たした農産物にのみ付与される日本の有機認証です。",
   },
   {
     q: "どんな味わい？",
@@ -37,13 +38,12 @@ const AboutPage = () => {
         <div className="max-w-5xl mx-auto px-4 lg:px-0 grid lg:grid-cols-2 gap-12 items-start">
           {/* photo */}
           <div className="relative h-64 sm:h-96 lg:h-full order-last lg:order-first">
-            <video
-              src="/videos/tea.mp4"
-              autoPlay
-              muted
-              playsInline
-              loop
-              className="object-cover rounded-2xl"
+            <Image
+              src="/images/fuji.webp"
+              alt="写真の説明"
+              layout="fill"
+              objectFit="cover"
+              className="rounded-lg"
             />
           </div>
 
@@ -62,7 +62,7 @@ const AboutPage = () => {
             <p>
               追い求めたのは「身体にも環境にも優しい一服」。
               化学肥料の代わりに自家製堆肥をすき込み、雑草はすべて手作業で抜き取る——
-              膨大な手間を惜しまぬ姿勢が〈富士抹茶 かがやき〉を生みました。
+              膨大な手間を惜しまぬ姿勢が〈富士抹茶 かがやき〉を生みました。
             </p>
             <p>
               碾茶に適した若葉だけを選び、<strong>21日間の覆下栽培</strong>
@@ -82,6 +82,85 @@ const AboutPage = () => {
               オンラインでも世界へ向けて販売を拡大し、日本茶の魅力を静かに発信し続けています。
             </p>
           </article>
+        </div>
+      </section>
+
+      {/* ──────────── 生産者セクション ──────────── */}
+      <section className="py-24 bg-gray-50">
+        <div className="max-w-5xl mx-auto px-4 lg:px-0">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* 生産者のコメント */}
+            <div className="space-y-6">
+              <h3 className="text-xl md:text-2xl font-light text-gray-900">
+                生産者からのメッセージ
+              </h3>
+              <blockquote className="text-gray-700 text-sm leading-relaxed space-y-4">
+                <p>
+                  「化学肥料や農薬に頼らず、自然の力だけでお茶を育てる——
+                  それは決して簡単な道ではありませんでした。」
+                </p>
+                <p>
+                  「手作業での除草、自家製堆肥の管理、天候との向き合い方。
+                  すべてを一から学び直しました。しかし、その先にあったのは
+                  今まで味わったことのない、本当に純粋な抹茶の味わいでした。」
+                </p>
+                <p>
+                  「私たちが生産しているお茶には、この挑戦で得た学びと喜びが込められています。
+                  飲んでくださる皆様にも、その輝きを感じていただけたら幸いです。」
+                </p>
+              </blockquote>
+              <div className="text-right">
+                <p className="text-sm text-gray-600">聚楽苑</p>
+                <p className="text-sm font-medium text-gray-900">望月</p>
+              </div>
+            </div>
+            {/* 生産者の写真 */}
+            <div className="relative h-80 lg:h-96">
+              <Image
+                src="/images/producer.webp"
+                alt="聚楽苑生産者"
+                layout="fill"
+                objectFit="cover"
+                className="rounded-lg shadow-lg"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ──────────── 被せ茶動画セクション ──────────── */}
+      <section className="py-24">
+        <div className="max-w-5xl mx-auto px-4 lg:px-0">
+          <div className="text-center mb-12">
+            <h3 className="text-xl md:text-2xl font-light text-gray-900 mb-4">
+              茶畑の様子
+            </h3>
+            <p className="text-gray-600 text-sm max-w-2xl mx-auto">
+              青々と広がる茶畑の風景。緑に囲まれたこの場所で、茶葉が成長していく過程が感じられます。
+              穏やかな風に揺れる茶葉の様子や、農作業の一幕をお楽しみください。
+            </p>
+          </div>
+
+          <div className="relative max-w-4xl mx-auto">
+            <div className="relative aspect-video rounded-lg overflow-hidden shadow-lg">
+              <video
+                className="w-full h-full object-cover"
+                autoPlay
+                muted
+                playsInline
+              >
+                <source src="/videos/tea_field.mp4" type="video/mp4" />
+                お使いのブラウザは動画の再生に対応していません。
+              </video>
+            </div>
+            <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-lg pointer-events-none"></div>
+          </div>
+
+          <div className="text-center mt-8">
+            <p className="text-sm text-gray-600 italic">
+              豊かな緑の茶畑が広がる風景、自然の恵みを感じてください。
+            </p>
+          </div>
         </div>
       </section>
 
