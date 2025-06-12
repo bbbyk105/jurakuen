@@ -30,6 +30,17 @@
             "price": "¥13,140 (tax included)"
         }
     },
+    "hero": {
+        "catchphrase": "Find peace in every sip\nfrom Mt. Fuji foothills",
+        "slides": [
+            {
+                "alt": "Mt. Fuji and matcha fields"
+            },
+            {
+                "alt": "Organic matcha tea leaves"
+            }
+        ]
+    },
     "common": {
         "loading": "Loading...",
         "processing": "Processing...",

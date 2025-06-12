@@ -3,12 +3,15 @@
 import React, { useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, EffectFade } from "swiper/modules";
+import { useTranslations, useLocale } from "next-intl";
 import Image from "next/image";
 import "swiper/css";
 import "swiper/css/effect-fade";
 
 export default function Hero() {
   const [isLoaded, setIsLoaded] = useState(false);
+  const t = useTranslations("hero");
+  const locale = useLocale();
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -17,17 +20,17 @@ export default function Hero() {
     return () => clearTimeout(timer);
   }, []);
 
-  // スライド用の画像データ（実際のプロジェクトでは適切な画像パスに変更してください）
+  // スライド用の画像データ
   const slides = [
     {
       id: 1,
       image: "/images/cha.jpg",
-      alt: "富士山と抹茶畑",
+      alt: t("slides.0.alt"),
     },
     {
       id: 2,
       image: "/images/cha2.jpg",
-      alt: "有機抹茶の茶葉",
+      alt: t("slides.1.alt"),
     },
   ];
 
@@ -68,11 +71,13 @@ export default function Hero() {
 
       {/* ------------------------------ キャッチコピー ------------------------------ */}
       <div className="absolute inset-0 z-10 flex items-center justify-center pointer-events-none select-none">
-        {/* PC: 縦書き / SP: 横書き */}
-        <h1 className="writing-mode-vertical font-light tracking-wider leading-relaxed text-white text-2xl md:text-4xl drop-shadow-md">
-          富士山の麓で
-          <br className="hidden md:block" />
-          心が澄む一服を
+        {/* 日本語: 縦書き / 英語: 横書き / SP: 横書き */}
+        <h1
+          className={`font-light tracking-wider leading-relaxed text-white text-2xl md:text-4xl drop-shadow-md whitespace-pre-line ${
+            locale === "ja" ? "writing-mode-vertical" : "text-center"
+          }`}
+        >
+          {t("catchphrase")}
         </h1>
       </div>
 
@@ -131,12 +136,13 @@ export default function Hero() {
           }
         }
 
-        /* モバイル端末 (幅 <= 768px) では横書きに切り替え */
+        /* モバイル端末では常に横書き */
         @media (max-width: 768px) {
           .writing-mode-vertical {
             writing-mode: horizontal-tb;
             text-orientation: mixed;
             line-height: 1.6;
+            text-align: center;
           }
         }
       `}</style>
