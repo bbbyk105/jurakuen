@@ -74,6 +74,17 @@
         ],
         "cta": "もっと詳しく"
     },
+    "products": {
+        "title": "Products",
+        "description": "聚楽苑の新商品・限定商品の掲載情報はこちら。",
+        "viewAll": "View All",
+        "viewMore": "View More",
+        "items": {
+            "premium_suirin": "最高級品種の翠輪",
+            "popular_matcha": "大人気のリーズナブルな抹茶『かがやき』再入荷",
+            "matcha_cleansing": "大人の艶肌をケアする抹茶クレンジングが登場"
+        }
+    },
     "common": {
         "loading": "読み込み中...",
         "processing": "処理中...",

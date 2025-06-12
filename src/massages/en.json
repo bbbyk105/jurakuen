@@ -74,6 +74,17 @@
         ],
         "cta": "Learn More"
     },
+    "products": {
+        "title": "Products",
+        "description": "Information on new and limited products from Jurakuen is here.",
+        "viewAll": "View All",
+        "viewMore": "View More",
+        "items": {
+            "premium_suirin": "Premium variety Suirin",
+            "popular_matcha": "Popular and reasonably priced matcha 'Kagayaki' back in stock",
+            "matcha_cleansing": "Matcha cleansing for mature skin care is now available"
+        }
+    },
     "common": {
         "loading": "Loading...",
         "processing": "Processing...",
