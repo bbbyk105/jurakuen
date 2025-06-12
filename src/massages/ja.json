@@ -2,17 +2,33 @@
     "language": {
         "toggle": "言語を切り替える",
         "current": "現在の言語: {locale}",
-        "select": "言語 / Language"
+        "select": "言語 / Language",
+        "japanese": "日本語",
+        "english": "English"
     },
     "navigation": {
         "home": "ホーム",
-        "About": "概要",
+        "about": "概要",
         "products": "商品",
         "cart": "カート"
     },
     "header": {
+        "brand": {
+            "name": "聚楽苑",
+            "subtitle": "富士山麓の\n無農薬緑茶"
+        },
         "navigationMenu": "ナビゲーションメニュー",
-        "closeMenu": "メニューを閉じる"
+        "closeMenu": "メニューを閉じる",
+        "mobile": {
+            "recentProduct": "最新商品",
+            "viewAll": "すべて見る",
+            "navigationMenu": "ナビゲーションメニュー"
+        },
+        "recentProduct": {
+            "title": "最高級抹茶 翠輪",
+            "subtitle": "完全無農薬、富士山の湧水で育った高級抹茶",
+            "price": "¥13,140 (税込)"
+        }
     },
     "common": {
         "loading": "読み込み中...",
@@ -27,7 +43,8 @@
         "continue": "続ける",
         "close": "閉じる",
         "confirm": "確認",
-        "retry": "再試行"
+        "retry": "再試行",
+        "menu": "メニュー"
     },
     "cart": {
         "title": "ショッピングカート",

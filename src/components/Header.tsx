@@ -3,6 +3,7 @@
 import React from "react";
 import Image from "next/image";
 import { FiMenu, FiX, FiShoppingCart } from "react-icons/fi";
+import { useTranslations } from "next-intl";
 import { Button } from "../components/ui/button";
 import {
   Sheet,
@@ -17,26 +18,31 @@ import { useCart } from "@/store/cart";
 import { LanguageSelector } from "./LanguageSelector";
 import { Link } from "@/i18n/routing";
 
-// Navigation items for both desktop and mobile
-const navItems = [
-  { label: "Home", href: "/" },
-  { label: "About", href: "/about" },
-  { label: "Products", href: "/products" },
-];
-
-// Recent product preview (optional)
-const recentProduct = {
-  title: "最高級抹茶 翠輪",
-  subtitle: "完全無農薬、富士山の湧水で育った高級抹茶",
-  price: "¥13,140 (税込)",
-  img: "/images/suirin.jpg",
-  href: "/products/1",
-};
-
 export default function Header() {
   const [open, setOpen] = React.useState(false);
   const { getTotalQuantity } = useCart();
   const totalQty = getTotalQuantity();
+
+  // 翻訳フック
+  const t = useTranslations("header");
+  const tCommon = useTranslations("common");
+
+  // Navigation items using translations
+  const tNav = useTranslations("navigation");
+  const navItems = [
+    { label: tNav("home"), href: "/" },
+    { label: tNav("about"), href: "/about" },
+    { label: tNav("products"), href: "/products" },
+  ];
+
+  // Recent product with translations
+  const recentProduct = {
+    title: t("recentProduct.title"),
+    subtitle: t("recentProduct.subtitle"),
+    price: t("recentProduct.price"),
+    img: "/images/suirin.jpg",
+    href: "/products/1",
+  };
 
   return (
     <header className="fixed top-0 left-0 w-full z-30 bg-transparent">
@@ -44,12 +50,10 @@ export default function Header() {
         {/* Brand */}
         <Link href="/" className="flex items-center gap-2 group">
           <span className="text-3xl font-serif tracking-wide group-hover:opacity-90 text-black">
-            聚楽苑
+            {t("brand.name")}
           </span>
-          <span className="hidden sm:block leading-snug text-xs opacity-80">
-            富士山麓の
-            <br />
-            無農薬緑茶
+          <span className="hidden sm:block leading-snug text-xs opacity-80 whitespace-pre-line">
+            {t("brand.subtitle")}
           </span>
         </Link>
 
@@ -87,6 +91,7 @@ export default function Header() {
               variant="ghost"
               size="icon"
               className="lg:hidden hover:bg-transparent focus-visible:ring-0 text-black"
+              aria-label={tCommon("menu")}
             >
               {open ? (
                 <FiX className="h-6 w-6" />
@@ -101,25 +106,29 @@ export default function Header() {
             className="!left-0 !right-0 w-full h-full p-0 bg-gradient-to-b from-emerald-950 via-emerald-900 to-emerald-800 text-emerald-50 overflow-y-auto"
           >
             <VisuallyHidden>
-              <SheetTitle>Navigation Menu</SheetTitle>
+              <SheetTitle>{t("mobile.navigationMenu")}</SheetTitle>
             </VisuallyHidden>
 
-            {/* Recent Product (optional) */}
+            {/* Recent Product */}
             <div className="relative pt-12 pb-8 px-6 bg-gradient-to-b from-emerald-800/80 to-transparent">
               <SheetClose asChild>
-                <button className="absolute top-4 right-4 p-2 hover:bg-emerald-700/30 rounded-lg transition-colors">
+                <button
+                  className="absolute top-4 right-4 p-2 hover:bg-emerald-700/30 rounded-lg transition-colors"
+                  aria-label={tCommon("close")}
+                >
                   <FiX className="h-6 w-6" />
                 </button>
               </SheetClose>
               <div className="flex items-center justify-between mb-6">
                 <h3 className="text-lg font-serif tracking-wide text-emerald-100">
-                  Recent Product
+                  {t("mobile.recentProduct")}
                 </h3>
                 <Link
-                  href="/product"
+                  href="/products"
                   className="text-sm flex items-center gap-1 hover:text-emerald-200 transition-colors text-emerald-300"
                 >
-                  View All <span className="text-lg leading-none">›</span>
+                  {t("mobile.viewAll")}{" "}
+                  <span className="text-lg leading-none">›</span>
                 </Link>
               </div>
               <Link
@@ -174,7 +183,9 @@ export default function Header() {
                   className="flex items-center gap-2 text-emerald-100 hover:text-emerald-200 transition-colors py-2"
                 >
                   <FiShoppingCart className="h-5 w-5" />
-                  <span>Cart ({totalQty})</span>
+                  <span>
+                    {tNav("cart")} ({totalQty})
+                  </span>
                 </Link>
               </SheetClose>
             </div>
