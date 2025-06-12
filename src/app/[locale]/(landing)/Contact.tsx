@@ -6,7 +6,7 @@ const ContactSection = () => {
     <section id="contact" className="py-20 bg-white">
       <div className="container max-w-6xl mx-auto px-4">
         <header className="text-center mb-16" data-aos="fade-up">
-          <h2 className="text-4xl md:text-5xl font-light text-matcha-dark mb-4">
+          <h2 className="text-4xl md:text-5xl text-matcha-dark mb-6 font-light">
             お問い合わせ
           </h2>
           <p className="text-lg text-gray-700">
