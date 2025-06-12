@@ -41,6 +41,39 @@
             }
         ]
     },
+    "about": {
+        "sectionTitle": "About",
+        "label": "Pesticide-Free Matcha",
+        "heroTitle": "Premium matcha cultivated completely pesticide-free",
+        "heroDescription": "From 21 days of shade cultivation to stone mill grinding — these refined processes at Mt. Fuji foothills\nsupport the vibrant green color, mellow sweetness, and safety you can trust.",
+        "steps": [
+            {
+                "step": "01",
+                "title": "Shade Cultivation",
+                "desc": "21 days of shade to concentrate umami",
+                "alt": "Shade cultivation process"
+            },
+            {
+                "step": "02",
+                "title": "Hand Picking",
+                "desc": "Carefully selecting and harvesting each bud",
+                "alt": "Hand picking process"
+            },
+            {
+                "step": "03",
+                "title": "Steaming & Drying",
+                "desc": "Processing tea leaves with traditional steaming",
+                "alt": "Steaming and drying process"
+            },
+            {
+                "step": "04",
+                "title": "Stone Mill Grinding",
+                "desc": "Slowly grinding to refine particles",
+                "alt": "Stone mill grinding process"
+            }
+        ],
+        "cta": "Learn More"
+    },
     "common": {
         "loading": "Loading...",
         "processing": "Processing...",

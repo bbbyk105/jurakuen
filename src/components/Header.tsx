@@ -111,14 +111,6 @@ export default function Header() {
 
             {/* Recent Product */}
             <div className="relative pt-12 pb-8 px-6 bg-gradient-to-b from-emerald-800/80 to-transparent">
-              <SheetClose asChild>
-                <button
-                  className="absolute top-4 right-4 p-2 hover:bg-emerald-700/30 rounded-lg transition-colors"
-                  aria-label={tCommon("close")}
-                >
-                  <FiX className="h-6 w-6" />
-                </button>
-              </SheetClose>
               <div className="flex items-center justify-between mb-6">
                 <h3 className="text-lg font-serif tracking-wide text-emerald-100">
                   {t("mobile.recentProduct")}

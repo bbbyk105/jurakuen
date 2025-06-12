@@ -62,7 +62,7 @@ export const LanguageSelector = ({
   if (variant === "mobile") {
     return (
       <div className="mb-6">
-        <h3 className="text-sm font-medium text-gray-500 uppercase tracking-wider mb-4">
+        <h3 className="text-sm font-medium text-emerald-300 uppercase tracking-wider mb-4">
           {tLang("select")}
         </h3>
         <div className="grid grid-cols-2 gap-2">
@@ -71,11 +71,11 @@ export const LanguageSelector = ({
             return (
               <Button
                 key={loc}
-                variant={loc === locale ? "default" : "outline"}
-                className={`h-12 rounded-xl transition-all duration-200 flex items-center justify-center ${
+                variant="ghost"
+                className={`h-12 rounded-xl transition-all duration-200 flex items-center justify-center border ${
                   loc === locale
-                    ? "bg-gradient-to-r from-gray-900 to-gray-700 text-white shadow-lg"
-                    : "border-gray-200 hover:bg-gray-50 hover:border-gray-300"
+                    ? "bg-emerald-600/80 hover:bg-emerald-600 text-emerald-50 border-emerald-500 shadow-lg"
+                    : "border-emerald-600/30 hover:bg-emerald-700/30 hover:border-emerald-500/50 text-emerald-200"
                 }`}
                 onClick={() => handleLanguageChange(loc)}
                 disabled={loc === locale}
