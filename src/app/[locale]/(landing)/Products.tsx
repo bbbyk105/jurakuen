@@ -15,21 +15,21 @@ import Link from "next/link";
  * ・Tailwind CSS ユーティリティ
  */
 
-const topics = [
+const products = [
   {
     title: "最高級品種の翠輪",
     image: "/images/cha.jpg",
-    href: "/topics/summer-set",
+    href: "/products/1",
   },
   {
     title: "大人気のリーズナブルな抹茶『かがやき』再入荷",
     image: "/images/cha2.jpg",
-    href: "/topics/uv-cream",
+    href: "/products/2",
   },
   {
     title: "大人の艶肌をケアする抹茶クレンジングが登場",
     image: "/images/maccha.jpg",
-    href: "/topics/cleansing",
+    href: "/products/3",
   },
 ] as const;
 
@@ -53,7 +53,7 @@ const Products = () => {
           </p>
 
           <Link
-            href="/topics"
+            href="/products"
             className="inline-flex items-center gap-2 border border-gray-900 px-5 py-2 text-sm font-medium transition-colors hover:bg-gray-900 hover:text-white"
           >
             View All <ArrowRight className="h-4 w-4" />
@@ -63,7 +63,7 @@ const Products = () => {
         {/* Right column – cards */}
         <div className="flex-1">
           <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-3">
-            {topics.map((topic, i) => (
+            {products.map((topic, i) => (
               <motion.article
                 key={topic.href}
                 initial={{ opacity: 0, y: 40 }}
