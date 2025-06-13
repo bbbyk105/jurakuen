@@ -91,6 +91,13 @@
         "postAlt": "Instagram post",
         "followButton": "Follow @juraku_en"
     },
+    "contact": {
+        "title": "Contact Us",
+        "description": "If you have any questions or inquiries, please feel free to contact us.",
+        "accessInfo": "Access Information",
+        "address": "485-2 Sakai, Fuji City, Shizuoka Prefecture 417-0812, Japan",
+        "mapTitle": "Jurakuen Location"
+    },
     "common": {
         "loading": "Loading...",
         "processing": "Processing...",
