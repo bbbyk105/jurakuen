@@ -85,6 +85,12 @@
             "matcha_cleansing": "大人の艶肌をケアする抹茶クレンジングが登場"
         }
     },
+    "instagram": {
+        "title": "Instagram",
+        "description": "日々の茶園の様子をご覧ください",
+        "postAlt": "インスタグラム投稿",
+        "followButton": "@juraku_en をフォロー"
+    },
     "common": {
         "loading": "読み込み中...",
         "processing": "処理中...",

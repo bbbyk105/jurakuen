@@ -2,8 +2,11 @@ import Image from "next/image";
 import React from "react";
 import { FaInstagram } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
+import { useTranslations } from "next-intl";
 
 const Instagram = () => {
+  const t = useTranslations("instagram");
+
   return (
     <div className="py-20 bg-washi-beige">
       <div className="max-w-6xl mx-auto px-4">
@@ -11,9 +14,7 @@ const Instagram = () => {
           <h2 className="text-4xl md:text-5xl text-matcha-dark mb-6 font-light">
             Instagram
           </h2>
-          <p className="text-lg text-gray-700">
-            日々の茶園の様子をご覧ください
-          </p>
+          <p className="text-lg text-gray-700">{t("description")}</p>
         </div>
 
         {/* Instagram Grid (Masonry風) */}
@@ -28,7 +29,7 @@ const Instagram = () => {
             >
               <Image
                 src={`/api/placeholder/300/${300 + (index % 3) * 50}`}
-                alt={`Instagram post ${item}`}
+                alt={`${t("postAlt")} ${item}`}
                 width={300}
                 height={300 + (index % 3) * 50}
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
@@ -46,7 +47,7 @@ const Instagram = () => {
             className="border-matcha-light text-matcha-dark hover:bg-matcha-light hover:text-white"
           >
             <FaInstagram className="w-4 h-4 mr-2" />
-            @juraku_en をフォロー
+            {t("followButton")}
           </Button>
         </div>
       </div>

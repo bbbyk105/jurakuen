@@ -85,6 +85,12 @@
             "matcha_cleansing": "Matcha cleansing for mature skin care is now available"
         }
     },
+    "instagram": {
+        "title": "Instagram",
+        "description": "Take a look at our daily tea garden activities",
+        "postAlt": "Instagram post",
+        "followButton": "Follow @juraku_en"
+    },
     "common": {
         "loading": "Loading...",
         "processing": "Processing...",
