@@ -476,35 +476,35 @@
         }
     },
     "footer": {
-        "companyName": "AMACHIHOSHISORA",
+        "companyName": "Jurakuen",
         "address": {
-            "postalCode": "〒417-0051",
-            "street": "2-8-21 Yoshiwara, Fuji City, Shizuoka Prefecture",
-            "phone": "TEL: 0545-52-0011"
+            "postalCode": "〒417-0812",
+            "street": "485-2 Sakai, Fuji City, Shizuoka Prefecture",
+            "phone": "TEL: 0545-34-0614"
         },
         "sections": {
             "products": {
                 "title": "Products",
-                "viewAll": "View All Products →"
+                "viewAll": "View All Products"
             },
             "company": {
-                "title": "Company"
+                "title": "Company",
+                "links": {
+                    "home": "Home",
+                    "about": "About",
+                    "products": "Products"
+                }
             },
             "contact": {
                 "title": "Contact",
-                "officialSite": "Official Website",
                 "socialMedia": "Social Media"
             }
         },
         "legal": {
-            "copyright": "© 2025 AMACHIHOSHISORA. All rights reserved.",
+            "copyright": "© 2025 Jurakuen. All rights reserved.",
             "privacyPolicy": "Privacy Policy",
             "termsOfService": "Terms of Service",
             "commerceLaw": "Commercial Law"
-        },
-        "ageVerification": {
-            "drinking": "※Must be 18 years or older to drink alcohol",
-            "driving": "※Drunk driving is prohibited by law"
         }
     }
 }

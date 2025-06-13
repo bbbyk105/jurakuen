@@ -475,28 +475,32 @@
         }
     },
     "footer": {
-        "companyName": "聚楽苑",
+        "companyName": "Jurakuen",
         "address": {
-            "postalCode": "〒417-0051",
-            "street": "静岡県富士市境 485-2",
-            "phone": "TEL:  0545-34-0614"
+            "postalCode": "〒417-0812",
+            "street": "485-2 Sakai, Fuji City, Shizuoka Prefecture",
+            "phone": "TEL: 0545-34-0614"
         },
         "sections": {
             "products": {
-                "title": "商品情報",
-                "viewAll": "すべての商品を見る →"
+                "title": "商品",
+                "viewAll": "すべての商品を見る"
             },
             "company": {
-                "title": "会社案内"
+                "title": "会社情報",
+                "links": {
+                    "home": "ホーム",
+                    "about": "概要",
+                    "products": "商品"
+                }
             },
             "contact": {
                 "title": "お問い合わせ",
-                "officialSite": "オフィシャルサイト",
                 "socialMedia": "SNS"
             }
         },
         "legal": {
-            "copyright": "© 2025 聚楽苑. All rights reserved.",
+            "copyright": "© 2025 Jurakuen. All rights reserved.",
             "privacyPolicy": "プライバシーポリシー",
             "termsOfService": "利用規約",
             "commerceLaw": "特定商取引法"
