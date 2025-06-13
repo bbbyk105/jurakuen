@@ -423,6 +423,58 @@
         },
         "companyFooter": "◯◯ ◯◯\nJurakuen"
     },
+    "aboutPage": {
+        "story": {
+            "title": "The Story of Jurakuen",
+            "paragraph1": "Shizuoka Prefecture, Fuji City, Sakai district—walking a little from the terminal station of the Gakunan Electric Railway, you'll arrive at a small tea plantation spreading against the backdrop of the sacred Mount Fuji. This is Jurakuen, a family-run tea shop approaching its centennial. The tea garden, preserved through three generations, is now embarking on a new challenge of complete pesticide-free and chemical fertilizer-free cultivation.",
+            "paragraph2": "What we pursued was 'a cup that is gentle to both body and environment.' Instead of chemical fertilizers, we incorporate homemade compost, and all weeds are removed by hand—this dedication to meticulous care has given birth to 'Fuji Matcha Kagayaki.'",
+            "paragraph3": "Selecting only young leaves suitable for tencha, we concentrate umami through 21 days of shade cultivation. The tea leaves, after steaming and drying, are slowly ground by stone mills at the long-established Meiko Tea Industry, transforming into matcha with vivid green color and mellow sweetness.",
+            "paragraph4": "Spring, when new buds sprout in the tea fields, and the wind rustles through them. The chirping of birds, Mount Fuji in the distance—because we want you to taste the entire landscape, Jurakuen sometimes opens tea picking and stone mill grinding experiences for those who wish. Freshly ground matcha enjoyed in the quiet countryside is exceptionally fragrant.",
+            "paragraph5": "The number of visitors from overseas is increasing year by year. Supported by multilingual information dissemination from Fuji City and tourism organizations, it's now possible to learn about our story in one's native language before visiting. We continue to quietly spread the charm of Japanese tea by expanding online sales worldwide."
+        },
+        "producer": {
+            "title": "Message from the Producer",
+            "quote1": "Growing tea relying only on nature's power, without chemical fertilizers or pesticides—this was certainly not an easy path.",
+            "quote2": "Manual weeding, managing homemade compost, dealing with weather. We had to learn everything from scratch. However, what we found at the end of this journey was a truly pure matcha flavor unlike anything we had tasted before.",
+            "quote3": "The tea we produce contains the learning and joy gained from this challenge. We hope that everyone who drinks it can also feel that radiance.",
+            "signature": "Jurakuen",
+            "name": "Mochizuki"
+        },
+        "teaField": {
+            "title": "Tea Field Scenery",
+            "description": "The landscape of lush green tea fields spreading out. In this place surrounded by greenery, you can feel the process of tea leaves growing. Please enjoy the sight of tea leaves swaying in the gentle wind and glimpses of farm work.",
+            "caption": "Feel the rich green tea field landscape and nature's blessings."
+        },
+        "safety": {
+            "title": "3 Reasons for Safety and Security",
+            "reasons": {
+                "organic": "Cultivated without pesticides or chemical fertilizers",
+                "water": "Pure spring water from the foot of Mount Fuji",
+                "certification": "Organic JAS & Fuji Brand Certified"
+            }
+        },
+        "faq": {
+            "title": "FAQ",
+            "items": {
+                "organicJas": {
+                    "question": "What is Organic JAS?",
+                    "answer": "It is Japan's organic certification given only to agricultural products that meet strict standards without using pesticides or chemical fertilizers."
+                },
+                "taste": {
+                    "question": "What does it taste like?",
+                    "answer": "Moderate bitterness and rich aroma, with mellow sweetness. Characterized by vivid green color and a refreshing aftertaste."
+                },
+                "enjoyment": {
+                    "question": "How do you enjoy it?",
+                    "answer": "Perfect not only for preparing usucha, but also for arrangements in matcha lattes and sweets."
+                }
+            }
+        },
+        "cta": {
+            "title": "Experience Online",
+            "buttonText": "View Shop"
+        }
+    },
     "footer": {
         "companyName": "AMACHIHOSHISORA",
         "address": {
