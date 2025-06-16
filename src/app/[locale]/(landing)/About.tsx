@@ -6,13 +6,6 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Link } from "@/i18n/routing";
 
-/**
- * About – Manufacturing‑focused layout for 無農薬抹茶「かがやき」
- * ----------------------------------------------------------------
- * ・モバイルでは横スクロール（スナップ付き）
- * ・タブレット以上では 2 → 4 カラムに展開
- * ・"無農薬抹茶" ラベルをモバイルでは横書き、SM 以上で縦書きに切替
- */
 const About = () => {
   const t = useTranslations("about");
 

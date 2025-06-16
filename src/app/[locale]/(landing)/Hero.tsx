@@ -24,7 +24,7 @@ export default function Hero() {
   const slides = [
     {
       id: 1,
-      image: "/images/cha.jpg",
+      image: "/images/hero1.webp",
       alt: t("slides.0.alt"),
     },
     {

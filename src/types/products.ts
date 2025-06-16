@@ -88,7 +88,7 @@ export interface StripePrice {
 }
 
 // フィルター・ソート関連
-export type CategoryType = "すべて" | "純米大吟醸" | "抹茶";
+export type CategoryType = "すべて" | "" | "抹茶";
 export type SortType =
   | "おすすめ順"
   | "価格の安い順"
