@@ -1,4 +1,4 @@
-// src/data/index.ts - 修正版
+// src/data/index.ts
 export * from "./types";
 
 // 国際化対応のユーティリティ関数をエクスポート
@@ -8,15 +8,16 @@ export {
   getCategories,
   getSortOptions,
   formatPrice,
-  formatPriceWithVolume,
+  formatPriceWithWeight,
+  formatPriceWithVolume, // 追加：これでエラーが解決
   getProductDetails,
   getProductById,
   getProductsByCategory,
   sortProducts,
 } from "./utils";
 
-// products のエクスポート - これが欠けていたためエラーが発生
-export { products } from "./locales/ja"; // デフォルトは日本語
+// products のエクスポート - デフォルトは日本語
+export { products } from "./locales/ja";
 export { categories, sortOptions } from "./locales/ja";
 export { heroData } from "./locales/ja";
 

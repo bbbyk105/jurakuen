@@ -1,4 +1,4 @@
-// src/data/utils.ts - 国際化対応版
+// src/data/utils.ts - 修正版（USD対応）
 import { Product } from "./types";
 
 // ロケール別データのインポート
@@ -36,89 +36,64 @@ export const getSortOptions = (locale: string = "ja"): string[] => {
   return data.sortOptions;
 };
 
-// 価格フォーマット（既存のまま - AUD表示）
+// 価格フォーマット（USD表示）
 export const formatPrice = (price: number): string => {
-  return `$${price.toFixed(2)} AUD`;
+  return `$${price.toFixed(2)}`;
 };
 
-// ボリューム付き価格フォーマット（国際化対応）
-export const formatPriceWithVolume = (
-  product: Product,
-  locale: string = "ja"
-): string => {
-  if (product.category === "抹茶" || product.category === "Matcha") {
-    const weightText = locale === "en" ? "20g" : "20g";
-    return `${weightText} $${product.price.toFixed(2)} AUD`;
-  }
-  const volume = product.name.includes("720ml") ? "720ml" : "500ml";
-  return `${volume} $${product.price.toFixed(2)} AUD`;
+// 重量付き価格フォーマット（お茶用）
+export const formatPriceWithWeight = (product: Product): string => {
+  const weight = product.details.weight || "20g";
+  return `${weight} $${product.price.toFixed(2)}`;
 };
 
-// 商品詳細の取得（国際化対応）
+// ボリューム付き価格フォーマット（エラー修正のため追加）
+export const formatPriceWithVolume = (product: Product): string => {
+  // weightをvolumeとして扱う場合
+  return formatPriceWithWeight(product);
+};
+
+// 商品詳細の取得（お茶用国際化対応）
 export const getProductDetails = (
   product: Product,
   locale: string = "ja"
 ): { label: string; value: string }[] => {
   const details = [];
 
-  // ラベルの翻訳マップ
+  // ラベルの翻訳マップ（お茶用）
   const labels = {
     ja: {
-      alcoholContent: "アルコール度数",
-      riceMilling: "精米歩合",
       weight: "内容量",
-      brewery: "醸造元",
-      region: "産地",
-      taste: "味わい",
-      temperature: "適温",
+      origin: "産地",
+      harvestSeason: "収穫期",
     },
     en: {
-      alcoholContent: "Alcohol Content",
-      riceMilling: "Rice Polishing Ratio",
       weight: "Net Weight",
-      brewery: "Brewery",
-      region: "Region",
-      taste: "Taste Profile",
-      temperature: "Serving Temperature",
+      origin: "Origin",
+      harvestSeason: "Harvest Season",
     },
   };
 
   const labelMap = labels[locale as keyof typeof labels] || labels.ja;
 
-  if (product.details.alcoholContent) {
-    details.push({
-      label: labelMap.alcoholContent,
-      value: product.details.alcoholContent,
-    });
-  }
-  if (product.details.riceMilling) {
-    details.push({
-      label: labelMap.riceMilling,
-      value: product.details.riceMilling,
-    });
-  }
   if (product.details.weight) {
     details.push({
       label: labelMap.weight,
       value: product.details.weight,
     });
   }
-  details.push({
-    label: labelMap.brewery,
-    value: product.details.brewery,
-  });
-  details.push({
-    label: labelMap.region,
-    value: product.details.region,
-  });
-  details.push({
-    label: labelMap.taste,
-    value: product.details.taste,
-  });
-  details.push({
-    label: labelMap.temperature,
-    value: product.details.temperature,
-  });
+  if (product.details.origin) {
+    details.push({
+      label: labelMap.origin,
+      value: product.details.origin,
+    });
+  }
+  if (product.details.harvestSeason) {
+    details.push({
+      label: labelMap.harvestSeason,
+      value: product.details.harvestSeason,
+    });
+  }
 
   return details;
 };
