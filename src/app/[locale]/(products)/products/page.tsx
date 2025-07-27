@@ -1,4 +1,4 @@
-// src/app/[locale]/(products)/products/page.tsx – Minimal Rustic Style (機能そのまま)
+// src/app/[locale]/(products)/products/page.tsx – 画像1.3倍拡大対応
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
@@ -54,13 +54,13 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, locale }) => {
       onClick={() => router.push(`/${locale}/products/${product.id}`)}
     >
       <CardContent className="p-0">
-        {/* Image */}
+        {/* Image - 1.3倍拡大対応 */}
         <div className="relative aspect-square bg-[#eeedeb] overflow-hidden">
           <Image
             src={product.image.url}
             alt={product.image.alt}
             fill
-            className="object-contain transition-transform duration-300 group-hover:scale-105"
+            className="object-contain scale-[1.3] transition-transform duration-300 group-hover:scale-[1.35]"
             sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
             priority
           />

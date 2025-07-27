@@ -1,4 +1,4 @@
-// src/app/[locale]/(products)/products/[slug]/page.tsx - 修正版
+// src/app/[locale]/(products)/products/[slug]/page.tsx - 画像1.3倍拡大対応
 "use client";
 import React, { useState, useMemo } from "react";
 import { Card, CardContent } from "@/components/ui/card";
@@ -118,7 +118,7 @@ const ProductDetailPage = () => {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
-          {/* 画像セクション */}
+          {/* 画像セクション - 1.3倍拡大対応 */}
           <div className="space-y-4">
             {/* メイン画像 */}
             <div className="aspect-square bg-gray-100 rounded-lg overflow-hidden relative">
@@ -126,7 +126,7 @@ const ProductDetailPage = () => {
                 src={product.image.url}
                 alt={product.image.alt}
                 fill
-                className="object-cover"
+                className="object-cover scale-[1.3]"
                 priority
               />
 
@@ -273,7 +273,7 @@ const ProductDetailPage = () => {
           </div>
         </div>
 
-        {/* 関連商品セクション - 関連商品がある場合のみ表示 */}
+        {/* 関連商品セクション - 関連商品がある場合のみ表示（1.3倍拡大対応） */}
         {relatedProducts.length > 0 && (
           <div className="mt-16">
             <h2 className="text-2xl font-bold text-gray-900 mb-8">
@@ -294,7 +294,7 @@ const ProductDetailPage = () => {
                         src={relatedProduct.image.url}
                         alt={relatedProduct.image.alt}
                         fill
-                        className="object-cover"
+                        className="object-cover scale-[1.3]"
                       />
                     </div>
                     <div className="p-4 space-y-2">
