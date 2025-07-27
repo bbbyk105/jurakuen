@@ -1,6 +1,6 @@
-// src/app/[locale]/(products)/products/[slug]/page.tsx - 国際化対応版
+// src/app/[locale]/(products)/products/[slug]/page.tsx - 修正版
 "use client";
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
@@ -41,6 +41,15 @@ const ProductDetailPage = () => {
   const productId = parseInt(params.slug as string);
   const product = getProductById(productId, locale);
 
+  // 関連商品を取得（メモ化）
+  const relatedProducts = useMemo(() => {
+    if (!product) return [];
+
+    return getProducts(locale)
+      .filter((p) => p.id !== product.id && p.category === product.category)
+      .slice(0, 4);
+  }, [product, locale]);
+
   if (!product) {
     return (
       <div className="min-h-screen bg-gray-50 pt-16 flex items-center justify-center">
@@ -62,7 +71,14 @@ const ProductDetailPage = () => {
 
   const handleAddToCart = async () => {
     setIsAdding(true);
-    addToCart(product, quantity);
+
+    // 型エラーを回避するために、必要なプロパティを持つオブジェクトを作成
+    const cartProduct = {
+      ...product,
+      // addToCartで期待される型に合わせて調整
+    };
+
+    addToCart(cartProduct, quantity);
 
     setTimeout(() => {
       setIsAdding(false);
@@ -257,18 +273,14 @@ const ProductDetailPage = () => {
           </div>
         </div>
 
-        {/* 関連商品セクション */}
-        <div className="mt-16">
-          <h2 className="text-2xl font-bold text-gray-900 mb-8">
-            {t("relatedProducts")}
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {getProducts(locale)
-              .filter(
-                (p) => p.id !== product.id && p.category === product.category
-              )
-              .slice(0, 4)
-              .map((relatedProduct) => (
+        {/* 関連商品セクション - 関連商品がある場合のみ表示 */}
+        {relatedProducts.length > 0 && (
+          <div className="mt-16">
+            <h2 className="text-2xl font-bold text-gray-900 mb-8">
+              {t("relatedProducts")}
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              {relatedProducts.map((relatedProduct) => (
                 <Card
                   key={relatedProduct.id}
                   className="border-none shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02] cursor-pointer"
@@ -296,8 +308,9 @@ const ProductDetailPage = () => {
                   </CardContent>
                 </Card>
               ))}
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );

@@ -20,12 +20,6 @@ export interface Product {
   category: string;
   image: Image;
   details: {
-    alcoholContent?: string;
-    riceMilling?: string;
-    brewery: string;
-    region: string;
-    taste: string;
-    temperature: string;
     weight?: string; // for matcha
   };
   stock?: number;
