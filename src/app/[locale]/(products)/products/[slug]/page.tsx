@@ -36,6 +36,7 @@ const ProductDetailPage = () => {
   const [quantity, setQuantity] = useState(1);
   const [isAdding, setIsAdding] = useState(false);
   const [justAdded, setJustAdded] = useState(false);
+  const [selectedImageIndex, setSelectedImageIndex] = useState(0);
 
   // slugからproductを取得（ロケール対応）
   const productId = parseInt(params.slug as string);
@@ -97,6 +98,9 @@ const ProductDetailPage = () => {
 
   const productDetails = getProductDetails(product, locale);
 
+  // 商品画像配列（メイン画像 + サブ画像があれば追加）
+  const productImages = [product.image, ...(product.subImages || [])];
+
   return (
     <div className="min-h-screen bg-gray-50 pt-16">
       {/* ナビゲーション */}
@@ -123,8 +127,8 @@ const ProductDetailPage = () => {
             {/* メイン画像 */}
             <div className="aspect-square bg-gray-100 rounded-lg overflow-hidden relative">
               <Image
-                src={product.image.url}
-                alt={product.image.alt}
+                src={productImages[selectedImageIndex].url}
+                alt={productImages[selectedImageIndex].alt}
                 fill
                 className="object-cover scale-[1.3]"
                 priority
@@ -150,6 +154,30 @@ const ProductDetailPage = () => {
                 </Button>
               </div>
             </div>
+
+            {/* サムネイル画像（2枚以上ある場合のみ表示） */}
+            {productImages.length > 1 && (
+              <div className="flex gap-2">
+                {productImages.map((image, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setSelectedImageIndex(index)}
+                    className={`relative aspect-square w-20 h-20 bg-gray-100 rounded-lg overflow-hidden border-2 transition-all duration-200 ${
+                      selectedImageIndex === index
+                        ? "border-gray-900 ring-2 ring-gray-900 ring-offset-2"
+                        : "border-gray-200 hover:border-gray-400"
+                    }`}
+                  >
+                    <Image
+                      src={image.url}
+                      alt={image.alt}
+                      fill
+                      className="object-cover scale-[1.3]"
+                    />
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
 
           {/* 商品情報セクション */}

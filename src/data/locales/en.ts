@@ -1,25 +1,33 @@
-// src/data/locales/en.ts - English data for tea products (USD)
+// src/data/locales/en.ts - English tea data (USD support)
 import { Product, HeroData } from "../types";
 
 export const products: Product[] = [
   {
     id: 1,
-    name: "Organic Premium Sencha Chiyo-no-Tomo",
+    name: "Organic Premium Sencha - Chiyo no Tomo",
     description:
-      "This completely pesticide-free organic premium sencha is cultivated in the pure waters and fertile soil at the foot of Mt. Fuji in Shizuoka. Only the tender, sun-bathed new buds are carefully hand-picked and processed using traditional medium-deep steaming methods. The light roasting preserves the tea's original refreshing aroma, elegant sweetness, and pleasant astringency in perfect harmony. Upon first sip, the fragrance of morning dew on fresh leaves fills your palate, leaving a gentle sweetness that lingers. This completely pesticide-free, organically grown tea supports your daily healthy lifestyle with absolute safety and peace of mind.",
+      "A completely pesticide-free organic premium sencha grown in the pristine waters and fertile soil at the foot of Mt. Fuji in Shizuoka Prefecture. Only the tender parts of new buds that have received plenty of sunlight are carefully hand-picked and finished using traditional medium-deep steaming methods. Light roasting creates an exquisite balance of the tea leaves' natural refreshing aroma, elegant sweetness, and pleasant astringency. With each sip, the fragrance of fresh greenery with morning dew spreads throughout your mouth, leaving a gentle sweetness in the aftertaste. This completely pesticide-free, organically grown safe tea supports a healthy daily lifestyle.",
     price: 32, // USD
     originalPrice: null,
     category: "Sencha",
     image: {
       url: "/images/products/chiyo.webp",
-      alt: "Organic Premium Sencha Chiyo-no-Tomo",
+      alt: "Organic Premium Sencha - Chiyo no Tomo",
       width: 400,
       height: 400,
     },
+    subImages: [
+      {
+        url: "/images/products/chiyo-b.webp",
+        alt: "Organic Premium Sencha - Chiyo no Tomo tea leaves detail",
+        width: 400,
+        height: 400,
+      },
+    ],
     details: {
       weight: "100g",
-      origin: "Fuji City, Shizuoka",
-      harvestSeason: "First Flush",
+      origin: "Fuji City, Shizuoka Prefecture",
+      harvestSeason: "First flush",
     },
     stripeProductId: "prod_organic_sencha_chiyo_us",
     stripePriceId: "price_organic_sencha_chiyo_usd",
@@ -27,22 +35,30 @@ export const products: Product[] = [
   },
   {
     id: 2,
-    name: "Organic Sencha Ichie-no-Tomo",
+    name: "Organic Sencha - Ichie no Tomo",
     description:
-      "A special organic sencha crafted with unwavering commitment to completely pesticide-free cultivation. Mature first flush leaves are harvested at the optimal timing and carefully processed by master tea artisans using medium-deep steaming techniques. The stronger roasting creates an aromatic fire-scent reminiscent of freshly roasted grains, while the palate experiences rich umami and smooth sweetness. With minimal astringency, this easily enjoyable tea is perfect for accompanying meals or relaxing moments. Experience the safety of completely pesticide-free cultivation combined with the deep flavors created by traditional processing methods.",
+      "A special organic sencha that is completely committed to pesticide-free cultivation. Mature leaves from the first flush are harvested at the optimal timing and carefully processed by skilled tea masters using medium-deep steaming methods. The fragrant roasted aroma created by strong roasting produces a deep aroma like freshly roasted grains, and when you taste it, rich umami and mellow sweetness spread throughout your mouth. With little astringency and an easy-to-drink taste for everyone, it's perfect as a meal companion or when you want to take a relaxing break. Enjoy the safety of completely pesticide-free cultivation and the deep flavor created by traditional manufacturing methods.",
     price: 50,
     originalPrice: null,
     category: "Sencha",
     image: {
       url: "/images/products/ichiyu.webp",
-      alt: "Organic Sencha Ichie-no-Tomo",
+      alt: "Organic Sencha - Ichie no Tomo",
       width: 400,
       height: 400,
     },
+    subImages: [
+      {
+        url: "/images/products/ichiyu-b.webp",
+        alt: "Organic Sencha - Ichie no Tomo brewing scene",
+        width: 400,
+        height: 400,
+      },
+    ],
     details: {
-      weight: "20g",
-      origin: "Fuji City, Shizuoka",
-      harvestSeason: "First Flush",
+      weight: "100g",
+      origin: "Fuji City, Shizuoka Prefecture",
+      harvestSeason: "First flush",
     },
     stripeProductId: "prod_organic_sencha_ichie_us",
     stripePriceId: "price_organic_sencha_ichie_usd",
@@ -50,22 +66,30 @@ export const products: Product[] = [
   },
   {
     id: 3,
-    name: "Organic Kukicha (Twig Tea)",
+    name: "Organic Twig Tea (Boucha)",
     description:
-      "A special kukicha made exclusively from carefully selected stems of completely pesticide-free grown tea leaves. This tea features the characteristic refreshing aroma unique to stems and a clean, transparent flavor profile. Through moderate roasting, subtle sweetness and toastiness complement the fresh, green notes, creating an elegant taste that never grows tiresome. With naturally lower caffeine content, it's perfect for evening relaxation and safe for everyone from children to elderly. Enjoy the safety of completely pesticide-free cultivation alongside the distinctive flavors unique to stem tea.",
+      "A special twig tea made using only carefully selected stem parts from completely pesticide-free tea leaves. It features a refreshing aroma unique to stems and a clean, transparent taste. Moderate roasting adds subtle sweetness and fragrance to the fresh, refreshing flavor, creating an elegant taste that never gets boring. With lower caffeine content, it can be safely enjoyed by people of all ages, from small children to the elderly, during evening relaxation time. Enjoy the safety of completely pesticide-free cultivation and the unique taste that only twig tea can offer.",
     price: 25,
     originalPrice: 30,
-    category: "Kukicha",
+    category: "Twig Tea",
     image: {
       url: "/images/products/boucha.webp",
-      alt: "Organic Kukicha",
+      alt: "Organic Twig Tea (Boucha)",
       width: 400,
       height: 400,
     },
+    subImages: [
+      {
+        url: "/images/products/boucha-b.webp",
+        alt: "Organic Twig Tea (Boucha) tea leaves",
+        width: 400,
+        height: 400,
+      },
+    ],
     details: {
-      weight: "50g",
-      origin: "Shizuoka",
-      harvestSeason: "First & Second Flush Blend",
+      weight: "100g",
+      origin: "Shizuoka Prefecture",
+      harvestSeason: "First and second flush blend",
     },
     stripeProductId: "prod_organic_boucha_us",
     stripePriceId: "price_organic_boucha_usd",
@@ -73,22 +97,30 @@ export const products: Product[] = [
   },
   {
     id: 4,
-    name: "Organic Konacha (Powder Tea)",
+    name: "Organic Powdered Tea (Konacha)",
     description:
-      "This organic konacha is made from precious powder particles collected during the processing of completely pesticide-free tea leaves. The fine particles extract instantly, delivering rich color and deep umami even with small amounts - an exceptional value tea. The distinctive deep green color is proof of concentrated tea nutrients. On the palate, powerful tea umami combines with moderate astringency, followed by a sweetness that creates exquisite harmony. Popular as 'agari' at sushi restaurants, it's also perfect as a palate cleanser after meals. With completely pesticide-free quality assurance, enjoy this tea abundantly every day.",
+      "Organic powdered tea carefully collected from the precious powder parts created during the production process of completely pesticide-free tea leaves. Because fine particles are extracted instantly, you can enjoy rich water color and deep umami with just a small amount - a very economical tea. The distinctive deep green color is proof that the tea leaves' nutrients are concentrated. When you taste it, the powerful tea umami, moderate astringency, and sweetness that follows create an exquisite harmony. Popular as 'agari' familiar in sushi restaurants, it's also perfect for cleansing the palate after meals. With completely pesticide-free assured quality, you can enjoy it abundantly every day.",
     price: 25,
     originalPrice: 30,
-    category: "Konacha",
+    category: "Powdered Tea",
     image: {
       url: "/images/products/konacha.webp",
-      alt: "Organic Konacha",
+      alt: "Organic Powdered Tea (Konacha)",
       width: 400,
       height: 400,
     },
+    subImages: [
+      {
+        url: "/images/products/konacha-b.webp",
+        alt: "Organic Powdered Tea (Konacha) powder",
+        width: 400,
+        height: 400,
+      },
+    ],
     details: {
-      weight: "50g",
-      origin: "Shizuoka",
-      harvestSeason: "First & Second Flush Blend",
+      weight: "150g",
+      origin: "Shizuoka Prefecture",
+      harvestSeason: "First and second flush blend",
     },
     stripeProductId: "prod_organic_kocha_us",
     stripePriceId: "price_organic_kocha_usd",
@@ -96,22 +128,30 @@ export const products: Product[] = [
   },
   {
     id: 5,
-    name: "Hojicha: Joraku",
+    name: "Roasted Tea (Hojicha) - Joraku",
     description:
-      "A fragrant hojicha created by expertly roasting selected bancha leaves with stronger heat. The careful roasting process produces an aromatic, nutty fragrance reminiscent of roasted chestnuts with deep, sweet undertones. The beautiful amber-colored liquor offers a smooth, mellow taste that's gentle on the stomach with minimal caffeine, making it safe and enjoyable for everyone from children to seniors. Perfect for after-meal relaxation or bedtime comfort, it's delicious whether served hot or cold. Experience the nostalgic yet fresh flavors created by traditional roasting techniques.",
+      "Fragrant hojicha made by strongly roasting carefully selected bancha with craftsman's skill. The fragrant and mellow aroma created by carefully roasting tea leaves produces a deep sweetness reminiscent of roasted chestnuts. The beautiful amber-colored water and smooth, mellow taste have low caffeine content and are gentle on the stomach, making them safe for everyone from children to the elderly. Perfect for post-meal moments or relaxing bedtime, it's delicious whether served hot or cold. Enjoy the nostalgic yet new taste created by traditional roasting techniques.",
     price: 25,
     originalPrice: 30,
-    category: "Hojicha",
+    category: "Roasted Tea",
     image: {
       url: "/images/products/hojicha.webp",
-      alt: "Hojicha: Joraku",
+      alt: "Roasted Tea (Hojicha) - Joraku",
       width: 400,
       height: 400,
     },
+    subImages: [
+      {
+        url: "/images/products/hojicha-b.webp",
+        alt: "Roasted Tea (Hojicha) - Joraku roasted tea leaves",
+        width: 400,
+        height: 400,
+      },
+    ],
     details: {
-      weight: "50g",
-      origin: "Shizuoka",
-      harvestSeason: "First & Second Flush Blend",
+      weight: "200g",
+      origin: "Shizuoka Prefecture",
+      harvestSeason: "First flush",
     },
     stripeProductId: "prod_hojicha_jyoraku_us",
     stripePriceId: "price_hojicha_jyoraku_usd",
@@ -121,7 +161,7 @@ export const products: Product[] = [
     id: 6,
     name: "Powdered Green Tea",
     description:
-      "A convenient and nutritious powdered green tea made by processing high-quality sencha into ultra-fine powder using special techniques. Instantly dissolving in water or hot water without leaving any tea grounds, this revolutionary product allows you to consume 100% of the tea leaf's nutrients. The vibrant green color, refreshing aroma, and smooth flavor are perfect not just for drinking, but also as a versatile ingredient in confectionery and cooking. From matcha lattes to green tea ice cream, pancakes to pasta sauces - the possibilities are endless. Rich in catechins and vitamins for health and beauty support. With completely pesticide-free cultivation quality, this is a new form of tea that fits perfectly into modern lifestyles.",
+      "A convenient and nutritious powdered green tea made by processing high-quality sencha into fine powder using special technology. It dissolves instantly in water or hot water without producing tea dregs, allowing you to consume 100% of the tea leaves' nutrients - a revolutionary product. The vibrant green color, refreshing aroma, and mellow taste are not only perfect for drinking as is, but also excel as accents in confectionery and cooking. The possibilities are endless with ideas like matcha lattes, green tea ice cream, pancakes, and pasta sauce. Rich in catechins and vitamins to support health and beauty. With completely pesticide-free cultivation's assured quality, it's a new form of tea that accompanies modern lifestyles.",
     price: 25,
     originalPrice: 30,
     category: "Green Tea",
@@ -131,10 +171,18 @@ export const products: Product[] = [
       width: 400,
       height: 400,
     },
+    subImages: [
+      {
+        url: "/images/products/hunmatsu-ryokucha-b.webp",
+        alt: "Powdered Green Tea dissolution scene",
+        width: 400,
+        height: 400,
+      },
+    ],
     details: {
       weight: "50g",
-      origin: "Shizuoka",
-      harvestSeason: "First & Second Flush Blend",
+      origin: "Shizuoka Prefecture",
+      harvestSeason: "First and second flush blend",
     },
     stripeProductId: "prod_powdered_green_tea_us",
     stripePriceId: "price_powdered_green_tea_usd",
@@ -142,22 +190,30 @@ export const products: Product[] = [
   },
   {
     id: 7,
-    name: "Powdered Green Tea Stick Type",
+    name: "Powdered Green Tea - Stick Type",
     description:
-      "Our popular powdered green tea in convenient 1g individual stick packets. Simply add one packet to a 500ml bottle of water and shake for instant, vibrant green tea. Perfect for office breaks, outdoor activities, sports, or travel - enjoy authentic green tea anytime, anywhere. Dissolves instantly in cold water and tastes great hot, making it perfect year-round. Made from completely pesticide-free tea leaves with absolutely no preservatives or artificial colors. Rich in catechins and vitamin C, supporting the healthy lifestyle of busy modern people. Each stick is perfectly portioned for consistent flavor every time.",
+      "Our popular powdered green tea in convenient 1g individual stick packaging. Simply add one packet to a 500ml plastic bottle of water and shake to create delicious green tea with a vibrant green color. Enjoy authentic green tea easily anytime, anywhere - during office break time, outdoor and sports scenes, or while traveling. It dissolves instantly in cold water and tastes great hot or cold, perfect for enjoyment regardless of season. Made with completely pesticide-free tea leaves with absolutely no preservatives or artificial colors. You can also properly consume nutrients like catechins and vitamin C, supporting the healthy lifestyle of busy modern people.",
     price: 25,
     originalPrice: 30,
     category: "Green Tea",
     image: {
       url: "/images/products/hunmatsu-stick.webp",
-      alt: "Powdered Green Tea Stick Type",
+      alt: "Powdered Green Tea - Stick Type",
       width: 400,
       height: 400,
     },
+    subImages: [
+      {
+        url: "/images/products/hunmatsu-stick-b.webp",
+        alt: "Powdered Green Tea - Stick Type usage scene",
+        width: 400,
+        height: 400,
+      },
+    ],
     details: {
-      weight: "50g",
-      origin: "Shizuoka",
-      harvestSeason: "First & Second Flush Blend",
+      weight: "1g × 20 sticks",
+      origin: "Shizuoka Prefecture",
+      harvestSeason: "First and second flush blend",
     },
     stripeProductId: "prod_powdered_green_tea_stick_us",
     stripePriceId: "price_powdered_green_tea_stick_usd",
@@ -165,47 +221,55 @@ export const products: Product[] = [
   },
   {
     id: 8,
-    name: "Fuji Matcha Kagayaki",
+    name: "Fuji Matcha - Kagayaki",
     description:
-      "A special organic JAS certified matcha cultivated under shade for 21 days in the blessed environment at the foot of Mt. Fuji. 'Kagayaki,' meaning 'radiance,' lives up to its name with a brilliant jade green color achieved through completely pesticide-free cultivation and careful stone-grinding. On the palate, you first experience elegant, soft sweetness, followed by deep richness and umami, finishing with a subtle bitterness that brings everything together. The smooth texture and rich froth make it perfect for traditional tea ceremony. It also adds wonderful flavor to matcha lattes and Japanese or Western confections. As a certified Fuji Brand product, it makes an appropriate gift for special occasions. Savor the safety of completely pesticide-free cultivation and the supreme flavors nurtured by Mt. Fuji's blessings.",
+      "Special organic JAS certified matcha cultivated under shade for a long period of 21 days in the blessed environment at the foot of Mt. Fuji. 'Kagayaki,' committed to being completely pesticide-free and carefully ground with stone mills, features a brilliant jade green color that lives up to its name. When you taste it, you first feel elegant and gentle sweetness, followed by deep richness and umami, with subtle bitterness that brings everything together at the end. The smooth texture and rich foam make it perfect for tea ceremony preparation. It also adds wonderful flavor to matcha lattes and Japanese and Western confectionery. As a Fuji Brand certified product, it's a masterpiece worthy of gifts for loved ones. Enjoy the safety of completely pesticide-free cultivation and the supreme taste nurtured by Mt. Fuji's blessings.",
     price: 25,
     originalPrice: 30,
     category: "Matcha",
     image: {
       url: "/images/products/kagayaki.webp",
-      alt: "Fuji Matcha Kagayaki",
+      alt: "Fuji Matcha - Kagayaki",
       width: 400,
       height: 400,
     },
+    subImages: [
+      {
+        url: "/images/products/kagayaki-b.webp",
+        alt: "Fuji Matcha - Kagayaki tea ceremony scene",
+        width: 400,
+        height: 400,
+      },
+    ],
     details: {
-      weight: "50g",
-      origin: "Shizuoka",
-      harvestSeason: "First & Second Flush Blend",
+      weight: "20g",
+      origin: "Shizuoka Prefecture",
+      harvestSeason: "First and second flush blend",
     },
-    stripeProductId: "prod_powdered_green_tea_stick_us",
-    stripePriceId: "price_powdered_green_tea_stick_usd",
+    stripeProductId: "prod_fuji_matcha_kagayaki_us",
+    stripePriceId: "price_fuji_matcha_kagayaki_usd",
     colorClass: "from-green-500 to-green-600",
   },
 ];
 
 export const heroData: HeroData = {
   title: [
-    "At the sacred foot of Mt. Fuji,",
-    "Three centuries of tradition",
-    "Perfected in matcha.",
+    "At the foot of sacred Mt. Fuji,",
+    "through three hundred years,",
+    "refined matcha.",
   ],
   subtitle: "Premium Matcha",
-  productName: "SUIRIN – SUIRIN CEREMONIAL",
+  productName: "SUIRIN CEREMONIAL",
   heroImage: "/images/hero-matcha-bowl.webp",
 };
 
 export const categories = [
   "All",
   "Sencha",
-  "Kukicha",
-  "Hojicha",
+  "Twig Tea",
+  "Roasted Tea",
   "Green Tea",
-  "Konacha",
+  "Powdered Tea",
   "Matcha",
 ];
 
@@ -213,12 +277,12 @@ export const sortOptions = [
   "Recommended",
   "Price: Low to High",
   "Price: High to Low",
-  "Newest First",
+  "Newest",
 ];
 
 // Currency settings
 export const currency = {
   code: "USD",
   symbol: "$",
-  locale: "en-US",
+  locale: "en-US", // For USD display
 };

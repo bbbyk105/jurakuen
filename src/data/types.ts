@@ -1,4 +1,4 @@
-// src/data/types.ts - お茶用型定義
+// src/data/types.ts - お茶用型定義（修正版）
 export interface Image {
   url: string;
   alt: string;
@@ -14,6 +14,7 @@ export interface Product {
   originalPrice?: number | null;
   category: string;
   image: Image;
+  subImages?: Image[]; // ← これが正しい型定義
   details: {
     weight?: string; // 内容量 (例: "20g", "100g")
     grade?: string; // 等級 (例: "特級", "一級")

@@ -16,6 +16,14 @@ export const products: Product[] = [
       width: 400,
       height: 400,
     },
+    subImages: [
+      {
+        url: "/images/products/chiyo-b.webp",
+        alt: "有機上煎茶 千代の友 茶葉詳細",
+        width: 400,
+        height: 400,
+      },
+    ],
     details: {
       weight: "100g",
       origin: "静岡県富士市",
@@ -39,8 +47,16 @@ export const products: Product[] = [
       width: 400,
       height: 400,
     },
+    subImages: [
+      {
+        url: "/images/products/ichiyu-b.webp",
+        alt: "有機煎茶 一会の友 抽出シーン",
+        width: 400,
+        height: 400,
+      },
+    ],
     details: {
-      weight: "20g",
+      weight: "100g",
       origin: "静岡県富士市",
       harvestSeason: "一番茶",
     },
@@ -62,8 +78,16 @@ export const products: Product[] = [
       width: 400,
       height: 400,
     },
+    subImages: [
+      {
+        url: "/images/products/boucha-b.webp",
+        alt: "有機棒茶 茶葉",
+        width: 400,
+        height: 400,
+      },
+    ],
     details: {
-      weight: "50g",
+      weight: "100g",
       origin: "静岡県",
       harvestSeason: "一番茶・二番茶ブレンド",
     },
@@ -85,8 +109,16 @@ export const products: Product[] = [
       width: 400,
       height: 400,
     },
+    subImages: [
+      {
+        url: "/images/products/konacha-b.webp",
+        alt: "有機粉茶 粉末",
+        width: 400,
+        height: 400,
+      },
+    ],
     details: {
-      weight: "50g",
+      weight: "150g",
       origin: "静岡県",
       harvestSeason: "一番茶・二番茶ブレンド",
     },
@@ -108,10 +140,18 @@ export const products: Product[] = [
       width: 400,
       height: 400,
     },
+    subImages: [
+      {
+        url: "/images/products/hojicha-b.webp",
+        alt: "ほうじ茶：常楽 焙煎茶葉",
+        width: 400,
+        height: 400,
+      },
+    ],
     details: {
-      weight: "50g",
+      weight: "200g",
       origin: "静岡県",
-      harvestSeason: "一番茶・二番茶ブレンド",
+      harvestSeason: "一番茶",
     },
     stripeProductId: "prod_hojicha_jyoraku_us",
     stripePriceId: "price_hojicha_jyoraku_usd",
@@ -131,6 +171,14 @@ export const products: Product[] = [
       width: 400,
       height: 400,
     },
+    subImages: [
+      {
+        url: "/images/products/hunmatsu-ryokucha-b.webp",
+        alt: "粉末緑茶 溶解シーン",
+        width: 400,
+        height: 400,
+      },
+    ],
     details: {
       weight: "50g",
       origin: "静岡県",
@@ -154,8 +202,16 @@ export const products: Product[] = [
       width: 400,
       height: 400,
     },
+    subImages: [
+      {
+        url: "/images/products/hunmatsu-stick-b.webp",
+        alt: "粉末緑茶 スティックタイプ 使用シーン",
+        width: 400,
+        height: 400,
+      },
+    ],
     details: {
-      weight: "50g",
+      weight: "1g × 20本",
       origin: "静岡県",
       harvestSeason: "一番茶・二番茶ブレンド",
     },
@@ -177,8 +233,16 @@ export const products: Product[] = [
       width: 400,
       height: 400,
     },
+    subImages: [
+      {
+        url: "/images/products/kagayaki-b.webp",
+        alt: "富士抹茶 かがやき 茶道シーン",
+        width: 400,
+        height: 400,
+      },
+    ],
     details: {
-      weight: "50g",
+      weight: "20g",
       origin: "静岡県",
       harvestSeason: "一番茶・二番茶ブレンド",
     },
