@@ -46,7 +46,7 @@ const Contact = () => {
           >
             <iframe
               title={t("mapTitle")}
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3282.6242223143734!2d138.6759925!3d35.1464575!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x601be4f4e004ae09%3A0xb1cbb30d33efce5b!2z5oi45byP5aSn!5e0!3m2!1sja!2sjp!4v1717916643144"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13048.415945458104!2d138.74390818715818!3d35.15402730000002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x601981006c2c7659%3A0x4c72734520720881!2z6IGa5qW96IuR!5e0!3m2!1sja!2sjp!4v1753596221218!5m2!1sja!2sjp"
               width="100%"
               height="300"
               style={{ border: 0 }}
