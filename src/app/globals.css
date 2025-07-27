@@ -120,3 +120,29 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* 和風フォントの追加設定 */
+@import url("https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap");
+
+/* カスタムフォントクラス */
+.font-noto-serif {
+  font-family: "Noto Serif JP", "Yu Mincho", "游明朝", serif;
+  font-feature-settings: "palt" 1;
+}
+
+.font-cormorant {
+  font-family: "Cormorant Garamond", "Georgia", serif;
+  font-feature-settings: "liga" 1, "kern" 1;
+}
+
+/* 和風のテキストシャドウ */
+.text-shadow-tea {
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* スムーズなアニメーション */
+@media (prefers-reduced-motion: no-preference) {
+  * {
+    scroll-behavior: smooth;
+  }
+}

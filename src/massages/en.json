@@ -31,13 +31,14 @@
         }
     },
     "hero": {
-        "catchphrase": "Find peace in every sip\nfrom Mt. Fuji foothills",
+        "catchphrase": "From Soil to Soul\nPurely Natural",
+        "subtitle": "Organic tea cultivated with care",
         "slides": [
             {
-                "alt": "Mt. Fuji and matcha fields"
+                "alt": "Mt. Fuji and organic tea fields"
             },
             {
-                "alt": "Organic matcha tea leaves"
+                "alt": "Pesticide-free tea leaves"
             }
         ]
     },
