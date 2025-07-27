@@ -33,7 +33,7 @@ const Contact = () => {
                 </li>
                 <li className="flex items-center space-x-3">
                   <FaEnvelope className="w-5 h-5 text-matcha-light shrink-0" />
-                  <span>info@juraku-en.com</span>
+                  <span>jurakuenfuji@gmail.com</span>
                 </li>
               </ul>
             </CardContent>
