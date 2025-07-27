@@ -4,7 +4,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
 import { useTranslations } from "next-intl";
 
 /**
@@ -22,17 +22,17 @@ const Products = () => {
   const products = [
     {
       title: t("items.premium_suirin"),
-      image: "/images/cha.jpg",
+      image: "/images/products/chiyo.webp",
       href: "/products/1",
     },
     {
       title: t("items.popular_matcha"),
-      image: "/images/cha2.jpg",
+      image: "/images/products/ichiyu.webp",
       href: "/products/2",
     },
     {
       title: t("items.matcha_cleansing"),
-      image: "/images/maccha.jpg",
+      image: "/images/products/boucha.webp",
       href: "/products/3",
     },
   ] as const;
