@@ -30,7 +30,7 @@ export default function Hero() {
     },
     {
       id: 2,
-      image: "/images/cha2.jpg",
+      image: "/images/hero2.webp",
       alt: t("slides.1.alt"),
     },
   ];
@@ -81,14 +81,6 @@ export default function Hero() {
             </SwiperSlide>
           ))}
         </Swiper>
-      </div>
-
-      {/* ------------------------------ 装飾的な和風要素 ------------------------------ */}
-      <div className="absolute top-0 left-0 w-full h-32 z-10 pointer-events-none">
-        <div className="relative w-full h-full">
-          <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-amber-600/30 to-transparent" />
-          <div className="absolute top-8 left-0 w-full h-px bg-gradient-to-r from-transparent via-amber-600/20 to-transparent" />
-        </div>
       </div>
 
       {/* ------------------------------ キャッチコピー ------------------------------ */}

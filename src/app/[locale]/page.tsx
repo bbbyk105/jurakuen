@@ -1,7 +1,6 @@
 "use client";
 import Hero from "./(landing)/Hero";
 import Contact from "./(landing)/Contact";
-import Instagram from "./(landing)/Instagram";
 import Products from "./(landing)/Products";
 import About from "./(landing)/About";
 
@@ -100,7 +99,6 @@ const JurakuEnLanding = () => {
       <Hero />
       <About />
       <Products />
-      <Instagram />
       <Contact />
     </div>
   );
