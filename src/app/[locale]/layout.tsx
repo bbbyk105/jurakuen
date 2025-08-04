@@ -2,13 +2,13 @@ import type { Metadata } from "next";
 import { setRequestLocale } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
-import { Inter } from "next/font/google";
+import { Noto_Serif_JP } from "next/font/google";
 import { CartProvider } from "../../store/cart";
 import "../globals.css";
 import Header from "@/components/Header";
 import { Footer } from "@/components/Footer";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Noto_Serif_JP({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "聚楽苑",

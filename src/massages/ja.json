@@ -45,8 +45,8 @@
     "about": {
         "sectionTitle": "About",
         "label": "無農薬緑茶",
-        "heroTitle": "完全無農薬で栽培した最高峰の緑茶",
-        "heroDescription": "21日間の覆下栽培から石臼挽きまで — 富士山麓で磨き上げられるその工程こそが\n鮮烈な緑、まろやかな甘味、そして安心安全を支えています。",
+        "heroTitle": "完全無農薬で栽培した\n最高峰の緑茶",
+        "heroDescription": "21日間の覆下栽培から石臼挽きまで、\n富士山麓で丹念に仕上げられるその工程が、\n鮮烈な緑、まろやかな甘味、\nそして安心・安全を生み出します。",
         "steps": [
             {
                 "step": "01",
@@ -479,7 +479,7 @@
         "companyName": "Jurakuen",
         "address": {
             "postalCode": "〒417-0812",
-            "street": "485-2 Sakai, Fuji City, Shizuoka Prefecture",
+            "street": "静岡県 富士市堺 485-2 ",
             "phone": "TEL: 0545-34-0614"
         },
         "sections": {
