@@ -35,7 +35,7 @@ export default function Hero() {
     },
   ];
 
-  // サブタイトルの存在確認（オプショナル）
+  // サブタイトルの存在確認
   const hasSubtitle = () => {
     try {
       t("subtitle");
@@ -52,13 +52,8 @@ export default function Hero() {
         <Swiper
           modules={[Autoplay, EffectFade]}
           effect="fade"
-          fadeEffect={{
-            crossFade: true,
-          }}
-          autoplay={{
-            delay: 6000,
-            disableOnInteraction: false,
-          }}
+          fadeEffect={{ crossFade: true }}
+          autoplay={{ delay: 6000, disableOnInteraction: false }}
           loop
           speed={2000}
           className="w-full h-full"
@@ -75,8 +70,8 @@ export default function Hero() {
                   quality={95}
                   priority={slide.id === 1}
                 />
-                {/* 和風グラデーションオーバーレイ */}
-                <div className="absolute inset-0 bg-gradient-to-b from-stone-900/20 via-transparent to-stone-900/40" />
+                {/* 写真をやや暗くし可読性を底上げ */}
+                <div className="absolute inset-0 bg-gradient-to-b from-stone-900/30 via-transparent to-stone-900/70" />
               </div>
             </SwiperSlide>
           ))}
@@ -85,11 +80,7 @@ export default function Hero() {
 
       {/* ------------------------------ キャッチコピー ------------------------------ */}
       <div className="absolute inset-0 z-10 flex items-center justify-center pointer-events-none select-none">
-        <div
-          className={`text-center ${
-            locale === "ja" ? "writing-container" : ""
-          }`}
-        >
+        <div className={locale === "ja" ? "writing-container" : ""}>
           <h1
             className={`
               font-serif tracking-widest leading-loose text-white
@@ -110,19 +101,19 @@ export default function Hero() {
             {t("catchphrase")}
           </h1>
 
-          {/* サブテキスト（必要に応じて） */}
+          {/* サブタイトル */}
           {hasSubtitle() && (
             <p
               className={`
-              mt-6 text-white/80 font-light
-              ${
-                locale === "ja"
-                  ? "text-sm md:text-base font-noto-serif"
-                  : "text-base md:text-lg font-cormorant italic"
-              }
-              transition-all duration-1000 delay-700
-              ${isLoaded ? "opacity-100" : "opacity-0"}
-            `}
+                mt-6 text-white/95 font-light drop-shadow-strong
+                ${
+                  locale === "ja"
+                    ? "text-sm md:text-base font-noto-serif"
+                    : "text-base md:text-lg font-cormorant italic"
+                }
+                transition-all duration-1000 delay-700
+                ${isLoaded ? "opacity-100" : "opacity-0"}
+              `}
             >
               {t("subtitle")}
             </p>
@@ -137,7 +128,6 @@ export default function Hero() {
         }`}
       >
         <div className="flex flex-col items-center text-white/80">
-          {/* 縦線のアニメーション */}
           <div className="relative w-px h-12 md:h-16 bg-white/20 overflow-hidden mb-3">
             <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent via-white/60 to-transparent animate-scroll-line" />
           </div>
@@ -148,7 +138,7 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* ------------------------------ Slide Progress Indicator with Animation ------------------------------ */}
+      {/* ------------------------------ Slide Progress Indicator ------------------------------ */}
       <div
         className={`hidden md:block absolute bottom-1/2 right-12 transform translate-y-1/2 z-20 transition-all duration-1000 delay-1800 ${
           isLoaded ? "translate-x-0 opacity-50" : "translate-x-8 opacity-0"
@@ -166,7 +156,6 @@ export default function Hero() {
                   }`}
                 />
               </div>
-              {/* プログレスリング */}
               {currentSlide === index && (
                 <svg className="absolute inset-0 w-8 h-8 -rotate-90">
                   <circle
@@ -187,7 +176,7 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* ------------------------------ 和風の装飾パターン ------------------------------ */}
+      {/* ------------------------------ 和風装飾パターン ------------------------------ */}
       <div className="absolute bottom-0 left-0 w-full h-24 z-10 pointer-events-none">
         <svg
           className="w-full h-full text-white/10"
@@ -208,11 +197,9 @@ export default function Hero() {
         .font-noto-serif {
           font-family: "Noto Serif JP", serif;
         }
-
         .font-cormorant {
           font-family: "Cormorant Garamond", serif;
         }
-
         .writing-mode-vertical {
           writing-mode: vertical-rl;
           text-orientation: upright;
@@ -222,6 +209,10 @@ export default function Hero() {
         .drop-shadow-tea {
           filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3))
             drop-shadow(0 1px 3px rgba(0, 0, 0, 0.2));
+        }
+        .drop-shadow-strong {
+          filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.65))
+            drop-shadow(0 0 2px rgba(0, 0, 0, 0.5));
         }
 
         /* スクロールラインアニメーション */
@@ -233,7 +224,6 @@ export default function Hero() {
             transform: translateY(100%);
           }
         }
-
         .animate-scroll-line {
           animation: scroll-line 2s ease-in-out infinite;
         }
@@ -248,7 +238,6 @@ export default function Hero() {
             transform: translateY(-4px);
           }
         }
-
         .animate-bounce-slow {
           animation: bounce-slow 2s ease-in-out infinite;
         }
@@ -262,7 +251,6 @@ export default function Hero() {
             stroke-dashoffset: 0;
           }
         }
-
         .animate-progress-ring {
           animation: progress-ring 6s linear;
         }
