@@ -40,7 +40,7 @@ export default function Header() {
     title: t("recentProduct.title"),
     subtitle: t("recentProduct.subtitle"),
     price: t("recentProduct.price"),
-    img: "/images/suirin.jpg",
+    img: "/images/products/chiyo.webp",
     href: "/products/1",
   };
 
