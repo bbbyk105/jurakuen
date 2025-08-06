@@ -1,106 +1,137 @@
 "use client";
-
 import React from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import Image from "next/image";
 import { Link } from "@/i18n/routing";
-import { useTranslations } from "next-intl";
-
-/**
- * Products – 商品／トピック一覧セクション
- * -------------------------------------------
- * ・左カラム: 見出し / 説明 / 一覧リンク
- * ・右カラム: カード 1〜3 列グリッド (レスポンシブ)
- * ・Framer Motion でフェード & スライドイン
- * ・Tailwind CSS ユーティリティ
- */
+import { BackgroundHerring } from "./Helpers";
+import { useTranslations, useLocale } from "next-intl";
 
 const Products = () => {
-  const t = useTranslations("products");
+  const tProducts = useTranslations("products");
+  const locale = useLocale();
 
-  const products = [
+  const productCards = [
     {
-      title: t("items.premium_suirin"),
-      image: "/images/products/chiyo.webp",
+      title: tProducts("items.premium_suirin"),
+      img: "/images/products/chiyo.webp",
       href: "/products/1",
+      badge: locale === "ja" ? "人気No.1" : "Best Seller",
+      desc:
+        locale === "ja"
+          ? "厳選された一番茶のみを使用した最高級茶"
+          : "Premium tea using only carefully selected first flush leaves",
     },
     {
-      title: t("items.popular_matcha"),
-      image: "/images/products/ichiyu.webp",
+      title: tProducts("items.popular_matcha"),
+      img: "/images/products/ichiyu.webp",
       href: "/products/2",
+      badge: locale === "ja" ? "おすすめ" : "Recommended",
+      desc:
+        locale === "ja"
+          ? "日常使いに最適な、バランスの取れた味わい"
+          : "Perfect for daily use with well-balanced flavor",
     },
     {
-      title: t("items.matcha_cleansing"),
-      image: "/images/products/boucha.webp",
+      title: tProducts("items.matcha_cleansing"),
+      img: "/images/products/boucha.webp",
       href: "/products/3",
+      badge: locale === "ja" ? "新商品" : "New",
+      desc:
+        locale === "ja"
+          ? "香ばしい風味が特徴の有機棒茶"
+          : "Organic twig tea with distinctive roasted aroma",
     },
-  ] as const;
+  ];
 
   return (
-    <section className="py-24 bg-white">
-      <div className="container mx-auto max-w-7xl px-4 flex flex-col gap-12 lg:flex-row lg:gap-20">
-        {/* Left column – heading / description / CTA */}
+    <section className="py-24 bg-white relative overflow-hidden" id="products">
+      <BackgroundHerring />
+      <div className="container mx-auto max-w-7xl px-4 relative z-10">
+        <header className="text-center mb-16">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <p className="text-sm tracking-[0.3em] text-gray-500 mb-4">
+              PRODUCTS
+            </p>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-light text-gray-900 mb-6">
+              {locale === "ja" ? "商品のご紹介" : "Our Products"}
+            </h2>
+            <div className="w-16 h-px bg-gray-400 mx-auto mb-8" />
+            <p className="max-w-2xl mx-auto text-gray-600 leading-relaxed">
+              {tProducts("description")}
+            </p>
+          </motion.div>
+        </header>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
+          {productCards.map((p, i) => (
+            <motion.article
+              key={p.href}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: i * 0.15 }}
+              className="group"
+            >
+              <Link href={p.href} className="block">
+                <div className="relative overflow-hidden rounded-lg shadow-md hover:shadow-2xl transition-shadow duration-500">
+                  {p.badge && (
+                    <span className="absolute top-4 left-4 z-10 bg-kin-gold text-white px-3 py-1 rounded-full text-xs font-medium shadow-lg">
+                      {p.badge}
+                    </span>
+                  )}
+                  <div className="relative h-72 bg-gradient-to-b from-gray-50 to-gray-100">
+                    <Image
+                      src={p.img}
+                      alt={p.title}
+                      fill
+                      className="object-cover group-hover:scale-110 transition-transform duration-700"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  </div>
+                  <div className="p-6 bg-white">
+                    <h3 className="text-lg font-medium text-gray-900 mb-2 group-hover:text-matcha-dark transition-colors">
+                      {p.title}
+                    </h3>
+                    <p className="text-sm text-gray-600 mb-4 line-clamp-2">
+                      {p.desc}
+                    </p>
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm font-medium text-matcha-dark group-hover:text-matcha-light transition-colors">
+                        {tProducts("viewMore")}
+                      </span>
+                      <ArrowRight className="w-4 h-4 text-matcha-dark group-hover:translate-x-1 transition-transform" />
+                    </div>
+                  </div>
+                </div>
+              </Link>
+            </motion.article>
+          ))}
+        </div>
+
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="lg:w-1/3"
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="mt-20 text-center"
         >
-          <h2 className="mb-6 text-4xl font-light tracking-wide text-gray-900 md:text-5xl">
-            Products
-          </h2>
-          <p className="mb-8 max-w-sm leading-relaxed text-gray-600">
-            {t("description")}
-          </p>
-
           <Link
             href="/products"
-            className="inline-flex items-center gap-2 border border-gray-900 px-5 py-2 text-sm font-medium transition-colors hover:bg-gray-900 hover:text-white"
+            className="group inline-flex items-center gap-3 bg-matcha-dark text-white px-10 py-4 rounded-full overflow-hidden transition-all hover:bg-matcha-medium"
           >
-            {t("viewAll")} <ArrowRight className="h-4 w-4" />
+            <span className="font-medium relative z-10">
+              {tProducts("viewAll")}
+            </span>
+            <ArrowRight className="w-5 h-5 relative z-10 group-hover:translate-x-1 transition-transform" />
+            <div className="absolute inset-0 bg-gradient-to-r from-matcha-medium to-matcha-dark opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
           </Link>
         </motion.div>
-
-        {/* Right column – cards */}
-        <div className="flex-1">
-          <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-3">
-            {products.map((topic, i) => (
-              <motion.article
-                key={topic.href}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, ease: "easeOut", delay: i * 0.1 }}
-                className="group"
-              >
-                <Link
-                  href={topic.href}
-                  className="relative block h-80 overflow-hidden rounded-lg"
-                >
-                  <Image
-                    src={topic.image}
-                    alt={topic.title}
-                    fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                </Link>
-
-                <h3 className="mt-2 line-clamp-2 text-lg font-medium leading-relaxed text-gray-900">
-                  {topic.title}
-                </h3>
-
-                <Link
-                  href={topic.href}
-                  className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-gray-900 hover:underline"
-                >
-                  {t("viewMore")} <ArrowRight className="h-4 w-4" />
-                </Link>
-              </motion.article>
-            ))}
-          </div>
-        </div>
       </div>
     </section>
   );

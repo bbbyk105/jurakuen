@@ -46,7 +46,7 @@ export default function Hero() {
   };
 
   return (
-    <div className="relative h-screen w-full overflow-hidden bg-stone-50">
+    <div className="relative h-screen w-full overflow-hidden bg-[#f6f5f0]">
       {/* ------------------------------ 背景スライダー ------------------------------ */}
       <div className="absolute inset-0 z-0">
         <Swiper
@@ -70,121 +70,135 @@ export default function Hero() {
                   quality={95}
                   priority={slide.id === 1}
                 />
-                {/* 写真をやや暗くし可読性を底上げ */}
-                <div className="absolute inset-0 bg-gradient-to-b from-stone-900/30 via-transparent to-stone-900/70" />
+                {/* オーバーレイ調整 - 108matcha風 */}
+                <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/50" />
               </div>
             </SwiperSlide>
           ))}
         </Swiper>
       </div>
 
-      {/* ------------------------------ キャッチコピー ------------------------------ */}
-      <div className="absolute inset-0 z-10 flex items-center justify-center pointer-events-none select-none">
-        <div className={locale === "ja" ? "writing-container" : ""}>
-          <h1
-            className={`
-              font-serif tracking-widest leading-loose text-white
-              ${
-                locale === "ja"
-                  ? "text-3xl md:text-5xl font-noto-serif writing-mode-vertical"
-                  : "text-2xl md:text-4xl font-cormorant"
-              }
-              drop-shadow-tea whitespace-pre-line
-              transition-all duration-1000 delay-500
-              ${
-                isLoaded
-                  ? "opacity-100 translate-y-0"
-                  : "opacity-0 translate-y-4"
-              }
-            `}
-          >
-            {t("catchphrase")}
-          </h1>
+      {/* ------------------------------ 108抹茶茶廊風 ロゴエリア ------------------------------ */}
+      <div className="absolute top-12 left-1/2 -translate-x-1/2 z-20">
+        <div
+          className={`transition-all duration-1000 ${
+            isLoaded ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"
+          }`}
+        >
+          {/* 円形の枠線デザイン */}
+          <div className="relative">
+            <div className="w-32 h-32 md:w-40 md:h-40 rounded-full border-2 border-white/40 flex items-center justify-center">
+              <div className="text-center">
+                <p className="text-white text-xs md:text-sm tracking-[0.3em] font-light mb-1">
+                  ORGANIC MATCHA
+                </p>
+                <div className="w-16 md:w-20 h-px bg-white/60 mx-auto"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-          {/* サブタイトル */}
-          {hasSubtitle() && (
-            <p
+      {/* ------------------------------ メインコンテンツ ------------------------------ */}
+      <div className="absolute inset-0 z-10 flex items-center justify-center">
+        <div className="text-center px-4">
+          {/* メインタイトル - 108matcha風縦書き */}
+          <div className={`${locale === "ja" ? "flex justify-center" : ""}`}>
+            <h1
               className={`
-                mt-6 text-white/95 font-light drop-shadow-strong
+                font-serif text-white
                 ${
                   locale === "ja"
-                    ? "text-sm md:text-base font-noto-serif"
-                    : "text-base md:text-lg font-cormorant italic"
+                    ? "text-4xl md:text-6xl font-noto-serif writing-mode-vertical-rl tracking-[0.25em]"
+                    : "text-3xl md:text-5xl font-cormorant tracking-widest"
                 }
-                transition-all duration-1000 delay-700
-                ${isLoaded ? "opacity-100" : "opacity-0"}
+                drop-shadow-strong whitespace-pre-line
+                transition-all duration-1000 delay-500
+                ${
+                  isLoaded
+                    ? "opacity-100 translate-y-0"
+                    : "opacity-0 translate-y-4"
+                }
               `}
             >
-              {t("subtitle")}
-            </p>
+              {t("catchphrase")}
+            </h1>
+          </div>
+
+          {/* サブタイトル - "おいしいお茶のお福分け"風 */}
+          {hasSubtitle() && (
+            <div className={`mt-8 ${locale === "ja" ? "" : "mt-6"}`}>
+              <p
+                className={`
+                  text-white/95 font-light drop-shadow-lg
+                  ${
+                    locale === "ja"
+                      ? "text-base md:text-lg font-noto-serif tracking-[0.2em]"
+                      : "text-lg md:text-xl font-cormorant italic"
+                  }
+                  transition-all duration-1000 delay-700
+                  ${isLoaded ? "opacity-100" : "opacity-0"}
+                `}
+              >
+                {t("subtitle")}
+              </p>
+
+              {/* 装飾ライン */}
+              <div
+                className="mt-4 w-24 h-px bg-white/40 mx-auto transition-all duration-1000 delay-900"
+                style={{
+                  width: isLoaded ? "6rem" : "0",
+                }}
+              />
+            </div>
           )}
         </div>
       </div>
 
-      {/* ------------------------------ Animated Scroll Indicator ------------------------------ */}
+      {/* ------------------------------ スクロールインジケーター（シンプル版） ------------------------------ */}
       <div
-        className={`absolute bottom-8 md:bottom-12 left-1/2 transform -translate-x-1/2 z-20 transition-all duration-1000 delay-1500 ${
-          isLoaded ? "translate-y-0 opacity-60" : "translate-y-4 opacity-0"
+        className={`absolute bottom-12 left-1/2 transform -translate-x-1/2 z-20 transition-all duration-1000 delay-1500 ${
+          isLoaded ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
         }`}
       >
-        <div className="flex flex-col items-center text-white/80">
-          <div className="relative w-px h-12 md:h-16 bg-white/20 overflow-hidden mb-3">
-            <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent via-white/60 to-transparent animate-scroll-line" />
-          </div>
-          <p className="text-xs font-light tracking-[0.3em] font-cormorant">
+        <div className="flex flex-col items-center text-white/70">
+          <p className="text-xs font-light tracking-[0.4em] mb-3 font-cormorant">
             SCROLL
           </p>
-          <div className="mt-2 w-4 h-4 border border-white/40 rounded-full animate-bounce-slow" />
+          <div className="w-px h-16 bg-gradient-to-b from-white/60 to-transparent" />
         </div>
       </div>
 
-      {/* ------------------------------ Slide Progress Indicator ------------------------------ */}
+      {/* ------------------------------ スライドインジケーター（右側） ------------------------------ */}
       <div
-        className={`hidden md:block absolute bottom-1/2 right-12 transform translate-y-1/2 z-20 transition-all duration-1000 delay-1800 ${
-          isLoaded ? "translate-x-0 opacity-50" : "translate-x-8 opacity-0"
+        className={`hidden md:flex absolute right-12 top-1/2 -translate-y-1/2 z-20 flex-col space-y-3 transition-all duration-1000 delay-1000 ${
+          isLoaded ? "translate-x-0 opacity-100" : "translate-x-8 opacity-0"
         }`}
       >
-        <div className="flex flex-col items-center space-y-4">
-          {slides.map((_, index) => (
-            <div key={index} className="relative">
-              <div className="w-8 h-8 rounded-full border border-white/30 flex items-center justify-center transition-all duration-500">
-                <div
-                  className={`w-2 h-2 rounded-full transition-all duration-500 ${
-                    currentSlide === index
-                      ? "bg-white/80 scale-100"
-                      : "bg-white/30 scale-75"
-                  }`}
-                />
-              </div>
-              {currentSlide === index && (
-                <svg className="absolute inset-0 w-8 h-8 -rotate-90">
-                  <circle
-                    cx="16"
-                    cy="16"
-                    r="15"
-                    stroke="rgba(255,255,255,0.6)"
-                    strokeWidth="1"
-                    fill="none"
-                    strokeDasharray="94.2"
-                    strokeDashoffset="0"
-                    className="animate-progress-ring"
-                  />
-                </svg>
-              )}
-            </div>
-          ))}
-        </div>
+        {slides.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => setCurrentSlide(index)}
+            className="group relative w-2 h-8 focus:outline-none"
+          >
+            <div
+              className={`absolute inset-0 bg-white/30 transition-all duration-500 ${
+                currentSlide === index ? "bg-white/80" : "hover:bg-white/50"
+              }`}
+            />
+          </button>
+        ))}
       </div>
 
-      {/* ------------------------------ 和風装飾パターン ------------------------------ */}
-      <div className="absolute bottom-0 left-0 w-full h-24 z-10 pointer-events-none">
+      {/* ------------------------------ 和風パターン（波模様） ------------------------------ */}
+      <div className="absolute bottom-0 left-0 w-full h-20 z-10 pointer-events-none">
         <svg
-          className="w-full h-full text-white/10"
+          className="w-full h-full text-white/5"
           viewBox="0 0 1200 100"
           preserveAspectRatio="none"
         >
           <path
-            d="M0,50 Q300,20 600,50 T1200,50 L1200,100 L0,100 Z"
+            d="M0,40 Q150,10 300,40 T600,40 T900,40 T1200,40 L1200,100 L0,100 Z"
             fill="currentColor"
           />
         </svg>
@@ -200,73 +214,26 @@ export default function Hero() {
         .font-cormorant {
           font-family: "Cormorant Garamond", serif;
         }
-        .writing-mode-vertical {
+
+        .writing-mode-vertical-rl {
           writing-mode: vertical-rl;
           text-orientation: upright;
-          letter-spacing: 0.15em;
         }
 
-        .drop-shadow-tea {
-          filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3))
-            drop-shadow(0 1px 3px rgba(0, 0, 0, 0.2));
-        }
         .drop-shadow-strong {
-          filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.65))
-            drop-shadow(0 0 2px rgba(0, 0, 0, 0.5));
+          filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.5))
+            drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
         }
 
-        /* スクロールラインアニメーション */
-        @keyframes scroll-line {
-          0% {
-            transform: translateY(-100%);
-          }
-          100% {
-            transform: translateY(100%);
-          }
-        }
-        .animate-scroll-line {
-          animation: scroll-line 2s ease-in-out infinite;
+        .drop-shadow-lg {
+          filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.4));
         }
 
-        /* ゆっくりとしたバウンス */
-        @keyframes bounce-slow {
-          0%,
-          100% {
-            transform: translateY(0);
-          }
-          50% {
-            transform: translateY(-4px);
-          }
-        }
-        .animate-bounce-slow {
-          animation: bounce-slow 2s ease-in-out infinite;
-        }
-
-        /* プログレスリングアニメーション */
-        @keyframes progress-ring {
-          0% {
-            stroke-dashoffset: 94.2;
-          }
-          100% {
-            stroke-dashoffset: 0;
-          }
-        }
-        .animate-progress-ring {
-          animation: progress-ring 6s linear;
-        }
-
-        /* モバイル端末では常に横書き */
+        /* モバイル端末では横書き */
         @media (max-width: 768px) {
-          .writing-mode-vertical {
+          .writing-mode-vertical-rl {
             writing-mode: horizontal-tb;
             text-orientation: mixed;
-            text-align: center;
-            letter-spacing: 0.08em;
-          }
-
-          .writing-container {
-            max-width: 90%;
-            margin: 0 auto;
           }
         }
       `}</style>
