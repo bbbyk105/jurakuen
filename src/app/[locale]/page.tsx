@@ -69,15 +69,14 @@ const JurakuEnLanding = () => (
     <About />
     <WaveDivider />
 
+    <Products />
+    <WaveDivider />
+
     <StoryProducer />
     <Video />
     <Safety />
     <FAQ />
     <WaveDivider />
-
-    <Products />
-    <WaveDivider />
-
     <Contact />
 
     {/* Footer */}
