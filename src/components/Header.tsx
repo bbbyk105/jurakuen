@@ -54,13 +54,6 @@ export default function Header() {
           {t("brand.name")}
         </Link>
 
-        {/* スマホ：サブタイトル（中央）※日本語のときのみ */}
-        {locale === "ja" && (
-          <div className="lg:hidden absolute left-1/2 -translate-x-1/2 text-center text-[10px] font-light opacity-80 max-w-[60%] truncate z-0">
-            {t("brand.subtitle")}
-          </div>
-        )}
-
         {/* スマホ：メニュー（右） */}
         <div className="lg:hidden z-10">
           <Sheet open={open} onOpenChange={setOpen}>
