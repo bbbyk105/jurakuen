@@ -44,7 +44,8 @@ export default function Header() {
 
   return (
     <header className="fixed top-0 left-0 w-full z-30 bg-transparent">
-      <div className="relative mx-auto max-w-7xl px-4 py-4 flex items-center justify-between text-black lg:justify-between">
+      {/* 🔽 ここでパディングを拡大しました */}
+      <div className="relative mx-auto max-w-7xl px-6 py-6 lg:px-8 flex items-center justify-between text-black lg:justify-between">
         {/* スマホ：ロゴ（左） */}
         <Link
           href="/"
