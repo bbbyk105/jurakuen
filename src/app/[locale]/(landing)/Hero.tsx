@@ -25,12 +25,12 @@ export default function Hero() {
   const slides = [
     {
       id: 1,
-      image: "/images/hero1.webp",
+      image: "/images/hero2.webp",
       alt: t("slides.0.alt"),
     },
     {
       id: 2,
-      image: "/images/hero2.webp",
+      image: "/images/hero1.webp",
       alt: t("slides.1.alt"),
     },
   ];
@@ -76,27 +76,6 @@ export default function Hero() {
             </SwiperSlide>
           ))}
         </Swiper>
-      </div>
-
-      {/* ------------------------------ 108抹茶茶廊風 ロゴエリア ------------------------------ */}
-      <div className="absolute top-12 left-1/2 -translate-x-1/2 z-20">
-        <div
-          className={`transition-all duration-1000 ${
-            isLoaded ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"
-          }`}
-        >
-          {/* 円形の枠線デザイン */}
-          <div className="relative">
-            <div className="w-32 h-32 md:w-40 md:h-40 rounded-full border-2 border-white/40 flex items-center justify-center">
-              <div className="text-center">
-                <p className="text-white text-xs md:text-sm tracking-[0.3em] font-light mb-1">
-                  ORGANIC MATCHA
-                </p>
-                <div className="w-16 md:w-20 h-px bg-white/60 mx-auto"></div>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
 
       {/* ------------------------------ メインコンテンツ ------------------------------ */}

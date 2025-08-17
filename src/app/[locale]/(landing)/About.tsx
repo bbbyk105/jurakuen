@@ -1,13 +1,12 @@
 "use client";
 import React from "react";
-import Image from "next/image";
 import { motion } from "framer-motion";
-import { Leaf, Award, Heart } from "lucide-react";
-import { useTranslations, useLocale } from "next-intl";
+import { Leaf, Award, Heart, ArrowRight } from "lucide-react";
+import { useLocale } from "next-intl";
 import { BlobDecor } from "./Helpers";
+import { Link } from "@/i18n/routing";
 
 const About = () => {
-  const tAbout = useTranslations("about");
   const locale = useLocale();
 
   const commitments = [
@@ -34,33 +33,6 @@ const About = () => {
         locale === "ja"
           ? "周囲とは隔離された大自然の中で栽培をおこなうことで他の畑で使用された農薬等が風に吹かれて混じってしまうことを防いでいます。"
           : "Cultivation in isolated natural environments prevents contamination from pesticides used in neighboring fields.",
-    },
-  ];
-
-  const manufSteps = [
-    {
-      step: tAbout("steps.0.step"),
-      title: tAbout("steps.0.title"),
-      desc: tAbout("steps.0.desc"),
-      img: "/images/cover.webp",
-    },
-    {
-      step: tAbout("steps.1.step"),
-      title: tAbout("steps.1.title"),
-      desc: tAbout("steps.1.desc"),
-      img: "/images/tezumi.webp",
-    },
-    {
-      step: tAbout("steps.2.step"),
-      title: tAbout("steps.2.title"),
-      desc: tAbout("steps.2.desc"),
-      img: "/images/mushi.jpg",
-    },
-    {
-      step: tAbout("steps.3.step"),
-      title: tAbout("steps.3.title"),
-      desc: tAbout("steps.3.desc"),
-      img: "/images/usu.jpg",
     },
   ];
 
@@ -123,44 +95,24 @@ const About = () => {
             </motion.div>
           ))}
         </div>
-      </div>
 
-      {/* Manufacturing Steps */}
-      <div className="max-w-7xl mx-auto px-4 lg:px-8 relative z-10">
-        <div className="flex overflow-x-auto gap-6 snap-x snap-mandatory md:grid md:grid-cols-2 lg:grid-cols-4 md:gap-8 md:overflow-visible md:snap-none">
-          {manufSteps.map((s, i) => (
-            <motion.div
-              key={i}
-              className="group flex-shrink-0 w-72 snap-start md:w-auto md:flex-shrink-0"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: i * 0.1 }}
+        {/* Button centered */}
+        <div className="text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+          >
+            <Link
+              href="/about"
+              className="group inline-flex items-center gap-3 bg-matcha-dark text-white px-10 py-4 rounded-full overflow-hidden transition-all hover:bg-matcha-medium"
             >
-              <div className="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300">
-                <div className="relative h-48 overflow-hidden">
-                  <Image
-                    src={s.img}
-                    alt={s.title}
-                    fill
-                    className="object-cover group-hover:scale-110 transition-transform duration-700"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
-                  <span className="absolute top-4 left-4 text-white text-2xl font-bold drop-shadow-lg">
-                    {s.step}
-                  </span>
-                </div>
-                <div className="p-6">
-                  <h4 className="text-lg font-medium text-gray-900 mb-3">
-                    {s.title}
-                  </h4>
-                  <p className="text-sm text-gray-600 leading-relaxed">
-                    {s.desc}
-                  </p>
-                </div>
-              </div>
-            </motion.div>
-          ))}
+              <span className="font-medium relative z-10">詳しく見る</span>
+              <ArrowRight className="w-5 h-5 relative z-10 group-hover:translate-x-1 transition-transform" />
+              <div className="absolute inset-0 bg-gradient-to-r from-matcha-medium to-matcha-dark opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            </Link>
+          </motion.div>
         </div>
       </div>
     </section>
