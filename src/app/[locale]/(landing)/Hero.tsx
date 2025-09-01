@@ -30,8 +30,13 @@ export default function Hero() {
     },
     {
       id: 2,
-      image: "/images/hero1.webp",
+      image: "/images/hero3.webp",
       alt: t("slides.1.alt"),
+    },
+    {
+      id: 3,
+      image: "/images/hero1.webp",
+      alt: t("slides.2.alt"),
     },
   ];
 

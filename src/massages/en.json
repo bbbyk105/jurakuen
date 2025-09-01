@@ -26,7 +26,7 @@
         },
         "recentProduct": {
             "title": "Organic Premium Sencha - Chiyo no Tomo",
-            "subtitle": "Completely pesticide-free, premium ryokucha grown with Mt. Fuji spring water",
+            "subtitle": "pesticide-free, premium ryokucha grown with Mt. Fuji spring water",
             "price": "$32"
         }
     },
@@ -38,6 +38,9 @@
                 "alt": "Mt. Fuji and organic tea fields"
             },
             {
+                "alt": "Kagayaki"
+            },
+            {
                 "alt": "Pesticide-free tea leaves"
             }
         ]
@@ -45,7 +48,7 @@
     "about": {
         "sectionTitle": "About",
         "label": "Pesticide-Free Matcha",
-        "heroTitle": "Premium matcha cultivated completely pesticide-free",
+        "heroTitle": "Premium matcha cultivated pesticide-free",
         "heroDescription": "From 21 days of shade cultivation to stone mill grinding — these refined processes at Mt. Fuji foothills\nsupport the vibrant green color, mellow sweetness, and safety you can trust.",
         "steps": [
             {
@@ -540,7 +543,7 @@
                         "step": 2,
                         "title": "Harvest",
                         "subtitle": "Hand-picking the finest one bud and two leaves",
-                        "description": "Tea leaves for matcha are covered for 20 days before harvest to block sunlight and concentrate umami.",
+                        "description": "Tea leaves for matcha are covered for 21 days before harvest to block sunlight and concentrate umami.",
                         "detail": "Shade cultivation increases amino acids in tea leaves while suppressing tannin, the astringent component. This special cultivation method creates matcha's characteristic sweetness and umami, achieving a vibrant green color."
                     },
                     "steaming": {

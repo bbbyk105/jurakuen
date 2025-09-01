@@ -108,7 +108,7 @@ const About = () => {
               href="/about"
               className="group inline-flex items-center gap-3 bg-matcha-dark text-white px-10 py-4 rounded-full overflow-hidden transition-all hover:bg-matcha-medium"
             >
-              <span className="font-medium relative z-10">詳しく見る</span>
+              <span className="font-medium relative z-10">View details</span>
               <ArrowRight className="w-5 h-5 relative z-10 group-hover:translate-x-1 transition-transform" />
               <div className="absolute inset-0 bg-gradient-to-r from-matcha-medium to-matcha-dark opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             </Link>

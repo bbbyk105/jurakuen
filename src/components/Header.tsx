@@ -44,14 +44,20 @@ export default function Header() {
 
   return (
     <header className="fixed top-0 left-0 w-full z-30 bg-transparent">
-      {/* 🔽 ここでパディングを拡大しました */}
       <div className="relative mx-auto max-w-7xl px-6 py-6 lg:px-8 flex items-center justify-between text-black lg:justify-between">
         {/* スマホ：ロゴ（左） */}
         <Link
           href="/"
-          className="lg:hidden text-2xl font-serif tracking-wide text-black z-10"
+          className="lg:hidden z-10 hover:opacity-90 transition-opacity"
         >
-          {t("brand.name")}
+          <Image
+            src="/images/logos/logo_horizontal.png"
+            alt={t("brand.name")}
+            width={120}
+            height={40}
+            className="h-8 w-auto"
+            priority
+          />
         </Link>
 
         {/* スマホ：メニュー（右） */}
@@ -80,8 +86,19 @@ export default function Header() {
                 <SheetTitle>{t("mobile.navigationMenu")}</SheetTitle>
               </VisuallyHidden>
 
+              {/* Mobile menu header with logo */}
+              <div className="px-6 pt-6 pb-4">
+                <Image
+                  src="/images/logos/logo_horizontal.png"
+                  alt={t("brand.name")}
+                  width={150}
+                  height={50}
+                  className="h-10 w-auto filter brightness-0 invert"
+                />
+              </div>
+
               {/* Recent Product */}
-              <div className="relative pt-12 pb-8 px-6 bg-gradient-to-b from-emerald-800/80 to-transparent">
+              <div className="relative pt-4 pb-8 px-6 bg-gradient-to-b from-emerald-800/80 to-transparent">
                 <div className="flex items-center justify-between mb-6">
                   <h3 className="text-lg font-serif tracking-wide text-emerald-100">
                     {t("mobile.recentProduct")}
@@ -158,13 +175,18 @@ export default function Header() {
 
         {/* PC: ナビゲーション */}
         <nav className="hidden lg:flex items-center justify-between w-full text-sm font-medium">
-          {/* ロゴ */}
-          <Link href="/" className="flex items-center gap-2 group">
-            <span className="text-3xl font-serif tracking-wide group-hover:opacity-90 text-black">
-              {t("brand.name")}
-            </span>
+          {/* PC ロゴ */}
+          <Link href="/" className="flex items-center gap-3 group">
+            <Image
+              src="/images/logos/logo_horizontal.png"
+              alt={t("brand.name")}
+              width={180}
+              height={60}
+              className="h-12 w-auto group-hover:opacity-90 transition-opacity"
+              priority
+            />
             {locale === "ja" && (
-              <span className="leading-snug text-xs opacity-80 whitespace-pre-line">
+              <span className="leading-snug text-xs opacity-80 whitespace-pre-line ml-2">
                 {t("brand.subtitle")}
               </span>
             )}
