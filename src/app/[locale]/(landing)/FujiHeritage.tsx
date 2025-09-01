@@ -90,9 +90,9 @@ const FujiHeritage = () => {
         </div>
       </section>
 
-      {/* Sacred Blessing */}
-      <section className="py-16 md:py-20 lg:py-24 bg-gray-900 text-white">
-        <div className="max-w-4xl mx-auto px-4 md:px-6 lg:px-0 text-center">
+      {/* Sacred Blessing with Logo */}
+      <section className="py-16 md:py-20 lg:py-24 bg-gray-900 text-white relative overflow-hidden">
+        <div className="max-w-4xl mx-auto px-4 md:px-6 lg:px-0 text-center relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -106,11 +106,48 @@ const FujiHeritage = () => {
             <blockquote className="text-lg md:text-xl lg:text-2xl font-light leading-relaxed text-gray-200 italic">
               「{tAboutPage("blessing.quote")}」
             </blockquote>
+
+            {/* Logo Display */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1, delay: 0.3 }}
+              className="py-8 md:py-12"
+            >
+              <div className="relative w-64 md:w-80 lg:w-96 h-20 md:h-24 lg:h-28 mx-auto">
+                <Image
+                  src="/images/logos/logo_horizontal.png"
+                  alt="聚楽苑"
+                  fill
+                  className="object-contain filter brightness-0 invert"
+                />
+              </div>
+            </motion.div>
+
             <div className="pt-4 md:pt-6">
               <div className="w-16 h-0.5 bg-white mx-auto opacity-60"></div>
             </div>
           </motion.div>
         </div>
+
+        {/* Background Logo Watermark */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 0.03 }}
+          viewport={{ once: true }}
+          transition={{ duration: 2 }}
+          className="absolute inset-0 flex items-center justify-center"
+        >
+          <div className="relative w-full h-full max-w-2xl">
+            <Image
+              src="/images/logos/logo_horizontal.png"
+              alt=""
+              fill
+              className="object-contain filter brightness-0 invert"
+            />
+          </div>
+        </motion.div>
       </section>
     </>
   );
