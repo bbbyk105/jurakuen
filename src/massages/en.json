@@ -474,6 +474,30 @@
                 }
             }
         },
+        "heritage": {
+            "title": "Blessings of Sacred Mount Fuji",
+            "paragraph1": "Mount Fuji, standing 3,776 meters tall as Japan's sacred peak. At the foot of this revered mountain, extraordinary tea is cultivated with ancient wisdom.",
+            "paragraph2": "Pure spring water flowing from Mount Fuji, mineral-rich volcanic soil, and the temperature variations from high altitude—all harmonize to create an unparalleled depth of flavor found nowhere else."
+        },
+        "elements": {
+            "title": "Three Sacred Gifts from Mount Fuji",
+            "water": {
+                "title": "Sacred Spring Water",
+                "description": "Crystal-clear water filtered through volcanic rock layers infuses tea leaves with pure life force."
+            },
+            "soil": {
+                "title": "Volcanic Soil",
+                "description": "Mineral-rich earth formed by volcanic activity bestows deep body and umami to every tea leaf."
+            },
+            "climate": {
+                "title": "Highland Climate",
+                "description": "Temperature variations from high altitude strengthen tea leaves, developing intense and concentrated flavors."
+            }
+        },
+        "blessing": {
+            "title": "Sacred Mountain's Protection",
+            "quote": "In each cup infused with Mount Fuji's sacred energy, both mind and body find purification"
+        },
         "cta": {
             "title": "Experience Online",
             "buttonText": "View Shop"

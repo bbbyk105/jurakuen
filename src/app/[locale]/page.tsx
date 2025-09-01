@@ -13,6 +13,7 @@ import FAQ from "./(landing)/FAQ";
 import Products from "./(landing)/Products";
 import Contact from "./(landing)/Contact";
 import WaveDivider from "./(landing)/WaveDivider";
+import FujiHeritage from "./(landing)/FujiHeritage";
 
 const JurakuEnLanding = () => (
   <div className="min-h-screen bg-washi-beige font-sans scroll-smooth">
@@ -71,6 +72,8 @@ const JurakuEnLanding = () => (
 
     <Products />
     <WaveDivider />
+
+    <FujiHeritage />
 
     <StoryProducer />
     <Video />
