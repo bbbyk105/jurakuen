@@ -17,7 +17,7 @@ export default function TeaProduction() {
       harvest: "/images/cover.webp",
       steaming: "/images/mushi.webp",
       drying: "/images/kannsou.jpg",
-      grinding: "/images/usu.jpg",
+      grinding: "/images/usu.webp",
     },
     boucha: {
       selection: "/images/stem-selection.jpg",

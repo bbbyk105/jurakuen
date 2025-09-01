@@ -128,7 +128,7 @@ const ProductPage = () => {
   const products = sortProducts(filtered, sortBy, locale);
 
   return (
-    <main className="bg-white min-h-screen">
+    <main className="bg-white min-h-screen mt-16">
       {/* Header */}
       <header className="max-w-screen-xl mx-auto px-6 pt-12 pb-8">
         <h1 className="text-lg sm:text-xl font-medium tracking-wide text-gray-900">
