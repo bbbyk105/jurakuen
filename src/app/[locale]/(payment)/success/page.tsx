@@ -1,179 +1,314 @@
+// src/app/[locale]/success/page.tsx
 "use client";
 
-import { useEffect, useState, useRef, Suspense } from "react";
-import { useSearchParams } from "next/navigation";
-import { Link } from "@/i18n/routing";
+import { useEffect, useState, useCallback } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { CheckCircle, Package, ArrowLeft } from "lucide-react";
-import { useCart } from "@/store/cart";
-import { useTranslations } from "next-intl";
+import { Mail, Check, Loader2 } from "lucide-react";
+import { useSearchParams } from "next/navigation";
+import { useRouter } from "@/i18n/routing";
 
-// ✅ Stripeセッションデータの型定義
-interface StripeSessionData {
+interface SessionData {
   id: string;
   payment_status: string;
-  amount_total: number | null;
-  currency: string | null;
+  amount_total: number;
+  currency: string;
   customer_details: {
     email: string | null;
     name: string | null;
-  } | null;
+  };
+  metadata: Record<string, string>;
 }
 
-// useSearchParams()を使用するコンポーネント
-function SuccessPageContent() {
+export default function SuccessPage() {
   const searchParams = useSearchParams();
+  const router = useRouter();
   const sessionId = searchParams.get("session_id");
-  const [sessionData, setSessionData] = useState<StripeSessionData | null>(
+
+  const [session, setSession] = useState<SessionData | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [sendingReceipt, setSendingReceipt] = useState(false);
+  const [receiptSent, setReceiptSent] = useState(false);
+  const [redirectCountdown, setRedirectCountdown] = useState<number | null>(
     null
   );
-  const [loading, setLoading] = useState(true);
-  const { clearCart } = useCart();
 
-  // 翻訳フック
-  const t = useTranslations("success");
+  // isJapaneseを安全に計算（sessionがnullの場合も考慮）
+  const isJapanese = session?.metadata?.locale === "ja";
 
-  // useRefで一度だけの実行を保証
-  const hasInitialized = useRef(false);
+  // fetchSessionDataをuseCallbackでメモ化
+  const fetchSessionData = useCallback(async () => {
+    if (!sessionId) {
+      setError("セッションIDが見つかりません");
+      setLoading(false);
+      return;
+    }
 
-  const fetchSessionData = async (sessionId: string) => {
     try {
+      setLoading(true);
       const response = await fetch(`/api/checkout?session_id=${sessionId}`);
-      if (response.ok) {
-        const data = await response.json();
-        setSessionData(data.session);
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(
+          errorData.error || "セッション情報の取得に失敗しました"
+        );
       }
-    } catch (error) {
-      console.error("Failed to fetch session data:", error);
+
+      const data = await response.json();
+      setSession(data.session);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "エラーが発生しました");
     } finally {
       setLoading(false);
     }
-  };
+  }, [sessionId]);
 
   useEffect(() => {
-    // 初期化が済んでいる場合は何もしない
-    if (hasInitialized.current) return;
+    fetchSessionData();
+  }, [fetchSessionData]);
 
-    // 初期化フラグを立てる
-    hasInitialized.current = true;
+  // リダイレクトのカウントダウンと実行
+  useEffect(() => {
+    if (redirectCountdown === null || redirectCountdown <= 0) return;
 
-    // カートをクリア（一度だけ）
-    clearCart();
+    const timer = setTimeout(() => {
+      if (redirectCountdown === 1) {
+        // ホームページにリダイレクト
+        router.push("/");
+      } else {
+        setRedirectCountdown(redirectCountdown - 1);
+      }
+    }, 1000);
 
-    // セッション情報を取得
-    if (sessionId) {
-      fetchSessionData(sessionId);
-    } else {
-      setLoading(false);
+    return () => clearTimeout(timer);
+  }, [redirectCountdown, router]);
+
+  const sendReceiptEmail = async () => {
+    if (!sessionId) return;
+
+    try {
+      setSendingReceipt(true);
+      const response = await fetch("/api/send-receipt", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ sessionId }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || "領収書の送信に失敗しました");
+      }
+
+      setReceiptSent(true);
+
+      // 3秒後にホームページへリダイレクト開始
+      setRedirectCountdown(3);
+    } catch (err) {
+      console.error("領収書送信エラー:", err);
+      alert(
+        err instanceof Error
+          ? err.message
+          : isJapanese
+          ? "領収書の送信に失敗しました"
+          : "Failed to send receipt"
+      );
+    } finally {
+      setSendingReceipt(false);
     }
-  }, [sessionId, clearCart]); // 必要な依存関係を含める
+  };
 
-  return (
-    <div className="min-h-screen bg-gray-50 pt-16 flex items-center">
-      <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <Card className="text-center">
-          <CardContent className="p-8 space-y-6">
-            {/* 成功アイコン */}
-            <div className="w-16 h-16 mx-auto bg-green-100 rounded-full flex items-center justify-center">
-              <CheckCircle className="w-10 h-10 text-green-600" />
-            </div>
+  const formatAmount = (amount: number, currency: string) => {
+    return new Intl.NumberFormat(isJapanese ? "ja-JP" : "en-US", {
+      style: "currency",
+      currency: currency.toUpperCase(),
+    }).format(amount / 100);
+  };
 
-            {/* メッセージ */}
-            <div className="space-y-3">
-              <h1 className="text-2xl font-medium text-gray-900">
-                {t("title")}
-              </h1>
-              <p className="text-gray-600">{t("message")}</p>
-            </div>
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="flex items-center space-x-2">
+          <Loader2 className="h-6 w-6 animate-spin" />
+          <span>{isJapanese ? "読み込み中..." : "Loading..."}</span>
+        </div>
+      </div>
+    );
+  }
 
-            {/* セッション情報 */}
-            {loading ? (
-              <div className="text-sm text-gray-500">
-                {t("loadingOrderInfo")}
-              </div>
-            ) : sessionData ? (
-              <div className="bg-gray-50 rounded-lg p-4 space-y-2">
-                <h3 className="font-medium text-gray-900">
-                  {t("orderDetails")}
-                </h3>
-                <div className="text-sm text-gray-600 space-y-1">
-                  <p>
-                    {t("orderId")}: {sessionData.id}
-                  </p>
-                  <p>
-                    {t("paymentStatus")}:{" "}
-                    {sessionData.payment_status === "paid"
-                      ? t("paymentCompleted")
-                      : t("paymentProcessing")}
-                  </p>
-                  {sessionData.amount_total && (
-                    <p>
-                      {t("totalAmount")}: $
-                      {(sessionData.amount_total / 100).toFixed(2)}{" "}
-                      {sessionData.currency?.toUpperCase()}
-                    </p>
-                  )}
-                  {sessionData.customer_details?.email && (
-                    <p>
-                      {t("email")}: {sessionData.customer_details.email}
-                    </p>
-                  )}
-                </div>
-              </div>
-            ) : sessionId ? (
-              <div className="text-sm text-gray-500">
-                {t("orderInfoFailed")}
-              </div>
-            ) : (
-              <div className="text-sm text-gray-500">
-                {t("sessionNotFound")}
-              </div>
-            )}
-
-            {/* アクションボタン */}
-            <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <Link href="/products">
-                <Button variant="outline" className="w-full sm:w-auto">
-                  <Package className="w-4 h-4 mr-2" />
-                  {t("backToProducts")}
-                </Button>
-              </Link>
-              <Link href="/">
-                <Button className="bg-gray-900 hover:bg-gray-800 text-white w-full sm:w-auto">
-                  <ArrowLeft className="w-4 h-4 mr-2" />
-                  {t("backToHome")}
-                </Button>
-              </Link>
-            </div>
-
-            {/* 追加情報 */}
-            <div className="text-xs text-gray-500 pt-4 border-t">
-              <p>{t("additionalInfo")}</p>
+  if (error) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <Card className="w-full max-w-md">
+          <CardContent className="pt-6">
+            <div className="text-center">
+              <p className="text-red-600">{error}</p>
             </div>
           </CardContent>
         </Card>
       </div>
-    </div>
-  );
-}
+    );
+  }
 
-// メインのページコンポーネント（Suspenseで囲む）
-export default function SuccessPage() {
-  const tCommon = useTranslations("common");
+  if (!session) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <Card className="w-full max-w-md">
+          <CardContent className="pt-6">
+            <div className="text-center">
+              <p>
+                {isJapanese
+                  ? "セッション情報が見つかりません"
+                  : "Session not found"}
+              </p>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
 
   return (
-    <Suspense
-      fallback={
-        <div className="min-h-screen bg-gray-50 pt-16 flex items-center justify-center">
-          <div className="text-center">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto mb-4"></div>
-            <p className="text-gray-600">{tCommon("loading")}</p>
+    <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
+      <Card className="w-full max-w-2xl">
+        <CardHeader className="text-center bg-green-50 border-b">
+          <div className="mx-auto w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-4">
+            <Check className="h-8 w-8 text-green-600" />
           </div>
-        </div>
-      }
-    >
-      <SuccessPageContent />
-    </Suspense>
+          <CardTitle className="text-2xl text-green-800">
+            {isJapanese
+              ? "ご購入ありがとうございます！"
+              : "Thank you for your purchase!"}
+          </CardTitle>
+          <p className="text-gray-600 mt-2">
+            {isJapanese
+              ? "決済が正常に完了しました"
+              : "Your payment was successful"}
+          </p>
+        </CardHeader>
+
+        <CardContent className="pt-6 space-y-6">
+          {/* 注文詳細 */}
+          <div className="space-y-4">
+            <h3 className="text-lg font-semibold">
+              {isJapanese ? "注文詳細" : "Order Details"}
+            </h3>
+
+            <div className="bg-gray-50 p-4 rounded-lg space-y-2">
+              <div className="flex justify-between">
+                <span>{isJapanese ? "注文番号" : "Order ID"}:</span>
+                <span className="font-mono text-sm">{session.id}</span>
+              </div>
+
+              <div className="flex justify-between">
+                <span>{isJapanese ? "お客様名" : "Customer"}:</span>
+                <span>
+                  {session.customer_details.name ||
+                    (isJapanese ? "お客様" : "Customer")}
+                </span>
+              </div>
+
+              <div className="flex justify-between">
+                <span>{isJapanese ? "メールアドレス" : "Email"}:</span>
+                <span>{session.customer_details.email}</span>
+              </div>
+
+              <div className="flex justify-between">
+                <span>{isJapanese ? "決済ステータス" : "Payment Status"}:</span>
+                <span className="text-green-600 font-semibold">
+                  {session.payment_status === "paid"
+                    ? isJapanese
+                      ? "支払い完了"
+                      : "Paid"
+                    : session.payment_status}
+                </span>
+              </div>
+
+              <div className="flex justify-between text-lg font-semibold">
+                <span>{isJapanese ? "合計金額" : "Total Amount"}:</span>
+                <span>
+                  {formatAmount(session.amount_total, session.currency)}
+                </span>
+              </div>
+            </div>
+          </div>
+
+          {/* 領収書送信セクション */}
+          <div className="space-y-4">
+            <h3 className="text-lg font-semibold">
+              {isJapanese ? "領収書" : "Receipt"}
+            </h3>
+
+            <div className="bg-blue-50 p-4 rounded-lg">
+              <p className="text-sm text-blue-800 mb-3">
+                {isJapanese
+                  ? "領収書をメールでお送りします。下のボタンをクリックしてください。"
+                  : "We can send your receipt via email. Click the button below."}
+              </p>
+
+              <Button
+                onClick={sendReceiptEmail}
+                disabled={sendingReceipt || receiptSent}
+                className="w-full"
+                variant={receiptSent ? "secondary" : "default"}
+              >
+                {sendingReceipt ? (
+                  <>
+                    <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                    {isJapanese ? "送信中..." : "Sending..."}
+                  </>
+                ) : receiptSent ? (
+                  <>
+                    <Check className="h-4 w-4 mr-2" />
+                    {redirectCountdown !== null
+                      ? isJapanese
+                        ? `送信完了！ ${redirectCountdown}秒後にホームへ移動...`
+                        : `Sent! Redirecting to home in ${redirectCountdown}s...`
+                      : isJapanese
+                      ? "送信完了！"
+                      : "Sent!"}
+                  </>
+                ) : (
+                  <>
+                    <Mail className="h-4 w-4 mr-2" />
+                    {isJapanese
+                      ? "領収書をメールで送信"
+                      : "Send Receipt via Email"}
+                  </>
+                )}
+              </Button>
+            </div>
+          </div>
+
+          {/* 次のステップ */}
+          <div className="space-y-4">
+            <h3 className="text-lg font-semibold">
+              {isJapanese ? "次のステップ" : "What's Next"}
+            </h3>
+
+            <div className="space-y-2 text-sm text-gray-600">
+              <p>
+                {isJapanese
+                  ? "• 商品の発送準備を開始いたします"
+                  : "• We will begin preparing your order for shipment"}
+              </p>
+              <p>
+                {isJapanese
+                  ? "• 発送完了時に追跡番号をメールでお送りします"
+                  : "• You will receive tracking information via email when shipped"}
+              </p>
+              <p>
+                {isJapanese
+                  ? "• ご不明な点がございましたら、当メールまでお問い合わせください"
+                  : "• Contact our support team if you have any questions"}
+              </p>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+    </div>
   );
 }

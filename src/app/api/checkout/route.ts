@@ -94,16 +94,72 @@ export async function POST(req: NextRequest) {
     const origin = req.nextUrl.origin;
     const locale = inferLocaleFromReferer(req);
 
+    // 送料オプションの設定（3.5ドル固定）
+    const shippingOptions: Stripe.Checkout.SessionCreateParams.ShippingOption[] =
+      [
+        {
+          shipping_rate_data: {
+            type: "fixed_amount",
+            fixed_amount: {
+              amount: 350, // 3.5ドル = 350セント
+              currency: "usd",
+            },
+            display_name: locale === "ja" ? "標準配送" : "Standard Shipping",
+            delivery_estimate: {
+              minimum: {
+                unit: "business_day",
+                value: 3,
+              },
+              maximum: {
+                unit: "business_day",
+                value: 7,
+              },
+            },
+          },
+        },
+      ];
+
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
       line_items,
       allow_promotion_codes: true,
       billing_address_collection: "auto",
+      shipping_address_collection: {
+        allowed_countries: ["US", "CA", "JP", "GB", "DE", "FR", "AU"], // 配送可能国を設定
+      },
+      shipping_options: shippingOptions,
+      // 領収書の自動送信を有効化
+      invoice_creation: {
+        enabled: true,
+        invoice_data: {
+          description:
+            locale === "ja"
+              ? "ご購入ありがとうございます"
+              : "Thank you for your purchase",
+          footer:
+            locale === "ja"
+              ? "お問い合わせがございましたら、サポートまでご連絡ください。"
+              : "If you have any questions, please contact our support team.",
+          metadata: {
+            locale,
+            order_date: new Date().toISOString(),
+          },
+        },
+      },
+      // カスタム領収書設定
+      payment_intent_data: {
+        receipt_email: undefined, // チェックアウト時に入力されたメールアドレスを使用
+        metadata: {
+          locale,
+          send_receipt: "true",
+        },
+      },
       success_url: `${origin}/${locale}/success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${origin}/${locale}/cancel`,
       metadata: {
         locale,
         created_at: new Date().toISOString(),
+        shipping_enabled: "true",
       },
     });
 
