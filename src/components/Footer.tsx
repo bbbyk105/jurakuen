@@ -94,7 +94,7 @@ export const Footer: React.FC = () => {
                   {t("sections.contact.socialMedia")}
                 </p>
                 <a
-                  href="https://instagram.com/juraku_en"
+                  href="https://instagram.com/jurakuenfuji"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center space-x-2 text-sm text-green-100 hover:text-white transition-colors"
