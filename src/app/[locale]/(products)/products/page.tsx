@@ -1,4 +1,4 @@
-// src/app/[locale]/(products)/products/page.tsx – 画像1.3倍拡大対応
+// src/app/[locale]/(products)/products/page.tsx – スマホ画面でもカートマーク表示対応
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
@@ -127,6 +127,8 @@ const ProductPage = () => {
   const filtered = getProductsByCategory(selectedCategory, locale);
   const products = sortProducts(filtered, sortBy, locale);
 
+  const totalQuantity = getTotalQuantity();
+
   return (
     <main className="bg-white min-h-screen mt-16">
       {/* Header */}
@@ -197,21 +199,22 @@ const ProductPage = () => {
         )}
       </section>
 
-      {/* Floating Cart indicator (右下) */}
-      {getTotalQuantity() > 0 && (
-        <Link href={"/cart"}>
-          <Button
-            onClick={() => {}}
-            className="fixed bottom-6 right-6 rounded-full w-12 h-12 bg-black text-white hover:opacity-90 shadow-lg"
-          >
-            <span className="sr-only">Cart</span>
-            <ShoppingCart className="w-5 h-5" />
-            <span className="absolute -top-1 -right-1 inline-flex items-center justify-center w-5 h-5 text-[10px] font-medium bg-red-600 text-white rounded-full">
-              {getTotalQuantity()}
+      {/* Floating Cart Button - スマホでも常に表示 */}
+      <Link href={"/cart"}>
+        <Button className="fixed bottom-6 right-6 rounded-full w-12 h-12 bg-black text-white hover:opacity-90 shadow-lg transition-all duration-200 hover:scale-105">
+          <span className="sr-only">
+            {locale === "en" ? "View Cart" : "カートを見る"}
+          </span>
+          <ShoppingCart className="w-5 h-5" />
+
+          {/* カート数量バッジ - 数量がある場合のみ表示 */}
+          {totalQuantity > 0 && (
+            <span className="absolute -top-1 -right-1 inline-flex items-center justify-center min-w-5 h-5 px-1 text-[10px] font-medium bg-red-600 text-white rounded-full">
+              {totalQuantity > 99 ? "99+" : totalQuantity}
             </span>
-          </Button>
-        </Link>
-      )}
+          )}
+        </Button>
+      </Link>
     </main>
   );
 };

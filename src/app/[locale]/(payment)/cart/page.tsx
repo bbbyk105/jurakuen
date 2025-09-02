@@ -1,3 +1,4 @@
+// src/app/[locale]/(cart)/cart/page.tsx – 送料3.5ドル対応
 "use client";
 
 import { useCart } from "@/store/cart";
@@ -37,6 +38,9 @@ export default function CartPage() {
   const t = useTranslations("cart");
   const tCommon = useTranslations("common");
 
+  // 送料設定
+  const SHIPPING_COST = 3.5; // $3.50
+
   const handleQuantityChange = (productId: number, newQuantity: number) => {
     if (newQuantity < 1) {
       setItemToDelete(productId);
@@ -74,6 +78,11 @@ export default function CartPage() {
     setItemToDelete(null);
   };
 
+  // 価格計算
+  const subtotal = getTotalPrice();
+  const shippingCost = SHIPPING_COST;
+  const totalWithShipping = subtotal + shippingCost;
+
   // ✅ 実際のStripeチェックアウトと連携
   const handleCheckout = async () => {
     setLoading(true);
@@ -84,13 +93,16 @@ export default function CartPage() {
         quantity: item.quantity,
       }));
 
-      // チェックアウトセッションを作成
+      // チェックアウトセッションを作成（送料も含む）
       const response = await fetch("/api/checkout", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ items }),
+        body: JSON.stringify({
+          items,
+          shippingCost: shippingCost, // 送料情報も送信
+        }),
       });
 
       if (!response.ok) {
@@ -297,21 +309,22 @@ export default function CartPage() {
                       <span className="text-gray-600">
                         {t("summary.subtotal")}
                       </span>
-                      <span>{formatPrice(getTotalPrice())}</span>
+                      <span>{formatPrice(subtotal)}</span>
                     </div>
                     <div className="flex justify-between text-sm">
                       <span className="text-gray-600">
                         {t("summary.shipping")}
                       </span>
-                      <span className="text-green-600">
-                        {t("summary.shippingFree")}
+                      <span className="text-gray-900">
+                        {formatPrice(shippingCost)}
                       </span>
                     </div>
+
                     <div className="border-t pt-2 sm:pt-3">
                       <div className="flex justify-between font-medium text-base sm:text-lg">
                         <span>{t("summary.total")}</span>
                         <span className="text-gray-900">
-                          {formatPrice(getTotalPrice())}
+                          {formatPrice(totalWithShipping)}
                         </span>
                       </div>
                     </div>
