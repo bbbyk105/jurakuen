@@ -122,10 +122,9 @@ export async function POST(req: NextRequest) {
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
       line_items,
-      allow_promotion_codes: true,
       billing_address_collection: "auto",
       shipping_address_collection: {
-        allowed_countries: ["US", "CA", "JP", "GB", "DE", "FR", "AU"], // 配送可能国を設定
+        allowed_countries: ["US", "JP"], // 配送可能国を設定
       },
       shipping_options: shippingOptions,
       // 領収書の自動送信を有効化
@@ -138,7 +137,7 @@ export async function POST(req: NextRequest) {
               : "Thank you for your purchase",
           footer:
             locale === "ja"
-              ? "お問い合わせがございましたら、サポートまでご連絡ください。"
+              ? "お問い合わせがございましたら、メールまでご連絡ください。"
               : "If you have any questions, please contact our support team.",
           metadata: {
             locale,
