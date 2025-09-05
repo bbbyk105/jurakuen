@@ -593,48 +593,6 @@
                     }
                 }
             },
-            "boucha": {
-                "name": "Boucha",
-                "subtitle": "BOUCHA",
-                "description": "Japanese tea made from roasted tea leaf stems, characterized by its fragrant aroma",
-                "sectionTitle": "Boucha Production Process",
-                "processOrder": [
-                    "selection",
-                    "roasting",
-                    "cooling",
-                    "finishing"
-                ],
-                "processes": {
-                    "selection": {
-                        "step": 1,
-                        "title": "Stem Selection",
-                        "subtitle": "Carefully selecting only premium stem portions",
-                        "description": "Stem portions removed during sencha production are carefully selected to become hojicha raw materials.",
-                        "detail": "Stem portions are rich in umami components like theanine and contain less caffeine. Only high-quality stems are selected while checking thickness and color."
-                    },
-                    "roasting": {
-                        "step": 2,
-                        "title": "Roasting",
-                        "subtitle": "Drawing out fragrance with high temperature",
-                        "description": "Stems are roasted at high temperatures around 200°C to create the characteristic fragrant aroma and brown color.",
-                        "detail": "Roasting decomposes chlorophyll in tea leaves, creating the characteristic brown color. At the same time, fragrant aromatic compounds are generated, giving birth to hojicha's unique flavor."
-                    },
-                    "cooling": {
-                        "step": 3,
-                        "title": "Cooling",
-                        "subtitle": "Rapid cooling to lock in aroma",
-                        "description": "After roasting, immediate cooling locks in the aroma and stabilizes quality.",
-                        "detail": "Rapid cooling immediately after roasting prevents volatilization of aromatic compounds and fixes the roasted fragrance in the tea leaves. This process is a crucial point that determines hojicha quality."
-                    },
-                    "finishing": {
-                        "step": 4,
-                        "title": "Finishing",
-                        "subtitle": "Final adjustments for completion",
-                        "description": "Sizes are aligned and final quality checks are performed to complete the hojicha.",
-                        "detail": "Foreign matter removal and particle size adjustment are performed to finish uniform quality hojicha. Moisture content and aroma are checked before shipping as the highest quality hojicha."
-                    }
-                }
-            },
             "sencha": {
                 "name": "Sencha",
                 "subtitle": "SENCHA",

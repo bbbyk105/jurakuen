@@ -19,12 +19,6 @@ export default function TeaProduction() {
       drying: "/images/kannsou.jpg",
       grinding: "/images/usu.webp",
     },
-    boucha: {
-      selection: "/images/stem-selection.jpg",
-      roasting: "/images/roasting.jpg",
-      cooling: "/images/cooling.jpg",
-      finishing: "/images/finishing.jpg",
-    },
     sencha: {
       cultivation: "/images/sencha-cultivation.jpg",
       harvest: "/images/sencha-harvest.jpg",
@@ -37,7 +31,6 @@ export default function TeaProduction() {
   // カラーテーマの設定
   const colorThemes = {
     matcha: "from-green-800 to-green-600",
-    boucha: "from-amber-800 to-amber-600",
     sencha: "from-emerald-800 to-emerald-600",
   };
 
@@ -47,11 +40,6 @@ export default function TeaProduction() {
       id: "matcha" as const,
       color: colorThemes.matcha,
       images: imageMap.matcha,
-    },
-    {
-      id: "boucha" as const,
-      color: colorThemes.boucha,
-      images: imageMap.boucha,
     },
     {
       id: "sencha" as const,
