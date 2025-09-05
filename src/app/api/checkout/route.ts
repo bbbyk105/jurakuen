@@ -94,14 +94,14 @@ export async function POST(req: NextRequest) {
     const origin = req.nextUrl.origin;
     const locale = inferLocaleFromReferer(req);
 
-    // 送料オプションの設定（3.5ドル固定）
+    // 送料オプションの設定（4ドル固定）
     const shippingOptions: Stripe.Checkout.SessionCreateParams.ShippingOption[] =
       [
         {
           shipping_rate_data: {
             type: "fixed_amount",
             fixed_amount: {
-              amount: 350, // 3.5ドル = 350セント
+              amount: 400, // 4ドル = 400セント
               currency: "usd",
             },
             display_name: locale === "ja" ? "標準配送" : "Standard Shipping",

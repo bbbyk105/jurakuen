@@ -39,7 +39,7 @@ export default function CartPage() {
   const tCommon = useTranslations("common");
 
   // 送料設定
-  const SHIPPING_COST = 3.5; // $3.50
+  const SHIPPING_COST = 4; // $4.0
 
   const handleQuantityChange = (productId: number, newQuantity: number) => {
     if (newQuantity < 1) {
