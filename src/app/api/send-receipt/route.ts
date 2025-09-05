@@ -61,7 +61,7 @@ export async function POST(req: NextRequest) {
 
     const items = session.line_items?.data || [];
     const subtotal = session.amount_subtotal || 0;
-    const shippingCost = 350; // 3.5ドル = 350セント
+    const shippingCost = 400;
     const tax = session.total_details?.amount_tax || 0;
     const total = session.amount_total || 0;
 
