@@ -37,7 +37,7 @@ const StoryProducer = () => {
             <h2 className="text-xl md:text-2xl lg:text-3xl font-light text-gray-900 mb-3 md:mb-4 lg:mb-4">
               {tAboutPage("story.title")}
             </h2>
-            {[1, 2, 3, 4, 5].map((p) => (
+            {[1, 2, 3, 4].map((p) => (
               <p key={p}>{tAboutPage(`story.paragraph${p}`)}</p>
             ))}
           </motion.article>
