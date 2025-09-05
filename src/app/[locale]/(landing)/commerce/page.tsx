@@ -84,26 +84,6 @@ const CommerceLaw = () => {
 
               <section>
                 <div className="bg-gray-50 p-6 rounded-lg">
-                  <p className="text-gray-700 leading-relaxed mb-4">
-                    {t("pricesInfo")}
-                  </p>
-                  <div className="text-sm text-gray-600">
-                    <p>
-                      <strong>{t("mainPrices")}</strong>
-                    </p>
-                    <ul className="list-disc list-inside mt-2 space-y-1">
-                      {t
-                        .raw("priceList")
-                        .map((price: string, index: number) => (
-                          <li key={index}>{price}</li>
-                        ))}
-                    </ul>
-                  </div>
-                </div>
-              </section>
-
-              <section>
-                <div className="bg-gray-50 p-6 rounded-lg">
                   <div className="text-gray-700 leading-relaxed">
                     <p className="mb-3">
                       <strong>{t("shipping")}</strong>
@@ -114,18 +94,6 @@ const CommerceLaw = () => {
                         .map((fee: string, index: number) => (
                           <li key={index}>{fee}</li>
                         ))}
-                    </ul>
-                    <p className="mb-3">
-                      <strong>{t("codFee")}</strong>
-                    </p>
-                    <ul className="list-disc list-inside mb-4 space-y-1">
-                      <li>{t("codFeeAmount")}</li>
-                    </ul>
-                    <p className="mb-3">
-                      <strong>{t("bankTransferFee")}</strong>
-                    </p>
-                    <ul className="list-disc list-inside space-y-1">
-                      <li>{t("bankTransferFeeInfo")}</li>
                     </ul>
                   </div>
                 </div>

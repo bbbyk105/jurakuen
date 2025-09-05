@@ -210,35 +210,24 @@
     "commerceLaw": {
         "title": "Legal Disclosure Based on Specified Commercial Transactions Act",
         "subtitle": "Jurakuen",
-        "lastUpdated": "Last Updated: June 11, 2025",
+        "lastUpdated": "Last Updated: September 5, 2025",
         "intro": "In accordance with the Specified Commercial Transactions Act, we provide the following disclosure:",
         "seller": "Seller",
-        "sellerInfo": "◯◯ ◯◯",
+        "sellerInfo": "Jurakuen",
         "representative": "Representative",
-        "representativeInfo": "President & CEO ◯◯ ◯◯",
+        "representativeInfo": "President & CEO Yoshihisa Mochizuki",
         "address": "Address",
         "addressInfo": "〒417-0812\n485-2 Sakai, Fuji City, Shizuoka Prefecture",
         "contact": "Contact Information",
-        "contactInfo": "TEL: 0545-34-0614\nBusiness Hours: Weekdays 9:00-17:00 (Excluding weekends and holidays)\nEmail: [Email Address]",
+        "contactInfo": "TEL: 0545-34-0614\nBusiness Hours: Weekdays 10:00-18:00 (Excluding weekends and holidays)\nEmail: [Email Address]",
         "prices": "Product Prices",
         "pricesInfo": "Prices listed on each product page (tax included)",
         "mainPrices": "Main Product Prices:",
-        "priceList": [
-            "◯◯ ◯◯: $200.00 AUD (tax included)",
-            "◯◯ ◯◯: $150.00 AUD (tax included)",
-            "◯◯ ◯◯: $55.00 AUD (tax included)"
-        ],
         "additionalFees": "Additional Fees Besides Product Price",
         "shipping": "Shipping:",
         "shippingFees": [
-            "Nationwide flat rate ¥1,100 (tax included)",
-            "Free shipping for purchases over ¥10,000",
-            "Cool delivery (refrigerated): Additional ¥330 (tax included)"
+            "Nationwide flat rate $4 (tax included)"
         ],
-        "codFee": "Cash on Delivery Fee:",
-        "codFeeAmount": "¥330 (tax included)",
-        "bankTransferFee": "Bank Transfer Fee:",
-        "bankTransferFeeInfo": "Customer responsibility",
         "paymentMethods": "Payment Methods",
         "paymentMethodsList": [
             "Credit Cards (VISA, MasterCard, JCB, American Express, Diners Club, Discover)",
@@ -253,9 +242,7 @@
         ],
         "deliveryTiming": "Product Delivery Schedule",
         "deliveryTimingList": [
-            "In-stock items: Ships within 3-5 business days after order confirmation",
-            "Pre-order items: Ships on scheduled date listed on product page",
-            "Bank transfer: Ships within 3-5 business days after payment confirmation"
+            "In-stock items: Ships within 3-5 business days after order confirmation"
         ],
         "deliveryNote": "※Excludes weekends, holidays, year-end/New Year, Golden Week, and Obon periods\n※Delays may occur due to weather or traffic conditions",
         "returns": "Returns & Exchanges",
@@ -286,15 +273,15 @@
             "Services may be temporarily suspended due to system maintenance",
             "Matters not specified in this disclosure shall be governed by the Consumer Contract Act and other applicable laws"
         ],
-        "companyFooter": "◯◯ ◯◯"
+        "companyFooter": "Jurakuen"
     },
     "privacyPolicy": {
         "title": "Privacy Policy",
-        "subtitle": "◯◯ ◯◯",
-        "enacted": "Enacted: January 1, 2025",
-        "lastUpdated": "Last Updated: June 4, 2025",
+        "subtitle": "Jurakuen",
+        "enacted": "Enacted: September 5, 2025",
+        "lastUpdated": "Last Updated: September 5, 2025",
         "basicPolicy": "1. Basic Policy",
-        "basicPolicyText1": "◯◯ ◯◯ (hereinafter referred to as \"the Company\") fully recognizes its social responsibility for protecting customers' personal information and will collect and use personal information within the scope necessary for the smooth operation of services provided on this website, taking appropriate measures for its protection.",
+        "basicPolicyText1": "Jurakuen (hereinafter referred to as \"the Company\") fully recognizes its social responsibility for protecting customers' personal information and will collect and use personal information within the scope necessary for the smooth operation of services provided on this website, taking appropriate measures for its protection.",
         "basicPolicyText2": "The Company complies with laws and regulations regarding personal information protection, including the Personal Information Protection Act, and other standards, and implements appropriate handling of personal information.",
         "definition": "2. Definition of Personal Information",
         "definitionText": "Personal information refers to \"personal information\" as defined in the Personal Information Protection Act, which is information about living individuals that can identify specific individuals through names, dates of birth, addresses, telephone numbers, contact information, and other descriptions contained in such information.",
@@ -332,20 +319,20 @@
         "changes": "9. Changes to Privacy Policy",
         "changesText": "The Company may change this Privacy Policy as necessary. The revised Privacy Policy will take effect from the time it is posted on the Company's website.",
         "contact": "10. Inquiry Desk",
-        "contactCompany": "◯◯ ◯◯",
+        "contactCompany": "Jurakuen",
         "contactAddress": "〒417-0812 485-2 Sakai, Fuji City, Shizuoka Prefecture",
         "contactPhone": "TEL: 0545-34-0614",
-        "contactHours": "Business Hours: Weekdays 9:00-17:00 (Excluding weekends and holidays)",
-        "companyFooter": "◯◯ ◯◯"
+        "contactHours": "Business Hours: Weekdays 10:00-18:00 (Excluding weekends and holidays)",
+        "companyFooter": "Jurakuen"
     },
     "termsOfService": {
         "title": "Terms of Service",
         "subtitle": "Jurakuen",
-        "enacted": "Enacted: January 1, 2025",
-        "lastUpdated": "Last Updated: June 4, 2025",
+        "enacted": "Enacted: September 5, 2025",
+        "lastUpdated": "Last Updated: September 5, 2025",
         "article1": {
             "title": "Article 1 (Application)",
-            "text1": "These Terms of Service are intended to define the rights and obligations between users and ◯◯ ◯◯ (hereinafter referred to as \"the Company\") regarding the use of the \"Jurakuen\" website (hereinafter referred to as \"this Site\") operated by the Company, and shall apply to all relationships between users and the Company regarding the use of this Service.",
+            "text1": "These Terms of Service are intended to define the rights and obligations between users and Jurakuen (hereinafter referred to as \"the Company\") regarding the use of the \"Jurakuen\" website (hereinafter referred to as \"this Site\") operated by the Company, and shall apply to all relationships between users and the Company regarding the use of this Service.",
             "text2": "When users use this Site, they shall be deemed to have agreed to these Terms of Service."
         },
         "article2": {
@@ -425,7 +412,7 @@
             "phone": "TEL: 0545-34-0614",
             "hours": "Business Hours: Weekdays 9:00-17:00 (Excluding weekends and holidays)"
         },
-        "companyFooter": "◯◯ ◯◯\nJurakuen"
+        "companyFooter": "Jurakuen"
     },
     "aboutPage": {
         "story": {
