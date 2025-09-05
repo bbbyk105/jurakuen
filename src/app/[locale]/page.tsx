@@ -14,6 +14,7 @@ import Products from "./(landing)/Products";
 import Contact from "./(landing)/Contact";
 import WaveDivider from "./(landing)/WaveDivider";
 import FujiHeritage from "./(landing)/FujiHeritage";
+import InstagramShowcase from "./(landing)/InstagramShowcase";
 
 const JurakuEnLanding = () => (
   <div className="min-h-screen bg-washi-beige font-sans scroll-smooth">
@@ -76,6 +77,12 @@ const JurakuEnLanding = () => (
     <FujiHeritage />
 
     <StoryProducer />
+    <InstagramShowcase
+      urls={[
+        "https://www.instagram.com/p/DNiGDZCRFBE/",
+        "https://www.instagram.com/p/DNiFe3yRC94/",
+      ]}
+    />
     <Video />
     <Safety />
     <FAQ />
