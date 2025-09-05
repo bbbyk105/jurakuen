@@ -15,16 +15,16 @@ export default function TeaProduction() {
     matcha: {
       cultivation: "/images/tezumi.webp",
       harvest: "/images/cover.webp",
-      steaming: "/images/mushi.webp",
+      steaming: "/images/steam.jpg",
       drying: "/images/kannsou.jpg",
       grinding: "/images/usu.webp",
     },
     sencha: {
-      cultivation: "/images/sencha-cultivation.jpg",
-      harvest: "/images/sencha-harvest.jpg",
-      steaming: "/images/sencha-steaming.jpg",
-      rolling: "/images/sencha-rolling.jpg",
-      firing: "/images/sencha-firing.jpg",
+      cultivation: "/images/chaba.webp",
+      harvest: "/images/tsumi.jpg",
+      steaming: "/images/burn.webp",
+      rolling: "/images/mochizuki.webp",
+      firing: "/images/kizami.webp",
     },
   };
 
