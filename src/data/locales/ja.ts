@@ -30,7 +30,7 @@ export const products: Product[] = [
       harvestSeason: "一番茶",
     },
     stripeProductId: "prod_SylwKGVQ2s7T4v",
-    stripePriceId: "price_1S2oOoGf5qkoGUYpj9mjS8qI",
+    stripePriceId: "price_1S5h9CGf5qkoGUYpUnZNtGRg",
     colorClass: "from-green-600 to-green-700",
   },
   {
@@ -61,7 +61,7 @@ export const products: Product[] = [
       harvestSeason: "一番茶",
     },
     stripeProductId: "prod_SylwLY3mpJfF7I",
-    stripePriceId: "price_1S2oOpGf5qkoGUYpwYbbSHyH",
+    stripePriceId: "price_1S5h9DGf5qkoGUYpGsyLAaQs",
     colorClass: "from-emerald-600 to-emerald-700",
   },
   {
@@ -92,7 +92,7 @@ export const products: Product[] = [
       harvestSeason: "一番茶・二番茶ブレンド",
     },
     stripeProductId: "prod_Sylwk2bFPyktmJ",
-    stripePriceId: "price_1S2oOqGf5qkoGUYp27YgzX8K",
+    stripePriceId: "price_1S5h9EGf5qkoGUYp3HfXHllw",
     colorClass: "from-green-500 to-green-600",
   },
   {
@@ -123,7 +123,7 @@ export const products: Product[] = [
       harvestSeason: "一番茶・二番茶ブレンド",
     },
     stripeProductId: "prod_SylwGgbjwpNhbq",
-    stripePriceId: "price_1S2oOrGf5qkoGUYpVspbR33H",
+    stripePriceId: "price_1S5h9FGf5qkoGUYps2rq5zPv",
     colorClass: "from-green-500 to-green-600",
   },
   {
@@ -154,7 +154,7 @@ export const products: Product[] = [
       harvestSeason: "一番茶",
     },
     stripeProductId: "prod_SylwOuCDEg9GA2",
-    stripePriceId: "price_1S2oOrGf5qkoGUYpe7YZ22UW",
+    stripePriceId: "price_1S5h9GGf5qkoGUYp1jKsAq6C",
     colorClass: "from-green-500 to-green-600",
   },
   {
@@ -185,7 +185,7 @@ export const products: Product[] = [
       harvestSeason: "一番茶・二番茶ブレンド",
     },
     stripeProductId: "prod_Sylw34uKuLm0Vk",
-    stripePriceId: "price_1S2oOsGf5qkoGUYpnc8Lers0",
+    stripePriceId: "price_1S5h9HGf5qkoGUYpMDdeohf1",
     colorClass: "from-green-500 to-green-600",
   },
   {
@@ -216,7 +216,7 @@ export const products: Product[] = [
       harvestSeason: "一番茶・二番茶ブレンド",
     },
     stripeProductId: "prod_Sylwzjrlg23w8U",
-    stripePriceId: "price_1S2oOtGf5qkoGUYpdAs02zjs",
+    stripePriceId: "price_1S5h9IGf5qkoGUYptWwlHhwP",
     colorClass: "from-green-500 to-green-600",
   },
   {
@@ -247,7 +247,7 @@ export const products: Product[] = [
       harvestSeason: "一番茶・二番茶ブレンド",
     },
     stripeProductId: "prod_SylwsrNs4F5YlQ",
-    stripePriceId: "price_1S2oOuGf5qkoGUYpn2bXLwtD",
+    stripePriceId: "price_1S5h9JGf5qkoGUYppnt4iHX2",
     colorClass: "from-green-500 to-green-600",
   },
 ];
