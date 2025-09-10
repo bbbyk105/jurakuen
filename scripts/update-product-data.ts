@@ -46,6 +46,10 @@ const stripeIdMapping = {
     stripeProductId: "prod_SylwsrNs4F5YlQ",
     stripePriceId: "price_1S2oOuGf5qkoGUYpn2bXLwtD",
   },
+  9: {
+    stripeProductId: "prod_SylwsrNs4F5YlQ",
+    stripePriceId: "price_1S2oOuGf5qkoGUYpsaj202mLs",
+  },
 };
 
 async function updateProductDataFiles() {
