@@ -3,23 +3,30 @@ import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
 import nodemailer from "nodemailer";
 
+/** Next.js Route Handler 設定 */
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
+export const preferredRegion = "home";
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {});
+/** Stripe SDK を 2025-08-27.basil に固定 */
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
+  apiVersion: "2025-08-27.basil",
+});
+
+/** 環境変数 */
 const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET!;
-
 const FULFILLMENT_EMAIL =
   process.env.FULFILLMENT_EMAIL || "jurakuenfuji@gmail.com";
 
+/** SMTP */
 const transporter = nodemailer.createTransport({
   host: process.env.SMTP_HOST,
-  port: parseInt(process.env.SMTP_PORT || "587"),
+  port: parseInt(process.env.SMTP_PORT || "587", 10),
   secure: process.env.SMTP_SECURE === "true",
   auth: { user: process.env.SMTP_USER, pass: process.env.SMTP_PASSWORD },
 });
 
-// ---------- helpers ----------
+/* ----------------------------- helpers ----------------------------- */
 function escapeHtml(s: string) {
   return String(s)
     .replace(/&/g, "&amp;")
@@ -38,21 +45,22 @@ function addressToLines(addr?: Stripe.Address | null) {
 }
 
 function fmtCurrency(amount: number | null | undefined, currency?: string) {
-  const cur = (currency || "USD").toUpperCase();
+  const cur = (currency || "JPY").toUpperCase();
   const n = typeof amount === "number" ? amount : 0;
   const isJPY = cur === "JPY";
   return new Intl.NumberFormat(isJPY ? "ja-JP" : "en-US", {
     style: "currency",
     currency: cur,
     maximumFractionDigits: isJPY ? 0 : 2,
-  }).format(isJPY ? n : n / 100); // Stripe金額は通常セント
+  }).format(isJPY ? n : n / 100); // 非0小数通貨は分解能が最小単位
 }
 
-// ---------- core mailer ----------
+/* --------------------------- core mailer --------------------------- */
 async function sendFulfillmentEmail(sessionId: string) {
-  // shipping_details は使わず、payment_intent.shipping を展開して利用
+  // line_items を必ず展開（product 名称取得用）
   const full = (await stripe.checkout.sessions.retrieve(sessionId, {
     expand: [
+      "line_items",
       "line_items.data.price.product",
       "payment_intent",
       "customer_details",
@@ -64,18 +72,15 @@ async function sendFulfillmentEmail(sessionId: string) {
   const items = full.line_items?.data ?? [];
   const currency = full.currency?.toUpperCase();
 
-  // totals
   const subtotal = full.amount_subtotal ?? 0;
   const tax = full.total_details?.amount_tax ?? 0;
   const shippingAmount = full.total_details?.amount_shipping ?? 0;
   const total = full.amount_total ?? 0;
 
-  // 配送先は PaymentIntent.shipping を参照（型：Stripe.Shipping | null）
   const pi =
     typeof full.payment_intent === "string" ? null : full.payment_intent;
   const shipping = pi?.shipping || null;
 
-  // 顧客詳細でフォールバック
   const shippingName =
     shipping?.name ?? full.customer_details?.name ?? "(no name)";
   const shippingPhone =
@@ -267,11 +272,14 @@ async function sendFulfillmentEmail(sessionId: string) {
   });
 }
 
-// ---------- webhook entrypoint ----------
+/* --------------------------- webhook entry -------------------------- */
 export async function POST(req: NextRequest) {
   const sig = req.headers.get("stripe-signature");
-  if (!sig) return NextResponse.json({ ok: true });
+  if (!sig) {
+    return NextResponse.json({ error: "Missing signature" }, { status: 400 });
+  }
 
+  // 署名検証のため raw body を使用
   const body = await req.text();
 
   let event: Stripe.Event;
@@ -284,21 +292,21 @@ export async function POST(req: NextRequest) {
 
   try {
     switch (event.type) {
-      case "checkout.session.completed": {
-        const session = event.data.object as Stripe.Checkout.Session;
-        await sendFulfillmentEmail(session.id);
-        break;
-      }
+      case "checkout.session.completed":
       case "checkout.session.async_payment_succeeded": {
         const session = event.data.object as Stripe.Checkout.Session;
-        await sendFulfillmentEmail(session.id);
+        // 重い処理は待たずに投げる（Stripeの再送対策）
+        sendFulfillmentEmail(session.id).catch((e) =>
+          console.error("mail err", e)
+        );
         break;
       }
-      // 必要なら他イベント分岐も追加
-      default:
-        break;
+      default: {
+        // 必要に応じて追加
+        console.log("Unhandled event:", event.type);
+      }
     }
-
+    // できるだけ早く 200
     return NextResponse.json({ received: true });
   } catch (err) {
     console.error("Webhook handler error:", err);
