@@ -71,122 +71,180 @@ export async function POST(req: NextRequest) {
       : `[Receipt] Thank you for your purchase - ${receiptNumber}`;
 
     const emailHtml = `
-      <!DOCTYPE html>
-      <html>
-        <head>
-          <meta charset="utf-8">
-          <style>
-            body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; margin: 0; padding: 20px; background-color: #f5f5f5; }
-            .container { max-width: 600px; margin: 0 auto; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); }
-            .header { background: #1f2937; color: white; padding: 30px; text-align: center; }
-            .content { padding: 30px; }
-            .receipt-number { font-size: 24px; font-weight: bold; margin-bottom: 10px; }
-            .date { opacity: 0.8; }
-            .section { margin: 20px 0; }
-            .section-title { font-weight: bold; margin-bottom: 10px; color: #374151; border-bottom: 2px solid #e5e7eb; padding-bottom: 5px; }
-            .item { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #f3f4f6; }
-            .item:last-child { border-bottom: none; }
-            .total-section { background: #f9fafb; padding: 20px; border-radius: 6px; margin-top: 20px; }
-            .total-row { display: flex; justify-content: space-between; padding: 5px 0; }
-            .total-final { font-weight: bold; font-size: 18px; border-top: 2px solid #d1d5db; padding-top: 10px; margin-top: 10px; }
-            .footer { background: #f9fafb; padding: 20px; text-align: center; color: #6b7280; font-size: 14px; }
-          </style>
-        </head>
-        <body>
-          <div class="container">
-            <div class="header">
-              <div class="receipt-number">${
-                isJapanese ? "領収書" : "Receipt"
-              }</div>
-              <div class="date">${receiptNumber}</div>
-              <div class="date">${purchaseDate}</div>
-            </div>
-            
-            <div class="content">
-              <div class="section">
-                <div class="section-title">${
-                  isJapanese ? "お客様情報" : "Customer Information"
-                }</div>
-                <p><strong>${isJapanese ? "お名前" : "Name"}:</strong> ${
-      session.customer_details?.name || (isJapanese ? "お客様" : "Customer")
-    }</p>
-                <p><strong>${
-                  isJapanese ? "メールアドレス" : "Email"
-                }:</strong> ${customerEmail}</p>
-              </div>
-
-              <div class="section">
-                <div class="section-title">${
-                  isJapanese ? "ご購入商品" : "Items Purchased"
-                }</div>
-                ${items
-                  .map((item) => {
-                    const product = item.price?.product as Stripe.Product;
-                    const unitAmount = item.price?.unit_amount || 0;
-                    const totalAmount = unitAmount * (item.quantity || 1);
-                    return `
-                    <div class="item">
-                      <div>
-                        <strong>${
-                          product?.name || (isJapanese ? "商品" : "Product")
-                        }</strong><br>
-                        <small>${isJapanese ? "数量" : "Quantity"}: ${
-                      item.quantity || 1
-                    }</small>
-                      </div>
-                      <div style="text-align: right;">
-                        <div>$${(unitAmount / 100).toFixed(2)} ${
-                      isJapanese ? "× " : "x "
-                    }${item.quantity || 1}</div>
-                        <strong>$${(totalAmount / 100).toFixed(2)}</strong>
-                      </div>
-                    </div>
-                  `;
-                  })
-                  .join("")}
-              </div>
-
-              <div class="total-section">
-                <div class="total-row">
-                  <span>${isJapanese ? "小計" : "Subtotal"}</span>
-                  <span>$${(subtotal / 100).toFixed(2)}</span>
-                </div>
-                <div class="total-row">
-                  <span>${isJapanese ? "送料" : "Shipping"}</span>
-                  <span>$${(shippingCost / 100).toFixed(2)}</span>
-                </div>
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <meta charset="utf-8">
+      <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; margin: 0; padding: 20px; background-color: #f5f5f5; }
+        .container { max-width: 600px; margin: 0 auto; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); }
+        .header { background: #1f2937; color: white; padding: 30px; text-align: center; }
+        .seller-info { background: #374151; color: white; padding: 20px; text-align: center; font-size: 14px; }
+        .seller-info h3 { margin: 0 0 10px 0; font-size: 18px; }
+        .content { padding: 30px; }
+        .receipt-number { font-size: 24px; font-weight: bold; margin-bottom: 10px; }
+        .date { opacity: 0.8; }
+        .section { margin: 20px 0; }
+        .section-title { font-weight: bold; margin-bottom: 10px; color: #374151; border-bottom: 2px solid #e5e7eb; padding-bottom: 5px; }
+        .customer-info { background: #f8fafc; padding: 15px; border-radius: 6px; margin-bottom: 20px; }
+        .info-row { margin-bottom: 8px; }
+        .item { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #f3f4f6; }
+        .item:last-child { border-bottom: none; }
+        .total-section { background: #f9fafb; padding: 20px; border-radius: 6px; margin-top: 20px; }
+        .total-row { display: flex; justify-content: space-between; padding: 5px 0; }
+        .total-final { font-weight: bold; font-size: 18px; border-top: 2px solid #d1d5db; padding-top: 10px; margin-top: 10px; }
+        .footer { background: #f9fafb; padding: 20px; text-align: center; color: #6b7280; font-size: 14px; }
+      </style>
+    </head>
+    <body>
+      <div class="container">
+        <!-- 販売者情報セクション -->
+        <div class="seller-info">
+          <h3>聚楽苑</h3>
+          <div>〒417-0812</div>
+          <div>静岡県 富士市堺 485-2</div>
+          <div style="margin-top: 5px;">jurakuenfuji@gmail.com</div>
+        </div>
+        
+        <!-- ヘッダー -->
+        <div class="header">
+          <div class="receipt-number">${isJapanese ? "領収書" : "Receipt"}</div>
+          <div class="date">${receiptNumber}</div>
+          <div class="date">${purchaseDate}</div>
+        </div>
+        
+        <div class="content">
+          <!-- お客様情報 -->
+          <div class="section">
+            <div class="section-title">${
+              isJapanese ? "お客様情報" : "Customer Information"
+            }</div>
+            <div class="customer-info">
+              <div class="info-row">
+                <strong>${isJapanese ? "お名前" : "Name"}:</strong> 
                 ${
-                  tax > 0
-                    ? `
-                <div class="total-row">
-                  <span>${isJapanese ? "税金" : "Tax"}</span>
-                  <span>$${(tax / 100).toFixed(2)}</span>
-                </div>`
-                    : ""
-                }
-                <div class="total-row total-final">
-                  <span>${isJapanese ? "合計" : "Total"}</span>
-                  <span>$${(total / 100).toFixed(2)}</span>
-                </div>
+                  session.customer_details?.name ||
+                  (isJapanese ? "お客様" : "Customer")
+                } 
+                ${isJapanese ? "様" : ""}
               </div>
-            </div>
-
-            <div class="footer">
-              <p>${
-                isJapanese
-                  ? "この度はご購入いただき、ありがとうございました。"
-                  : "Thank you for your purchase!"
-              }</p>
-              <p><small>${
-                isJapanese
-                  ? "お問い合わせがございましたら、サポートまでご連絡ください。"
-                  : "If you have any questions, please contact our support team."
-              }</small></p>
+              <div class="info-row">
+                <strong>${isJapanese ? "メールアドレス" : "Email"}:</strong> 
+                ${customerEmail}
+              </div>
+              ${
+                session.customer_details?.address
+                  ? `
+                <div class="info-row">
+                  <strong>${isJapanese ? "ご住所" : "Address"}:</strong>
+                </div>
+                <div style="margin-left: 10px;">
+                  ${
+                    session.customer_details.address.postal_code
+                      ? `〒${session.customer_details.address.postal_code}<br>`
+                      : ""
+                  }
+                  ${
+                    session.customer_details.address.state
+                      ? `${session.customer_details.address.state}${
+                          session.customer_details.address.city
+                            ? session.customer_details.address.city
+                            : ""
+                        }<br>`
+                      : ""
+                  }
+                  ${
+                    session.customer_details.address.line1
+                      ? `${session.customer_details.address.line1}<br>`
+                      : ""
+                  }
+                  ${
+                    session.customer_details.address.line2
+                      ? `${session.customer_details.address.line2}`
+                      : ""
+                  }
+                </div>
+              `
+                  : ""
+              }
             </div>
           </div>
-        </body>
-      </html>
-    `;
+
+          <!-- ご購入商品 -->
+          <div class="section">
+            <div class="section-title">${
+              isJapanese ? "ご購入商品" : "Items Purchased"
+            }</div>
+            ${items
+              .map((item) => {
+                const product = item.price?.product as Stripe.Product;
+                const unitAmount = item.price?.unit_amount || 0;
+                const totalAmount = unitAmount * (item.quantity || 1);
+                return `
+                <div class="item">
+                  <div>
+                    <strong>${
+                      product?.name || (isJapanese ? "商品" : "Product")
+                    }</strong><br>
+                    <small>${isJapanese ? "数量" : "Quantity"}: ${
+                  item.quantity || 1
+                }</small>
+                  </div>
+                  <div style="text-align: right;">
+                    <div>$${(unitAmount / 100).toFixed(2)} ${
+                  isJapanese ? "× " : "x "
+                }${item.quantity || 1}</div>
+                    <strong>$${(totalAmount / 100).toFixed(2)}</strong>
+                  </div>
+                </div>
+              `;
+              })
+              .join("")}
+          </div>
+
+          <!-- 合計金額 -->
+          <div class="total-section">
+            <div class="total-row">
+              <span>${isJapanese ? "小計" : "Subtotal"}</span>
+              <span>$${(subtotal / 100).toFixed(2)}</span>
+            </div>
+            <div class="total-row">
+              <span>${isJapanese ? "送料" : "Shipping"}</span>
+              <span>$${(shippingCost / 100).toFixed(2)}</span>
+            </div>
+            ${
+              tax > 0
+                ? `
+            <div class="total-row">
+              <span>${isJapanese ? "税金" : "Tax"}</span>
+              <span>$${(tax / 100).toFixed(2)}</span>
+            </div>`
+                : ""
+            }
+            <div class="total-row total-final">
+              <span>${isJapanese ? "合計" : "Total"}</span>
+              <span>$${(total / 100).toFixed(2)}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- フッター -->
+        <div class="footer">
+          <p>${
+            isJapanese
+              ? "この度はご購入いただき、ありがとうございました。"
+              : "Thank you for your purchase!"
+          }</p>
+          <p><small>${
+            isJapanese
+              ? "お問い合わせがございましたら、上記メールアドレスまでご連絡ください。"
+              : "If you have any questions, please contact us at the email address above."
+          }</small></p>
+        </div>
+      </div>
+    </body>
+  </html>
+`;
 
     // メールを送信
     const emailResult = await transporter.sendMail({

@@ -105,164 +105,163 @@ async function sendFulfillmentEmail(sessionId: string) {
       const unit = li.price?.unit_amount || 0;
       const lineTotal = unit * qty;
       return `
-        <tr>
-          <td style="padding:8px;border:1px solid #eee;">
-            <div><strong>${escapeHtml(name)}</strong></div>
-            ${
-              sku
-                ? `<div style="opacity:.7;">SKU: ${escapeHtml(
-                    String(sku)
-                  )}</div>`
-                : ""
-            }
-          </td>
-          <td style="padding:8px;border:1px solid #eee; text-align:right;">${qty}</td>
-          <td style="padding:8px;border:1px solid #eee; text-align:right;">${fmtCurrency(
-            unit,
-            currency
-          )}</td>
-          <td style="padding:8px;border:1px solid #eee; text-align:right;">${fmtCurrency(
-            lineTotal,
-            currency
-          )}</td>
-        </tr>
-      `;
+      <tr>
+        <td>
+          <div class="product-name">${escapeHtml(name)}</div>
+          ${
+            sku
+              ? `<div class="product-sku">SKU: ${escapeHtml(String(sku))}</div>`
+              : ""
+          }
+        </td>
+        <td>${qty}</td>
+        <td>${fmtCurrency(unit, currency)}</td>
+        <td>${fmtCurrency(lineTotal, currency)}</td>
+      </tr>
+    `;
     })
     .join("");
 
   const html = `
-    <!doctype html>
-    <html><head><meta charset="utf-8" />
-      <style>
-        body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;background:#f6f7f9;margin:0;padding:24px;}
-        .card{max-width:760px;margin:0 auto;background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 6px 16px rgba(0,0,0,.08)}
-        .header{background:#111827;color:#fff;padding:20px 24px;font-weight:600}
-        .section{padding:20px 24px}
-        .title{font-weight:600;margin:0 0 8px}
-        table{border-collapse:collapse;width:100%}
-        .muted{color:#6b7280}
-      </style>
-    </head>
-    <body>
-      <div class="card">
-        <div class="header">${
-          isJa ? "新規注文（出荷依頼）" : "New Order (Fulfillment Request)"
-        }</div>
+  <!doctype html>
+  <html><head><meta charset="utf-8" />
+    <style>
+      body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;background:#f6f7f9;margin:0;padding:24px;}
+      .card{max-width:760px;margin:0 auto;background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 6px 16px rgba(0,0,0,.08)}
+      .header{background:#111827;color:#fff;padding:24px;font-weight:600;font-size:20px;text-align:center;}
+      .section{padding:24px;border-bottom:1px solid #f3f4f6;}
+      .section:last-child{border-bottom:none;}
+      .title{font-weight:600;margin:0 0 16px 0;color:#374151;font-size:18px;padding-bottom:8px;border-bottom:2px solid #e5e7eb;}
+      .info-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-bottom:12px;}
+      .info-item{background:#f9fafb;padding:12px;border-radius:6px;border:1px solid #e5e7eb;}
+      .info-label{font-size:12px;color:#6b7280;font-weight:600;margin-bottom:4px;}
+      .info-value{font-weight:600;color:#111827;}
+      .shipping-details{background:#f9fafb;padding:16px;border-radius:8px;border:1px solid #e5e7eb;}
+      .shipping-name{font-weight:600;font-size:16px;margin-bottom:8px;color:#111827;}
+      .shipping-address{line-height:1.5;color:#374151;}
+      table{border-collapse:collapse;width:100%;background:white;border-radius:8px;overflow:hidden;border:1px solid #e5e7eb;}
+      th{background:#f9fafb;padding:12px;text-align:left;font-weight:600;color:#374151;border-bottom:1px solid #e5e7eb;}
+      th:last-child,td:last-child{text-align:right;}
+      td{padding:12px;border-bottom:1px solid #f3f4f6;}
+      tr:last-child td{border-bottom:none;}
+      .product-name{font-weight:600;color:#111827;}
+      .product-sku{font-size:12px;color:#6b7280;margin-top:4px;}
+      .total-section{margin-top:16px;background:#f9fafb;border-radius:8px;overflow:hidden;border:1px solid #e5e7eb;}
+      .total-row{display:flex;justify-content:space-between;padding:12px 16px;border-bottom:1px solid #e5e7eb;}
+      .total-row:last-child{border-bottom:none;background:#111827;color:white;font-weight:700;}
+      .footer-note{background:#f9fafb;padding:20px;text-align:center;color:#6b7280;font-size:14px;border-top:1px solid #e5e7eb;}
+      .muted{color:#6b7280}
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <div class="header">${
+        isJa ? "新規注文（出荷依頼）" : "New Order (Fulfillment Request)"
+      }</div>
 
-        <div class="section">
-          <p class="muted" style="margin:0 0 6px;">Checkout Session: ${
-            full.id
-          }</p>
-          <p class="muted" style="margin:0 0 6px;">Payment Status: ${
-            full.payment_status
-          }</p>
-          <p class="muted" style="margin:0 0 6px;">Created: ${new Date(
-            (full.created || 0) * 1000
-          ).toLocaleString(isJa ? "ja-JP" : "en-US")}</p>
+      <div class="section">
+        <div class="info-grid">
+          <div class="info-item">
+            <div class="info-label">Checkout Session</div>
+            <div class="info-value">${full.id}</div>
+          </div>
+          <div class="info-item">
+            <div class="info-label">Payment Status</div>
+            <div class="info-value">${full.payment_status}</div>
+          </div>
+          <div class="info-item">
+            <div class="info-label">Created</div>
+            <div class="info-value">${new Date(
+              (full.created || 0) * 1000
+            ).toLocaleString(isJa ? "ja-JP" : "en-US")}</div>
+          </div>
           ${
             full.payment_intent
-              ? `<p class="muted" style="margin:0 0 6px;">PaymentIntent: ${
-                  typeof full.payment_intent === "string"
-                    ? full.payment_intent
-                    : full.payment_intent.id
-                }</p>`
+              ? `<div class="info-item">
+                  <div class="info-label">PaymentIntent</div>
+                  <div class="info-value">${
+                    typeof full.payment_intent === "string"
+                      ? full.payment_intent
+                      : full.payment_intent.id
+                  }</div>
+                </div>`
               : ""
           }
         </div>
+      </div>
 
-        <div class="section">
-          <h3 class="title">${isJa ? "配送先" : "Ship To"}</h3>
-          <div><strong>${escapeHtml(shippingName)}</strong></div>
-          <div>${addrLines.map(escapeHtml).join("<br>")}</div>
+      <div class="section">
+        <h3 class="title">${isJa ? "配送先" : "Ship To"}</h3>
+        <div class="shipping-details">
+          <div class="shipping-name">${escapeHtml(shippingName)}</div>
+          <div class="shipping-address">
+            ${addrLines.map(escapeHtml).join("<br>")}
+            ${
+              shippingPhone
+                ? `<div style="margin-top: 8px;">${
+                    isJa ? "電話" : "Phone"
+                  }: ${escapeHtml(shippingPhone)}</div>`
+                : ""
+            }
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h3 class="title">${isJa ? "購入明細" : "Items"}</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>${isJa ? "商品" : "Item"}</th>
+              <th>${isJa ? "数量" : "Qty"}</th>
+              <th>${isJa ? "単価" : "Unit"}</th>
+              <th>${isJa ? "小計" : "Line Total"}</th>
+            </tr>
+          </thead>
+          <tbody>${rows}</tbody>
+        </table>
+
+        <div class="total-section">
+          <div class="total-row">
+            <span>${isJa ? "小計" : "Subtotal"}</span>
+            <span>${fmtCurrency(subtotal, currency)}</span>
+          </div>
+          <div class="total-row">
+            <span>${isJa ? "送料" : "Shipping"}</span>
+            <span>${fmtCurrency(shippingAmount, currency)}</span>
+          </div>
           ${
-            shippingPhone
-              ? `<div>${isJa ? "電話" : "Phone"}: ${escapeHtml(
-                  shippingPhone
-                )}</div>`
+            (tax || 0) > 0
+              ? `<div class="total-row">
+                  <span>${isJa ? "税金" : "Tax"}</span>
+                  <span>${fmtCurrency(tax, currency)}</span>
+                </div>`
               : ""
           }
+          <div class="total-row">
+            <span>${isJa ? "合計" : "Total"}</span>
+            <span>${fmtCurrency(total, currency)}</span>
+          </div>
         </div>
+      </div>
 
-        <div class="section">
-          <h3 class="title">${isJa ? "購入明細" : "Items"}</h3>
-          <table>
-            <thead>
-              <tr>
-                <th style="text-align:left;padding:8px;border:1px solid #eee;">${
-                  isJa ? "商品" : "Item"
-                }</th>
-                <th style="text-align:right;padding:8px;border:1px solid #eee;">${
-                  isJa ? "数量" : "Qty"
-                }</th>
-                <th style="text-align:right;padding:8px;border:1px solid #eee;">${
-                  isJa ? "単価" : "Unit"
-                }</th>
-                <th style="text-align:right;padding:8px;border:1px solid #eee;">${
-                  isJa ? "小計" : "Line Total"
-                }</th>
-              </tr>
-            </thead>
-            <tbody>${rows}</tbody>
-            <tfoot>
-              <tr>
-                <td colspan="3" style="padding:8px;border:1px solid #eee;text-align:right;">${
-                  isJa ? "小計" : "Subtotal"
-                }</td>
-                <td style="padding:8px;border:1px solid #eee;text-align:right;">${fmtCurrency(
-                  subtotal,
-                  currency
-                )}</td>
-              </tr>
-              <tr>
-                <td colspan="3" style="padding:8px;border:1px solid #eee;text-align:right;">${
-                  isJa ? "送料" : "Shipping"
-                }</td>
-                <td style="padding:8px;border:1px solid #eee;text-align:right;">${fmtCurrency(
-                  shippingAmount,
-                  currency
-                )}</td>
-              </tr>
-              ${
-                (tax || 0) > 0
-                  ? `<tr>
-                      <td colspan="3" style="padding:8px;border:1px solid #eee;text-align:right;">${
-                        isJa ? "税金" : "Tax"
-                      }</td>
-                      <td style="padding:8px;border:1px solid #eee;text-align:right;">${fmtCurrency(
-                        tax,
-                        currency
-                      )}</td>
-                    </tr>`
-                  : ""
-              }
-              <tr>
-                <td colspan="3" style="padding:8px;border:1px solid #eee;text-align:right;font-weight:700;">${
-                  isJa ? "合計" : "Total"
-                }</td>
-                <td style="padding:8px;border:1px solid #eee;text-align:right;font-weight:700;">${fmtCurrency(
-                  total,
-                  currency
-                )}</td>
-              </tr>
-            </tfoot>
-          </table>
-        </div>
-
-        <div class="section muted" style="border-top:1px solid #eee;">
-          <div>${
-            isJa
-              ? "本メールに基づき出荷手配をお願いします。"
-              : "Please fulfill this order."
-          }</div>
-          <div>${
+      <div class="footer-note">
+        <div>${
+          isJa
+            ? "本メールに基づき出荷手配をお願いします。"
+            : "Please fulfill this order."
+        }</div>
+        <div style="margin-top: 8px; font-size: 12px;">
+          ${
             isJa
               ? "（注）StripeのWebhookは重複配送されることがあります。同一Session IDの多重処理にご注意ください。"
               : "(Note) Stripe webhook events can be delivered more than once. Ensure idempotency."
-          }</div>
+          }
         </div>
       </div>
-    </body></html>
-  `;
+    </div>
+  </body></html>
+`;
 
   await transporter.sendMail({
     from: process.env.FROM_EMAIL || "orders@yourstore.com",
