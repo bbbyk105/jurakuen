@@ -50,13 +50,23 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const locale = session.metadata?.locale || "ja";
+    const locale = session.metadata?.locale === "ja" ? "ja" : "en";
     const isJapanese = locale === "ja";
 
     // 領収書データを準備
     const receiptNumber = `RCP-${session.id.slice(-8).toUpperCase()}`;
-    const purchaseDate = new Date(session.created * 1000).toLocaleDateString(
-      isJapanese ? "ja-JP" : "en-US"
+    const purchaseDate = new Date(session.created * 1000).toLocaleString(
+      isJapanese ? "ja-JP" : "en-US",
+      {
+        timeZone: "Asia/Tokyo",
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        timeZoneName: "short", // 例: JST
+      }
     );
 
     const items = session.line_items?.data || [];

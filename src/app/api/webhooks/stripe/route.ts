@@ -169,7 +169,16 @@ async function sendFulfillmentEmail(sessionId: string) {
             <div class="info-label">作成日</div>
             <div class="info-value">${new Date(
               (full.created || 0) * 1000
-            ).toLocaleString(isJa ? "ja-JP" : "en-US")}</div>
+            ).toLocaleString(isJa ? "ja-JP" : "en-US", {
+              timeZone: "Asia/Tokyo",
+              year: "numeric",
+              month: "2-digit",
+              day: "2-digit",
+              hour: "2-digit",
+              minute: "2-digit",
+              second: "2-digit",
+              timeZoneName: "short", // JST と表示
+            })}</div>
           </div>
           ${
             full.payment_intent
