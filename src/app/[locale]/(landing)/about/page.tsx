@@ -24,7 +24,7 @@ export default function TeaProduction() {
       harvest: "/images/tsumi.jpg",
       steaming: "/images/burn.webp",
       rolling: "/images/mochizuki.webp",
-      firing: "/images/kizami.webp",
+      firing: "/images/kizami.jpg",
     },
   };
 

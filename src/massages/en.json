@@ -525,7 +525,7 @@
         "mainHero": {
             "subtitle": "TEA PRODUCTION PROCESS",
             "title": "The Journey to a Perfect Cup of Tea",
-            "description": "Three distinctive teas crafted with care by Jyurakuen.\nEach production method embodies a century of history and artisan expertise.",
+            "description": "Two distinctive teas crafted with care by Jyurakuen.\nEach production method embodies a century of history and artisan expertise.",
             "scroll": "SCROLL"
         },
         "teaTypes": {
@@ -547,12 +547,12 @@
                         "title": "Cultivation",
                         "subtitle": "The First Step in Nurturing Tea Life",
                         "description": "It takes approximately 5 years from planting tea trees to harvesting to create a single cup of tea.",
-                        "detail": "To welcome the fresh spring tea, careful soil preparation and tea leaf management are carried out from the previous year, finally enabling harvest. Carefully nurtured in Kirishima's rich natural environment, tea trees are maintained in healthy condition to produce high-quality tea leaves."
+                        "detail": "To welcome the fresh spring tea, careful soil preparation and tea leaf management are carried out from the previous year, finally enabling harvest. Carefully nurtured in foot of Mt.Fuji's rich natural environment, tea trees are maintained in healthy condition to produce high-quality tea leaves."
                     },
                     "harvest": {
                         "step": 2,
                         "title": "Harvest",
-                        "subtitle": "Hand-picking the finest one bud and two leaves",
+                        "subtitle": "Harvesting young tea shoots to draw out the tea’s inherent richness",
                         "description": "Tea leaves for matcha are covered for 21 days before harvest to block sunlight and concentrate umami.",
                         "detail": "Shade cultivation increases amino acids in tea leaves while suppressing tannin, the astringent component. This special cultivation method creates matcha's characteristic sweetness and umami, achieving a vibrant green color."
                     },
