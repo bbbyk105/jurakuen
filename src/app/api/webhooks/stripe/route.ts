@@ -162,15 +162,11 @@ async function sendFulfillmentEmail(sessionId: string) {
       <div class="section">
         <div class="info-grid">
           <div class="info-item">
-            <div class="info-label">Checkout Session</div>
-            <div class="info-value">${full.id}</div>
-          </div>
-          <div class="info-item">
-            <div class="info-label">Payment Status</div>
+            <div class="info-label">支払い状況</div>
             <div class="info-value">${full.payment_status}</div>
           </div>
           <div class="info-item">
-            <div class="info-label">Created</div>
+            <div class="info-label">作成日</div>
             <div class="info-value">${new Date(
               (full.created || 0) * 1000
             ).toLocaleString(isJa ? "ja-JP" : "en-US")}</div>
@@ -178,7 +174,7 @@ async function sendFulfillmentEmail(sessionId: string) {
           ${
             full.payment_intent
               ? `<div class="info-item">
-                  <div class="info-label">PaymentIntent</div>
+                  <div class="info-label">決済ID</div>
                   <div class="info-value">${
                     typeof full.payment_intent === "string"
                       ? full.payment_intent
