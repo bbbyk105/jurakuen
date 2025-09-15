@@ -112,7 +112,7 @@ export async function POST(req: NextRequest) {
         <div class="seller-info">
           <h3>聚楽苑</h3>
           <div>〒417-0812</div>
-          <div>静岡県 富士市堺 485-2</div>
+          <div>静岡県 富士市境 485-2</div>
           <div style="margin-top: 5px;">jurakuenfuji@gmail.com</div>
         </div>
         
