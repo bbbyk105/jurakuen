@@ -10,7 +10,8 @@
         "home": "ホーム",
         "about": "概要",
         "products": "商品",
-        "cart": "カート"
+        "cart": "カート",
+        "jas": "JAS認証"
     },
     "header": {
         "brand": {
@@ -27,7 +28,7 @@
         "recentProduct": {
             "title": "有機上煎茶 千代の友",
             "subtitle": "農薬不使用、富士山の湧水で育ったお茶です",
-            "price": "$32"
+            "price": "$10"
         }
     },
     "hero": {

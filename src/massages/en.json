@@ -10,7 +10,8 @@
         "home": "Home",
         "about": "About",
         "products": "Products",
-        "cart": "Cart"
+        "cart": "Cart",
+        "jas": "JAS"
     },
     "header": {
         "brand": {
