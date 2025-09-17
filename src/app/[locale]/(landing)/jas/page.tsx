@@ -90,7 +90,7 @@ export default function JASPage() {
         {/* 背景画像 */}
         <div className="absolute inset-0 z-0">
           <Image
-            src="/images/chaba.webp"
+            src="/images/field2.webp"
             alt="有機栽培茶園"
             fill
             className="object-cover"
@@ -366,7 +366,7 @@ export default function JASPage() {
             >
               <div className="relative h-48 sm:h-64 md:h-80 rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl">
                 <Image
-                  src="/images/cover.webp"
+                  src="/images/field.webp"
                   alt="有機栽培の茶畑管理"
                   fill
                   className="object-cover"
@@ -375,7 +375,7 @@ export default function JASPage() {
               </div>
               <div className="relative h-48 sm:h-64 md:h-80 rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl">
                 <Image
-                  src="/images/steam.jpg"
+                  src="/images/cha.webp"
                   alt="有機茶葉の加工"
                   fill
                   className="object-cover"

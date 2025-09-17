@@ -681,5 +681,35 @@
                 "description": "残留農薬の心配がなく、小さなお子様からご年配の方まで、安心してお飲みいただけます。"
             }
         }
+    },
+    "jasNavigation": {
+        "badge": "ORGANIC JAS CERTIFIED",
+        "title": "富士市初の有機JAS認証取得",
+        "subtitle": "化学農薬・化学肥料を使用しない、\n安全で環境に優しいお茶づくりへの取り組みをご紹介します。",
+        "certification": {
+            "title": "有機JAS認証取得",
+            "subtitle": "農林水産省認定",
+            "description": "厳格な有機栽培基準をクリアし、3年以上化学物質を使用していない土壌で育てた安全なお茶です。"
+        },
+        "cta": {
+            "button": "有機JAS認証について詳しく見る",
+            "description": "認証基準や取り組みについて詳細をご覧いただけます",
+            "ariaLabel": "有機JAS認証の詳細ページへ移動"
+        },
+        "trustIndicators": {
+            "maffApproved": "農林水産省認定",
+            "continuousAudit": "継続監査済み"
+        },
+        "secondaryInfo": {
+            "title": "認証の詳細情報",
+            "inspection": "第三者機関による厳格な審査",
+            "qualityAssurance": "年次監査による品質保証",
+            "traceability": "トレーサビリティ完全対応"
+        },
+        "overlay": {
+            "certified": "認証取得済み",
+            "title": "自然の恵みと職人の技",
+            "description": "富士山の麓で育まれた有機栽培茶"
+        }
     }
 }

@@ -15,6 +15,7 @@ import Contact from "./(landing)/Contact";
 import WaveDivider from "./(landing)/WaveDivider";
 import FujiHeritage from "./(landing)/FujiHeritage";
 import InstagramShowcase from "./(landing)/InstagramShowcase";
+import Jas from "./(landing)/Jas";
 
 const JurakuEnLanding = () => (
   <div className="min-h-screen bg-washi-beige font-sans scroll-smooth">
@@ -73,6 +74,8 @@ const JurakuEnLanding = () => (
 
     <Products />
     <WaveDivider />
+
+    <Jas />
 
     <FujiHeritage />
 

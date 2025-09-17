@@ -716,5 +716,35 @@
                 "description": "With no worry about pesticide residues, everyone from small children to elderly can drink with confidence."
             }
         }
+    },
+    "jasNavigation": {
+        "badge": "ORGANIC JAS CERTIFIED",
+        "title": "First Organic JAS Certification in Fuji City",
+        "subtitle": "Discover our commitment to safe and environmentally friendly tea production without any chemical pesticides or fertilizers.",
+        "certification": {
+            "title": "Organic JAS Certified",
+            "subtitle": "MAFF Approved",
+            "description": "Safe tea grown in soil that has been chemical-free for over 3 years, meeting strict organic cultivation standards."
+        },
+        "cta": {
+            "button": "Learn More About Organic JAS Certification",
+            "description": "View detailed information about certification standards and our initiatives",
+            "ariaLabel": "Navigate to Organic JAS certification details page"
+        },
+        "trustIndicators": {
+            "maffApproved": "MAFF Approved",
+            "continuousAudit": "Continuously Audited"
+        },
+        "secondaryInfo": {
+            "title": "Certification Details",
+            "inspection": "Strict inspection by third-party organizations",
+            "qualityAssurance": "Quality assurance through annual audits",
+            "traceability": "Complete traceability support"
+        },
+        "overlay": {
+            "certified": "Certified",
+            "title": "Nature's Bounty & Artisan Craftsmanship",
+            "description": "Organic tea cultivated at the foot of Mt. Fuji"
+        }
     }
 }
