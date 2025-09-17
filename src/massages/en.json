@@ -634,5 +634,87 @@
             "title": "A Cup of Tea Woven by\nTradition and Innovation",
             "description": "Matcha, hojicha, and sencha born from different production methods.\nPlease enjoy to your heart's content the artisan skills and natural blessings\nembedded in each cup."
         }
+    },
+    "jas": {
+        "meta": {
+            "title": "Organic JAS Certification - Proof of Nature and Safety",
+            "description": "Learn about Jurakuen's Organic JAS certification. Our commitment to safe and environmentally friendly tea production without chemical pesticides or fertilizers, and the strict certification standards we meet.",
+            "keywords": "Organic JAS certification, organic tea, pesticide-free tea, Jurakuen, safe tea, environmental care, sustainable agriculture"
+        },
+        "hero": {
+            "subtitle": "ORGANIC JAS CERTIFICATION",
+            "title": "Organic JAS Certification\nProof of Nature and Safety",
+            "description": "Our commitment to safe and environmentally friendly tea production\nthat meets strict organic cultivation standards.\nDelivering authentic flavors born from nature's bounty and artisan craftsmanship.",
+            "scroll": "SCROLL"
+        },
+        "about": {
+            "title": "What is Organic JAS Certification",
+            "subtitle": "Organic Japanese Agricultural Standards",
+            "description": "Our tea meets the strict standards for organic agricultural products established by the Ministry of Agriculture, Forestry and Fisheries, and has been certified through inspection by registered certification bodies.\n\nWe use only tea leaves grown in soil that has undergone organic cultivation for more than three years without the use of chemical pesticides or fertilizers.",
+            "verified": "MAFF Certified Organic Agricultural Product",
+            "imageCaption": "Organic Tea Plantation",
+            "imageCaptionDetail": "Cultivation without any chemical pesticides or fertilizers"
+        },
+        "features": {
+            "title": "Four Features of Organic JAS Certification",
+            "description": "Sustainable tea production that balances safety and environmental consideration",
+            "safety": {
+                "title": "Ensuring Safety",
+                "description": "We deliver safe and secure tea without using chemical pesticides or fertilizers. No worry about pesticide residues."
+            },
+            "environment": {
+                "title": "Environmental Consideration",
+                "description": "We practice sustainable agriculture while protecting the natural environment without polluting soil or water quality."
+            },
+            "health": {
+                "title": "Health Consideration",
+                "description": "Through cultivation without chemicals, we offer healthy tea that maximizes the original nutritional components of tea leaves."
+            },
+            "sustainability": {
+                "title": "Sustainability",
+                "description": "To preserve beautiful nature for future generations, we practice circular agriculture that minimizes environmental impact."
+            }
+        },
+        "standards": {
+            "title": "Strict Certification Standards",
+            "description": "To obtain Organic JAS certification, we meet all of the following stringent standards:",
+            "noChemicals": {
+                "title": "No Chemical Pesticides or Fertilizers",
+                "description": "We cultivate on land where chemical pesticides and fertilizers have been prohibited for more than three years, not just during the cultivation period."
+            },
+            "organicFertilizer": {
+                "title": "Only Certified Organic Fertilizers Used",
+                "description": "We use only organic fertilizers approved by JAS standards while maintaining soil health and nurturing tea plants."
+            },
+            "soilManagement": {
+                "title": "Soil and Environmental Management",
+                "description": "We regularly inspect soil health and conduct cultivation in an environment that protects biodiversity."
+            },
+            "traceability": {
+                "title": "Complete Traceability",
+                "description": "We maintain detailed records throughout all processes from cultivation to manufacturing and distribution, ensuring quality and safety."
+            }
+        },
+        "jasMark": {
+            "title": "This Mark is Proof of Quality",
+            "description1": "The Organic JAS mark is an official certification mark that can only be displayed on products that meet the strict standards established by the Ministry of Agriculture, Forestry and Fisheries.",
+            "description2": "Products with this mark are guaranteed to be truly safe and environmentally friendly organic agricultural products that do not use chemical synthetic pesticides, chemical fertilizers, or genetic modification technology."
+        },
+        "benefits": {
+            "title": "The Appeal of Organic Tea",
+            "description": "Special value and deliciousness created through Organic JAS certification",
+            "taste": {
+                "title": "Authentic Flavor",
+                "description": "Without relying on chemicals, you can enjoy deep flavors that maximize the original umami and aroma of tea leaves."
+            },
+            "nutrition": {
+                "title": "Rich Nutritional Components",
+                "description": "Tea leaves grown in healthy soil are rich in active ingredients such as catechins and amino acids, truly nature's bounty."
+            },
+            "safety": {
+                "title": "Peace of Mind and Safety",
+                "description": "With no worry about pesticide residues, everyone from small children to elderly can drink with confidence."
+            }
+        }
     }
 }
