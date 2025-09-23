@@ -242,36 +242,36 @@ export const products: Product[] = [
     stripePriceId: "price_1S5iZqGWVrFqKZ5xvCp7hsf4",
     colorClass: "from-green-500 to-green-600",
   },
-  {
-    id: 9,
-    name: "test",
-    description:
-      "富士山麓の恵まれた環境で、21日間もの長期間覆下栽培された特別な有機JAS認証抹茶です。農薬不使用にこだわり、丁寧に石臼で挽いた「かがやき」は、その名の通り輝くような鮮やかな翡翠色が特徴。口に含むと、まず感じるのは上品でやわらかな甘み、続いて深いコクと旨みが広がり、最後にほのかな苦みが全体を引き締めます。なめらかな舌触りと豊かな泡立ちは、茶道のお点前にも最適。また、抹茶ラテや和洋菓子作りにも素晴らしい風味を添えます。富士ブランド認定品として、大切な方への贈り物にもふさわしい逸品。農薬不使用の安全性と、富士山の恵みが育んだ極上の味わいをご堪能ください。",
-    price: 0.5,
-    category: "抹茶",
-    image: {
-      url: "/images/products/kagayaki.webp",
-      alt: "test",
-      width: 400,
-      height: 400,
-    },
-    subImages: [
-      {
-        url: "/images/products/kagayaki-b.webp",
-        alt: "test 茶道シーン",
-        width: 400,
-        height: 400,
-      },
-    ],
-    details: {
-      weight: "20g",
-      origin: "静岡県",
-      harvestSeason: "一番茶",
-    },
-    stripeProductId: "prod_T1m8fZUFEE5ENR",
-    stripePriceId: "price_1S5iZsGWVrFqKZ5xTO5Aiw4W",
-    colorClass: "from-green-500 to-green-600",
-  },
+  // {
+  //   id: 9,
+  //   name: "test",
+  //   description:
+  //     "富士山麓の恵まれた環境で、21日間もの長期間覆下栽培された特別な有機JAS認証抹茶です。農薬不使用にこだわり、丁寧に石臼で挽いた「かがやき」は、その名の通り輝くような鮮やかな翡翠色が特徴。口に含むと、まず感じるのは上品でやわらかな甘み、続いて深いコクと旨みが広がり、最後にほのかな苦みが全体を引き締めます。なめらかな舌触りと豊かな泡立ちは、茶道のお点前にも最適。また、抹茶ラテや和洋菓子作りにも素晴らしい風味を添えます。富士ブランド認定品として、大切な方への贈り物にもふさわしい逸品。農薬不使用の安全性と、富士山の恵みが育んだ極上の味わいをご堪能ください。",
+  //   price: 0.5,
+  //   category: "抹茶",
+  //   image: {
+  //     url: "/images/products/kagayaki.webp",
+  //     alt: "test",
+  //     width: 400,
+  //     height: 400,
+  //   },
+  //   subImages: [
+  //     {
+  //       url: "/images/products/kagayaki-b.webp",
+  //       alt: "test 茶道シーン",
+  //       width: 400,
+  //       height: 400,
+  //     },
+  //   ],
+  //   details: {
+  //     weight: "20g",
+  //     origin: "静岡県",
+  //     harvestSeason: "一番茶",
+  //   },
+  //   stripeProductId: "prod_T1m8fZUFEE5ENR",
+  //   stripePriceId: "price_1S5iZsGWVrFqKZ5xTO5Aiw4W",
+  //   colorClass: "from-green-500 to-green-600",
+  // },
 ];
 
 export const heroData: HeroData = {

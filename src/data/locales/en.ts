@@ -242,36 +242,36 @@ export const products: Product[] = [
     stripePriceId: "price_1S5iZqGWVrFqKZ5xvCp7hsf4",
     colorClass: "from-green-500 to-green-600",
   },
-  {
-    id: 9,
-    name: "test",
-    description:
-      "Special organic JAS certified matcha cultivated under shade for a long period of 21 days in the blessed environment at the foot of Mt. Fuji. 'Kagayaki,' committed to being completely pesticide-free and carefully ground with stone mills, features a brilliant jade green color that lives up to its name. When you taste it, you first feel elegant and gentle sweetness, followed by deep richness and umami, with subtle bitterness that brings everything together at the end. The smooth texture and rich foam make it perfect for tea ceremony preparation. It also adds wonderful flavor to matcha lattes and Japanese and Western confectionery. As a Fuji Brand certified product, it's a masterpiece worthy of gifts for loved ones. Enjoy the safety of completely pesticide-free cultivation and the supreme taste nurtured by Mt. Fuji's blessings.",
-    price: 0.5,
-    category: "Matcha",
-    image: {
-      url: "/images/products/kagayaki.webp",
-      alt: "test",
-      width: 400,
-      height: 400,
-    },
-    subImages: [
-      {
-        url: "/images/products/kagayaki-b.webp",
-        alt: "test tea ceremony scene",
-        width: 400,
-        height: 400,
-      },
-    ],
-    details: {
-      weight: "20g",
-      origin: "Shizuoka Prefecture",
-      harvestSeason: "First flush",
-    },
-    stripeProductId: "prod_T1m8fZUFEE5ENR",
-    stripePriceId: "price_1S5iZsGWVrFqKZ5xTO5Aiw4W",
-    colorClass: "from-green-500 to-green-600",
-  },
+  // {
+  //   id: 9,
+  //   name: "test",
+  //   description:
+  //     "Special organic JAS certified matcha cultivated under shade for a long period of 21 days in the blessed environment at the foot of Mt. Fuji. 'Kagayaki,' committed to being completely pesticide-free and carefully ground with stone mills, features a brilliant jade green color that lives up to its name. When you taste it, you first feel elegant and gentle sweetness, followed by deep richness and umami, with subtle bitterness that brings everything together at the end. The smooth texture and rich foam make it perfect for tea ceremony preparation. It also adds wonderful flavor to matcha lattes and Japanese and Western confectionery. As a Fuji Brand certified product, it's a masterpiece worthy of gifts for loved ones. Enjoy the safety of completely pesticide-free cultivation and the supreme taste nurtured by Mt. Fuji's blessings.",
+  //   price: 0.5,
+  //   category: "Matcha",
+  //   image: {
+  //     url: "/images/products/kagayaki.webp",
+  //     alt: "test",
+  //     width: 400,
+  //     height: 400,
+  //   },
+  //   subImages: [
+  //     {
+  //       url: "/images/products/kagayaki-b.webp",
+  //       alt: "test tea ceremony scene",
+  //       width: 400,
+  //       height: 400,
+  //     },
+  //   ],
+  //   details: {
+  //     weight: "20g",
+  //     origin: "Shizuoka Prefecture",
+  //     harvestSeason: "First flush",
+  //   },
+  //   stripeProductId: "prod_T1m8fZUFEE5ENR",
+  //   stripePriceId: "price_1S5iZsGWVrFqKZ5xTO5Aiw4W",
+  //   colorClass: "from-green-500 to-green-600",
+  // },
 ];
 
 export const heroData: HeroData = {
