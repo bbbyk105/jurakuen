@@ -1,3 +1,5 @@
+// src/app/[locale]/layout.tsx
+
 import type { Metadata } from "next";
 import { setRequestLocale } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
@@ -43,8 +45,17 @@ export const metadata: Metadata = {
     googleBot: {
       index: true,
       follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
     },
   },
+
+  // 👇 Google Search Console verification を追加
+  verification: {
+    google: "KnrFCiFH56kO_Wmqx_op32xyVVRg1fdYwmlI1F9cj5k",
+  },
+
   openGraph: {
     title: "聚楽苑 - 富士市初の有機JAS認証取得茶園",
     description:
