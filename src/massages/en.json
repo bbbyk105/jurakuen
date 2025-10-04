@@ -651,8 +651,7 @@
         "about": {
             "title": "What is Organic JAS Certification",
             "subtitle": "Organic Japanese Agricultural Standards",
-            "description": "Our tea meets the strict standards for organic agricultural products established by the Ministry of Agriculture, Forestry and Fisheries, and has been certified through inspection by registered certification bodies.\n\nWe use only tea leaves grown in soil that has undergone organic cultivation for more than three years without the use of chemical pesticides or fertilizers.",
-            "verified": "MAFF Certified Organic Agricultural Product",
+            "description": "Registered certification bodies certify the business operators,  and those certified operators are allowed to label their products as organic.\n\nWe use only tea leaves cultivated without chemical pesticides or chemical fertilizers,  on soil that has undergone more than three years of organic farming practices.",
             "imageCaption": "Organic Tea Plantation",
             "imageCaptionDetail": "Cultivation without any chemical pesticides or fertilizers"
         },
@@ -724,17 +723,12 @@
         "subtitle": "Discover our commitment to safe and environmentally friendly tea production without any chemical pesticides or fertilizers.",
         "certification": {
             "title": "Organic JAS Certified",
-            "subtitle": "MAFF Approved",
             "description": "Safe tea grown in soil that has been chemical-free for over 3 years, meeting strict organic cultivation standards."
         },
         "cta": {
             "button": "Learn More About Organic JAS Certification",
             "description": "View detailed information about certification standards and our initiatives",
             "ariaLabel": "Navigate to Organic JAS certification details page"
-        },
-        "trustIndicators": {
-            "maffApproved": "MAFF Approved",
-            "continuousAudit": "Continuously Audited"
         },
         "secondaryInfo": {
             "title": "Certification Details",

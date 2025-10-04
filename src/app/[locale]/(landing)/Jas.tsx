@@ -84,9 +84,6 @@ export default function JASNavigationSection() {
                   <h3 className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-gray-900 mb-1 sm:mb-2 tracking-tight leading-tight">
                     {t("certification.title")}
                   </h3>
-                  <p className="text-xs sm:text-sm md:text-base text-green-600 font-semibold tracking-wide uppercase">
-                    {t("certification.subtitle")}
-                  </p>
                 </div>
               </div>
 
@@ -94,25 +91,6 @@ export default function JASNavigationSection() {
               <p className="text-sm sm:text-base md:text-lg text-gray-700 leading-relaxed mb-6 sm:mb-8">
                 {t("certification.description")}
               </p>
-
-              {/* Trust indicators - モバイル向けレイアウト調整 */}
-              <div className="mt-auto pt-4 sm:pt-6 border-t border-gray-100">
-                <div className="flex flex-col sm:flex-row items-center justify-center space-y-2 sm:space-y-0 sm:space-x-6 text-xs sm:text-sm text-gray-500">
-                  <div className="flex items-center">
-                    <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-green-500 rounded-full mr-2" />
-                    <span className="font-medium text-center sm:text-left">
-                      {t("trustIndicators.maffApproved")}
-                    </span>
-                  </div>
-                  <div className="hidden sm:block w-px h-4 bg-gray-300" />
-                  <div className="flex items-center">
-                    <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-green-500 rounded-full mr-2" />
-                    <span className="font-medium text-center sm:text-left">
-                      {t("trustIndicators.continuousAudit")}
-                    </span>
-                  </div>
-                </div>
-              </div>
             </div>
           </motion.div>
 

@@ -178,14 +178,6 @@ export default function JASPage() {
                 <p className="text-sm sm:text-base md:text-lg text-gray-700 leading-relaxed mb-6 sm:mb-8 whitespace-pre-line">
                   {t("about.description")}
                 </p>
-                <div className="flex items-center">
-                  <div className="w-5 h-5 sm:w-6 sm:h-6 bg-green-500 rounded-full flex items-center justify-center mr-3">
-                    <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-white rounded-full"></div>
-                  </div>
-                  <span className="text-xs sm:text-sm font-medium text-gray-600 tracking-wide">
-                    {t("about.verified")}
-                  </span>
-                </div>
               </div>
             </motion.div>
 
