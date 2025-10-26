@@ -2,65 +2,48 @@ import { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://www.jurakuen.com";
+  const locales = ["ja", "en"];
 
-  return [
-    // メインページ
+  // 各ページのパス定義
+  const pages = [
+    { path: "", priority: 1, changeFrequency: "weekly" as const },
+    { path: "/about", priority: 0.8, changeFrequency: "monthly" as const },
+    { path: "/commerce", priority: 0.9, changeFrequency: "weekly" as const },
+    { path: "/products", priority: 0.9, changeFrequency: "weekly" as const },
+    { path: "/privacy", priority: 0.3, changeFrequency: "yearly" as const },
+    { path: "/terms", priority: 0.3, changeFrequency: "yearly" as const },
     {
-      url: baseUrl,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 1,
-    },
-    // 基本ページ
-    {
-      url: `${baseUrl}/about`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/commerce`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/products`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.9,
-    },
-    // 法的ページ
-    {
-      url: `${baseUrl}/privacy`,
-      lastModified: new Date(),
-      changeFrequency: "yearly",
-      priority: 0.3,
-    },
-    {
-      url: `${baseUrl}/terms`,
-      lastModified: new Date(),
-      changeFrequency: "yearly",
-      priority: 0.3,
-    },
-    // 決済関連
-    {
-      url: `${baseUrl}/payment/success`,
-      lastModified: new Date(),
-      changeFrequency: "never",
+      path: "/payment/success",
       priority: 0.1,
+      changeFrequency: "never" as const,
     },
     {
-      url: `${baseUrl}/payment/cancel`,
-      lastModified: new Date(),
-      changeFrequency: "never",
+      path: "/payment/cancel",
       priority: 0.1,
+      changeFrequency: "never" as const,
     },
-    {
-      url: `${baseUrl}/cart`,
-      lastModified: new Date(),
-      changeFrequency: "never",
-      priority: 0.2,
-    },
+    { path: "/cart", priority: 0.2, changeFrequency: "never" as const },
   ];
+
+  // 各言語ごとにURLを生成
+  const sitemapEntries: MetadataRoute.Sitemap = [];
+
+  locales.forEach((locale) => {
+    pages.forEach((page) => {
+      sitemapEntries.push({
+        url: `${baseUrl}/${locale}${page.path}`,
+        lastModified: new Date(),
+        changeFrequency: page.changeFrequency,
+        priority: page.priority,
+        alternates: {
+          languages: {
+            ja: `${baseUrl}/ja${page.path}`,
+            en: `${baseUrl}/en${page.path}`,
+          },
+        },
+      });
+    });
+  });
+
+  return sitemapEntries;
 }
