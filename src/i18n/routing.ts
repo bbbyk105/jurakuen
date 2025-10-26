@@ -4,7 +4,7 @@ import { createNavigation } from "next-intl/navigation";
 
 export const routing = defineRouting({
   locales: ["ja", "en"],
-  defaultLocale: "en", // デフォルト言語は英語のまま
+  defaultLocale: "ja", // デフォルト言語は英語のまま
   localePrefix: "always",
   localeDetection: false, // ブラウザ言語設定は無効のまま
 });
