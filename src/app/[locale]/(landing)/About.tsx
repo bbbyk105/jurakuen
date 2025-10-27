@@ -70,7 +70,11 @@ const About = () => {
                 href="/about"
                 className="group inline-flex items-center gap-3 text-gray-900 font-medium text-lg border-b-2 border-gray-200 pb-2 hover:border-green-600 transition-colors duration-300"
               >
-                <span>{locale === "ja" ? "詳しく見る" : "Learn More"}</span>
+                <span>
+                  {locale === "ja"
+                    ? "富士市の有機茶について詳しく見る"
+                    : "Learn More"}
+                </span>
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
               </Link>
             </motion.div>
