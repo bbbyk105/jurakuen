@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap");
 @import "tailwindcss";
 @import "tw-animate-css";
 
@@ -120,9 +121,6 @@
     @apply bg-background text-foreground;
   }
 }
-
-/* 和風フォントの追加設定 */
-@import url("https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap");
 
 /* カスタムフォントクラス */
 .font-noto-serif {
