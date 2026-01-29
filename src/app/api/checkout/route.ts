@@ -24,7 +24,7 @@ async function findAndValidatePriceId(id: number): Promise<string> {
   if (!product.stripePriceId) {
     throw new Error(
       `商品 "${product.name}" (ID: ${id}) のStripe Price IDが設定されていません。` +
-        `商品データファイルでstripePriceIdを確認してください。`
+        `商品データファイルでstripePriceIdを確認してください。`,
     );
   }
 
@@ -37,7 +37,7 @@ async function findAndValidatePriceId(id: number): Promise<string> {
       throw new Error(
         `Stripe Price ID "${product.stripePriceId}" が存在しません。` +
           `Stripeダッシュボードで価格を作成するか、商品データの stripePriceId を正しい値に更新してください。` +
-          `商品: "${product.name}" (ID: ${id})`
+          `商品: "${product.name}" (ID: ${id})`,
       );
     }
     throw stripeError;
@@ -86,7 +86,7 @@ export async function POST(req: NextRequest) {
             productId: item.id,
             action: "商品データまたはStripe設定を確認してください",
           },
-          { status: 400 }
+          { status: 400 },
         );
       }
     }
@@ -94,14 +94,15 @@ export async function POST(req: NextRequest) {
     const origin = req.nextUrl.origin;
     const locale = inferLocaleFromReferer(req);
 
-    // 送料オプションの設定（4ドル固定）
+    // 送料オプション（英語＝アメリカ向け15ドル、日本語＝日本向け4ドル）
+    const isUS = locale === "en";
     const shippingOptions: Stripe.Checkout.SessionCreateParams.ShippingOption[] =
       [
         {
           shipping_rate_data: {
             type: "fixed_amount",
             fixed_amount: {
-              amount: 400, // 4ドル = 400セント
+              amount: isUS ? 1500 : 400, // 15ドル or 4ドル
               currency: "usd",
             },
             display_name: locale === "ja" ? "標準配送" : "Standard Shipping",
@@ -121,10 +122,11 @@ export async function POST(req: NextRequest) {
 
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
+      locale: locale === "ja" ? "ja" : "en",
       line_items,
       billing_address_collection: "auto",
       shipping_address_collection: {
-        allowed_countries: ["US", "JP"], // 配送可能国を設定
+        allowed_countries: isUS ? ["US"] : ["US", "JP"],
       },
       shipping_options: shippingOptions,
       // 領収書の自動送信を有効化
@@ -174,7 +176,7 @@ export async function POST(req: NextRequest) {
           stripeErrorType: error.type,
           stripeErrorCode: error.code,
         },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -192,7 +194,7 @@ export async function POST(req: NextRequest) {
         suggestion:
           "商品データのstripePriceId設定を確認するか、Stripeダッシュボードで価格を作成してください",
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
@@ -203,7 +205,7 @@ export async function GET(req: NextRequest) {
     if (!sessionId) {
       return NextResponse.json(
         { error: "session_id パラメータが必要です" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -225,7 +227,7 @@ export async function GET(req: NextRequest) {
           metadata: session.metadata,
         },
       },
-      { status: 200 }
+      { status: 200 },
     );
   } catch (error: unknown) {
     console.error("セッション取得エラー:", error);
@@ -236,7 +238,7 @@ export async function GET(req: NextRequest) {
           error: `Stripeセッション取得エラー: ${error.message}`,
           stripeErrorType: error.type,
         },
-        { status: 400 }
+        { status: 400 },
       );
     }
 

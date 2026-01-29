@@ -59,7 +59,6 @@ export default function TeaProduction() {
             muted
             loop
             playsInline
-            poster="/images/tea-field-workers.jpg"
             className="w-full h-full object-cover"
           >
             <source src="/videos/tea.mp4" type="video/mp4" />
@@ -168,7 +167,7 @@ export default function TeaProduction() {
                               tea.images[processKey as keyof typeof tea.images]
                             }
                             alt={t(
-                              `teaTypes.${tea.id}.processes.${processKey}.title`
+                              `teaTypes.${tea.id}.processes.${processKey}.title`,
                             )}
                             fill
                             className="object-cover transition-transform duration-700 hover:scale-105"
@@ -194,16 +193,16 @@ export default function TeaProduction() {
                           <div>
                             <p className="text-sm text-gray-500 font-medium tracking-wider uppercase mb-2">
                               {t(
-                                `teaTypes.${tea.id}.processes.${processKey}.subtitle`
+                                `teaTypes.${tea.id}.processes.${processKey}.subtitle`,
                               )}
                             </p>
                             <h3 className="text-3xl md:text-4xl font-light text-gray-900 mb-4">
                               {t.raw(
-                                `teaTypes.${tea.id}.processes.${processKey}.step`
+                                `teaTypes.${tea.id}.processes.${processKey}.step`,
                               )}
                               .{" "}
                               {t(
-                                `teaTypes.${tea.id}.processes.${processKey}.title`
+                                `teaTypes.${tea.id}.processes.${processKey}.title`,
                               )}
                             </h3>
                             <div className="w-16 h-px bg-gray-300 mb-6" />
@@ -211,13 +210,13 @@ export default function TeaProduction() {
 
                           <p className="text-lg text-gray-700 leading-relaxed mb-6">
                             {t(
-                              `teaTypes.${tea.id}.processes.${processKey}.description`
+                              `teaTypes.${tea.id}.processes.${processKey}.description`,
                             )}
                           </p>
 
                           <p className="text-gray-600 leading-relaxed">
                             {t(
-                              `teaTypes.${tea.id}.processes.${processKey}.detail`
+                              `teaTypes.${tea.id}.processes.${processKey}.detail`,
                             )}
                           </p>
                         </div>

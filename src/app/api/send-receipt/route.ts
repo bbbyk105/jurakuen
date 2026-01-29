@@ -26,7 +26,7 @@ export async function POST(req: NextRequest) {
     if (!sessionId) {
       return NextResponse.json(
         { error: "session_id が必要です" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -38,7 +38,7 @@ export async function POST(req: NextRequest) {
     if (session.payment_status !== "paid") {
       return NextResponse.json(
         { error: "決済が完了していません" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -46,7 +46,7 @@ export async function POST(req: NextRequest) {
     if (!customerEmail) {
       return NextResponse.json(
         { error: "顧客のメールアドレスが見つかりません" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -66,12 +66,12 @@ export async function POST(req: NextRequest) {
         minute: "2-digit",
         second: "2-digit",
         timeZoneName: "short", // 例: JST
-      }
+      },
     );
 
     const items = session.line_items?.data || [];
     const subtotal = session.amount_subtotal || 0;
-    const shippingCost = 400;
+    const shippingCost = session.total_details?.amount_shipping ?? 400;
     const tax = session.total_details?.amount_tax || 0;
     const total = session.amount_total || 0;
 
@@ -197,13 +197,13 @@ export async function POST(req: NextRequest) {
                       product?.name || (isJapanese ? "商品" : "Product")
                     }</strong><br>
                     <small>${isJapanese ? "数量" : "Quantity"}: ${
-                  item.quantity || 1
-                }</small>
+                      item.quantity || 1
+                    }</small>
                   </div>
                   <div style="text-align: right;">
                     <div>$${(unitAmount / 100).toFixed(2)} ${
-                  isJapanese ? "× " : "x "
-                }${item.quantity || 1}</div>
+                      isJapanese ? "× " : "x "
+                    }${item.quantity || 1}</div>
                     <strong>$${(totalAmount / 100).toFixed(2)}</strong>
                   </div>
                 </div>
@@ -281,7 +281,7 @@ export async function POST(req: NextRequest) {
           error: `Stripe API エラー: ${error.message}`,
           stripeErrorType: error.type,
         },
-        { status: 400 }
+        { status: 400 },
       );
     }
 

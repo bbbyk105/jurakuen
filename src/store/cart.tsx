@@ -1,8 +1,46 @@
 // src/contexts/CartProvider.tsx
 "use client";
 
-import { createContext, useContext, useState, ReactNode } from "react";
+import {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  ReactNode,
+} from "react";
 import { Product, CartItem, CartContextType } from "@/types/products";
+
+const CART_STORAGE_KEY = "jurakuen-cart";
+
+function loadCartFromStorage(): CartItem[] {
+  if (typeof window === "undefined") return [];
+  try {
+    const raw = localStorage.getItem(CART_STORAGE_KEY);
+    if (!raw) return [];
+    const parsed = JSON.parse(raw) as unknown;
+    if (!Array.isArray(parsed)) return [];
+    return parsed.filter(
+      (item): item is CartItem =>
+        item &&
+        typeof item === "object" &&
+        "product" in item &&
+        "quantity" in item &&
+        typeof (item as CartItem).product?.id === "number" &&
+        typeof (item as CartItem).quantity === "number",
+    );
+  } catch {
+    return [];
+  }
+}
+
+function saveCartToStorage(items: CartItem[]) {
+  if (typeof window === "undefined") return;
+  try {
+    localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(items));
+  } catch {
+    // ignore
+  }
+}
 
 const CartContext = createContext<CartContextType>({
   cartItems: [],
@@ -16,6 +54,17 @@ const CartContext = createContext<CartContextType>({
 
 export function CartProvider({ children }: { children: ReactNode }) {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const [hydrated, setHydrated] = useState(false);
+
+  useEffect(() => {
+    setCartItems(loadCartFromStorage());
+    setHydrated(true);
+  }, []);
+
+  useEffect(() => {
+    if (!hydrated) return;
+    saveCartToStorage(cartItems);
+  }, [cartItems, hydrated]);
 
   const addToCart = (product: Product, quantity = 1) => {
     setCartItems((prev) => {
@@ -25,7 +74,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
         return prev.map((item) =>
           item.product.id === product.id
             ? { ...item, quantity: item.quantity + quantity }
-            : item
+            : item,
         );
       } else {
         // 新規追加
@@ -36,7 +85,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
   const removeFromCart = (productId: number) => {
     setCartItems((prev) =>
-      prev.filter((item) => item.product.id !== productId)
+      prev.filter((item) => item.product.id !== productId),
     );
   };
 
@@ -48,8 +97,8 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
     setCartItems((prev) =>
       prev.map((item) =>
-        item.product.id === productId ? { ...item, quantity } : item
-      )
+        item.product.id === productId ? { ...item, quantity } : item,
+      ),
     );
   };
 
@@ -60,7 +109,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const getTotalPrice = () => {
     return cartItems.reduce(
       (acc, item) => acc + item.product.price * item.quantity,
-      0
+      0,
     );
   };
 

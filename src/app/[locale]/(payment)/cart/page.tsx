@@ -1,4 +1,4 @@
-// src/app/[locale]/(cart)/cart/page.tsx – 送料3.5ドル対応
+// src/app/[locale]/(payment)/cart/page.tsx – 送料ロケール対応（米15ドル/日本4ドル）
 "use client";
 
 import { useCart } from "@/store/cart";
@@ -19,6 +19,7 @@ import {
 } from "lucide-react";
 import { formatPrice } from "@/data";
 import { useTranslations } from "next-intl";
+import { useParams } from "next/navigation";
 
 export default function CartPage() {
   const {
@@ -34,12 +35,15 @@ export default function CartPage() {
   const [showClearConfirm, setShowClearConfirm] = useState(false);
   const [itemToDelete, setItemToDelete] = useState<number | null>(null);
 
+  const params = useParams();
+  const locale = (params?.locale as string) ?? "ja";
+
   // 翻訳フック
   const t = useTranslations("cart");
   const tCommon = useTranslations("common");
 
-  // 送料設定
-  const SHIPPING_COST = 4; // $4.0
+  // 送料設定（アメリカ向け15ドル、日本向け4ドル）
+  const SHIPPING_COST = locale === "en" ? 15 : 4;
 
   const handleQuantityChange = (productId: number, newQuantity: number) => {
     if (newQuantity < 1) {
@@ -117,7 +121,7 @@ export default function CartPage() {
     } catch (error) {
       console.error("Checkout error:", error);
       alert(
-        error instanceof Error ? error.message : t("errors.checkoutFailed")
+        error instanceof Error ? error.message : t("errors.checkoutFailed"),
       );
     } finally {
       setLoading(false);
@@ -242,7 +246,7 @@ export default function CartPage() {
                               onClick={() =>
                                 handleQuantityChange(
                                   item.product.id,
-                                  item.quantity - 1
+                                  item.quantity - 1,
                                 )
                               }
                               className="h-8 w-8 p-0 hover:bg-gray-100"
@@ -259,7 +263,7 @@ export default function CartPage() {
                               onClick={() =>
                                 handleQuantityChange(
                                   item.product.id,
-                                  item.quantity + 1
+                                  item.quantity + 1,
                                 )
                               }
                               className="h-8 w-8 p-0 hover:bg-gray-100"
