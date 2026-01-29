@@ -1,36 +1,31 @@
 import { MetadataRoute } from "next";
+import { getSiteUrl } from "@/lib/seo/site-url";
+import { getProducts } from "@/data/utils";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://www.jurakuen.com";
-  const locales = ["ja", "en"];
+  const baseUrl = getSiteUrl();
+  const locales = ["ja", "en"] as const;
 
-  // 各ページのパス定義
-  const pages = [
-    { path: "", priority: 1, changeFrequency: "weekly" as const },
-    { path: "/about", priority: 0.8, changeFrequency: "monthly" as const },
-    { path: "/commerce", priority: 0.9, changeFrequency: "weekly" as const },
-    { path: "/products", priority: 0.9, changeFrequency: "weekly" as const },
-    { path: "/privacy", priority: 0.3, changeFrequency: "yearly" as const },
-    { path: "/terms", priority: 0.3, changeFrequency: "yearly" as const },
-    {
-      path: "/payment/success",
-      priority: 0.1,
-      changeFrequency: "never" as const,
-    },
-    {
-      path: "/payment/cancel",
-      priority: 0.1,
-      changeFrequency: "never" as const,
-    },
-    { path: "/cart", priority: 0.2, changeFrequency: "never" as const },
+  // インデックス対象の静的パス（cart / success / cancel は noindex のため除外）
+  const staticPages: {
+    path: string;
+    priority: number;
+    changeFrequency: "weekly" | "monthly" | "yearly";
+  }[] = [
+    { path: "", priority: 1, changeFrequency: "weekly" },
+    { path: "/about", priority: 0.8, changeFrequency: "monthly" },
+    { path: "/commerce", priority: 0.9, changeFrequency: "weekly" },
+    { path: "/products", priority: 0.9, changeFrequency: "weekly" },
+    { path: "/jas", priority: 0.8, changeFrequency: "monthly" },
+    { path: "/privacy", priority: 0.3, changeFrequency: "yearly" },
+    { path: "/terms", priority: 0.3, changeFrequency: "yearly" },
   ];
 
-  // 各言語ごとにURLを生成
-  const sitemapEntries: MetadataRoute.Sitemap = [];
+  const entries: MetadataRoute.Sitemap = [];
 
-  locales.forEach((locale) => {
-    pages.forEach((page) => {
-      sitemapEntries.push({
+  for (const locale of locales) {
+    for (const page of staticPages) {
+      entries.push({
         url: `${baseUrl}/${locale}${page.path}`,
         lastModified: new Date(),
         changeFrequency: page.changeFrequency,
@@ -42,8 +37,25 @@ export default function sitemap(): MetadataRoute.Sitemap {
           },
         },
       });
-    });
-  });
+    }
 
-  return sitemapEntries;
+    // 商品詳細URLを商品データから追加
+    const products = getProducts(locale);
+    for (const product of products) {
+      entries.push({
+        url: `${baseUrl}/${locale}/products/${product.id}`,
+        lastModified: new Date(),
+        changeFrequency: "weekly" as const,
+        priority: 0.8,
+        alternates: {
+          languages: {
+            ja: `${baseUrl}/ja/products/${product.id}`,
+            en: `${baseUrl}/en/products/${product.id}`,
+          },
+        },
+      });
+    }
+  }
+
+  return entries;
 }

@@ -6,6 +6,7 @@ import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { Noto_Serif_JP } from "next/font/google";
 import { CartProvider } from "../../store/cart";
+import { getSiteUrl, buildCanonical } from "@/lib/seo";
 import "../globals.css";
 import Header from "@/components/Header";
 import { Footer } from "@/components/Footer";
@@ -102,6 +103,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const localizedMeta = getLocalizedMetadata(locale);
+  const siteUrl = getSiteUrl();
 
   return {
     title: localizedMeta.title,
@@ -113,9 +115,9 @@ export async function generateMetadata({
       address: false,
       telephone: false,
     },
-    metadataBase: new URL("https://www.jurakuen.com"),
+    metadataBase: new URL(getSiteUrl()),
     alternates: {
-      canonical: `/${locale}`,
+      canonical: buildCanonical(`/${locale}`),
       languages: {
         ja: "/ja",
         en: "/en",
@@ -138,7 +140,7 @@ export async function generateMetadata({
     openGraph: {
       title: localizedMeta.openGraph.title,
       description: localizedMeta.openGraph.description,
-      url: `https://www.jurakuen.com/${locale}`,
+      url: `${getSiteUrl()}/${locale}`,
       siteName: locale === "ja" ? "聚楽苑" : "Jurakuen",
       locale: localizedMeta.openGraph.locale,
       type: "website",
@@ -165,12 +167,12 @@ export async function generateMetadata({
         {
           "@context": "https://schema.org",
           "@type": "LocalBusiness",
-          "@id": "https://www.jurakuen.com/#organization",
+          "@id": `${siteUrl}/#organization`,
           name: locale === "ja" ? "聚楽苑" : "Jurakuen",
           alternateName: locale === "ja" ? "Jurakuen" : "聚楽苑",
-          url: "https://www.jurakuen.com",
-          logo: "https://www.jurakuen.com/images/logos/logo_horizontal.png",
-          image: "https://www.jurakuen.com/images/logos/logo_horizontal.png",
+          url: siteUrl,
+          logo: `${siteUrl}/images/logos/logo_horizontal.png`,
+          image: `${siteUrl}/images/logos/logo_horizontal.png`,
           description:
             locale === "ja"
               ? "静岡県富士市で初めて有機JAS認証を取得した茶園。富士市の有機抹茶・お茶専門店として、農薬不使用で育てた安心安全なお茶を販売しています。富士山麓の豊かな自然の中で育まれた有機茶を、富士市から全国へお届けします。"
@@ -290,7 +292,7 @@ export async function generateMetadata({
           brand: {
             "@type": "Brand",
             name: locale === "ja" ? "聚楽苑" : "Jurakuen",
-            logo: "https://www.jurakuen.com/images/logos/logo_horizontal.png",
+            logo: `${siteUrl}/images/logos/logo_horizontal.png`,
           },
           description:
             locale === "ja"
@@ -299,7 +301,7 @@ export async function generateMetadata({
           manufacturer: {
             "@type": "Organization",
             name: locale === "ja" ? "聚楽苑" : "Jurakuen",
-            logo: "https://www.jurakuen.com/images/logos/logo_horizontal.png",
+            logo: `${siteUrl}/images/logos/logo_horizontal.png`,
             address: {
               "@type": "PostalAddress",
               streetAddress: "境485-2",
@@ -332,8 +334,8 @@ export async function generateMetadata({
         {
           "@context": "https://schema.org",
           "@type": "WebSite",
-          "@id": "https://www.jurakuen.com/#website",
-          url: "https://www.jurakuen.com",
+          "@id": `${siteUrl}/#website`,
+          url: siteUrl,
           name:
             locale === "ja"
               ? "聚楽苑 - 富士市の有機抹茶・緑茶専門店"
@@ -343,13 +345,12 @@ export async function generateMetadata({
               ? "静岡県富士市で初めて有機JAS認証を取得した茶園。富士市の有機抹茶・緑茶専門店。"
               : "First organic JAS certified tea farm in Fuji City, Shizuoka",
           publisher: {
-            "@id": "https://www.jurakuen.com/#organization",
+            "@id": `${siteUrl}/#organization`,
           },
           inLanguage: locale === "ja" ? "ja-JP" : "en-US",
           potentialAction: {
             "@type": "SearchAction",
-            target:
-              "https://www.jurakuen.com/ja/products?q={search_term_string}",
+            target: `${siteUrl}/${locale}/products?q={search_term_string}`,
             "query-input": "required name=search_term_string",
           },
         },
