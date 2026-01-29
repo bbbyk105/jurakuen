@@ -730,12 +730,6 @@
             "description": "View detailed information about certification standards and our initiatives",
             "ariaLabel": "Navigate to Organic JAS certification details page"
         },
-        "secondaryInfo": {
-            "title": "Certification Details",
-            "inspection": "Strict inspection by third-party organizations",
-            "qualityAssurance": "Quality assurance through annual audits",
-            "traceability": "Complete traceability support"
-        },
         "overlay": {
             "certified": "Certified",
             "title": "Nature's Bounty & Artisan Craftsmanship",

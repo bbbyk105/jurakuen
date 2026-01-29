@@ -7,11 +7,6 @@ import { Link } from "@/i18n/routing";
 
 export default function JASNavigationSection() {
   const t = useTranslations("jasNavigation");
-  const infoItems = [
-    t("secondaryInfo.inspection"),
-    t("secondaryInfo.qualityAssurance"),
-    t("secondaryInfo.traceability"),
-  ];
 
   return (
     <section className="py-12 sm:py-16 md:py-20 lg:py-24 xl:py-28 bg-white border-b border-gray-100">
@@ -94,28 +89,6 @@ export default function JASNavigationSection() {
                 <p className="text-xs sm:text-sm text-gray-600 max-w-xs mx-auto leading-relaxed px-2">
                   {t("cta.description")}
                 </p>
-              </div>
-
-              {/* Secondary information - モダンなフッターカード */}
-              <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl border border-green-100/80 bg-linear-to-br from-emerald-50 via-white to-emerald-50/60 p-4 sm:p-6 shadow-[0_10px_30px_rgba(16,185,129,0.08)]">
-                <h4 className="text-sm sm:text-base font-bold text-green-900 mb-2 sm:mb-3 text-center">
-                  {t("secondaryInfo.title")}
-                </h4>
-                <p className="text-xs sm:text-sm text-gray-600 text-center mb-4">
-                  運用・監査・記録をひとつながりで管理しています。
-                </p>
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
-                  {infoItems.map((item) => (
-                    <div
-                      key={item}
-                      className="flex items-center gap-3 rounded-xl bg-white/90 border border-white/70 shadow-[0_6px_20px_rgba(0,0,0,0.04)] backdrop-blur-sm px-3.5 py-3"
-                    >
-                      <span className="text-sm sm:text-base font-medium text-gray-900 leading-relaxed">
-                        {item}
-                      </span>
-                    </div>
-                  ))}
-                </div>
               </div>
             </div>
           </motion.div>

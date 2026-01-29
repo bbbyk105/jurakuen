@@ -695,12 +695,6 @@
             "description": "認証基準や取り組みについて詳細をご覧いただけます",
             "ariaLabel": "有機JAS認証の詳細ページへ移動"
         },
-        "secondaryInfo": {
-            "title": "認証の詳細情報",
-            "inspection": "第三者機関による厳格な審査",
-            "qualityAssurance": "年次監査による品質保証",
-            "traceability": "トレーサビリティ完全対応"
-        },
         "overlay": {
             "certified": "認証取得済み",
             "title": "自然の恵みと職人の技",
