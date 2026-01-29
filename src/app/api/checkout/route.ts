@@ -126,7 +126,7 @@ export async function POST(req: NextRequest) {
       line_items,
       billing_address_collection: "auto",
       shipping_address_collection: {
-        allowed_countries: isUS ? ["US"] : ["US", "JP"],
+        allowed_countries: isUS ? ["US"] : ["JP"],
       },
       shipping_options: shippingOptions,
       // 領収書の自動送信を有効化
