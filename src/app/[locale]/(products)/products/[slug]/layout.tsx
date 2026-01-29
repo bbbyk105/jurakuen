@@ -126,7 +126,6 @@ export async function generateMetadata({
       ],
     },
     other: {
-      ...baseMeta.other,
       "application/ld+json": JSON.stringify(jsonLd),
     },
   };
