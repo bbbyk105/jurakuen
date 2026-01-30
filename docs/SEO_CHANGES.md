@@ -79,3 +79,48 @@
 - **`.env.example`** に `NEXT_PUBLIC_SITE_URL` を追加済みです。
 - 本番でドメインが異なる場合は、本番環境に `NEXT_PUBLIC_SITE_URL=https://www.jurakuen.com`（または実際のドメイン）を設定してください。
 - 未設定時は `https://www.jurakuen.com` がフォールバックされます。
+
+---
+
+## 2025 SEO強化（DMC品質・月間3,000PV土台）
+
+### 変更ファイル一覧と要点
+
+| ファイル                                                          | 変更内容                                                                                                                                                                                    |
+| ----------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **A: 技術SEO**                                                    |                                                                                                                                                                                             |
+| `src/lib/seo/meta.ts`                                             | `alternates.languages` を絶対URLに変更（`ja`/`en` を `${siteUrl}/ja${pathWithoutLocale}` 形式に）。og:image を絶対URL化（`imageUrl`）。                                                     |
+| `src/app/[locale]/layout.tsx`                                     | `alternates.languages` を絶対URL（`${siteUrl}/ja`, `${siteUrl}/en`）。og:url / og:image / twitter.images を絶対URLに統一。JSON-LD を site-info 参照に変更。WebSite の SearchAction を削除。 |
+| `src/proxy.ts`                                                    | non-www → www（308）、trailing slash 除去（308）を追加。locale リダイレクトは従来どおり。Next.js 16 では proxy ファイルがミドルウェアとして読み込まれる。                                   |
+| **B: 構造化・サイト情報**                                         |                                                                                                                                                                                             |
+| `src/lib/site-info.ts`                                            | **新規**。NAP 一元管理（SITE*NAME_JA/EN, TELEPHONE_DISPLAY/E164, ADDRESS_JA/EN, getPostalAddressSchema, GEO, OPENING_HOURS*\*, SAME_AS, HAS_MAP）。                                         |
+| `src/app/[locale]/layout.tsx`                                     | LocalBusiness / Product / manufacturer の住所・電話・営業時間・sameAs・hasMap を site-info 参照に変更。                                                                                     |
+| `src/app/[locale]/(products)/products/[slug]/layout.tsx`          | Offer の priceCurrency をロケール別に（ja: JPY, en: USD）。price を ja 時は概算円換算。                                                                                                     |
+| **C: 取るページ**                                                 |                                                                                                                                                                                             |
+| `src/app/[locale]/(landing)/matcha/layout.tsx`                    | **新規**。有機抹茶通販用 title/description、FAQPage JSON-LD。                                                                                                                               |
+| `src/app/[locale]/(landing)/matcha/page.tsx`                      | **新規**。H1・導入・商品/JAS 内部リンク・FAQ（2〜5問）。                                                                                                                                    |
+| `src/app/[locale]/(landing)/recommend/shizuoka-matcha/layout.tsx` | **新規**。静岡抹茶おすすめ用 title/description、FAQPage JSON-LD。                                                                                                                           |
+| `src/app/[locale]/(landing)/recommend/shizuoka-matcha/page.tsx`   | **新規**。H1・導入・選び方・内部リンク・FAQ。                                                                                                                                               |
+| `src/app/sitemap.ts`                                              | `/matcha`、`/recommend/shizuoka-matcha` を staticPages に追加。                                                                                                                             |
+
+### ローカル確認URL一覧
+
+- `http://localhost:3000/ja` … canonical / hreflang / og:url 絶対URL
+- `http://localhost:3000/ja/about` … 同上
+- `http://localhost:3000/ja/matcha` … 新規ページ・FAQPage JSON-LD
+- `http://localhost:3000/ja/recommend/shizuoka-matcha` … 新規ページ・FAQPage JSON-LD
+- `http://localhost:3000/en/matcha` … 英語抹茶ページ
+- `http://localhost:3000/sitemap.xml` … /ja/matcha, /en/matcha, /ja/recommend/shizuoka-matcha が含まれること
+- 本番ドメインで `https://jurakuen.com/ja` → `https://www.jurakuen.com/ja` に 308 リダイレクトすること
+- 本番で `https://www.jurakuen.com/ja/` → `https://www.jurakuen.com/ja` に 308 リダイレクトすること
+
+### 検証チェックリスト
+
+- [ ] **canonical** … 主要ページの view-source で `<link rel="canonical" href="https://www.jurakuen.com/...">`
+- [ ] **hreflang** … `<link rel="alternate" hreflang="ja" href="https://www.jurakuen.com/ja/...">` および `hreflang="en"` が絶対URL
+- [ ] **og:url / og:image** … `https://www.jurakuen.com` で始まる絶対URL
+- [ ] **リダイレクト** … non-www → www（308）、trailing slash → なし（308）
+- [ ] **JSON-LD** … 構造化データテストで LocalBusiness / Product / FAQPage エラーなし。NAP が site-info と一致
+- [ ] **商品詳細 Offer** … ja は priceCurrency: JPY、en は USD
+- [ ] **tsc** … `npx tsc --noEmit` 成功
+- [ ] **lint** … `npx eslint src --max-warnings 0` 成功（`npm run lint` が環境により失敗する場合は eslint を直接実行）

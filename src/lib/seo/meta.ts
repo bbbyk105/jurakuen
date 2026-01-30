@@ -38,6 +38,9 @@ export function buildPageMeta({
   const isJa = locale === "ja";
 
   const pathWithoutLocale = canonicalPath.replace(/^\/(ja|en)\b/, "") || "/";
+  const imageUrl = image.startsWith("http")
+    ? image
+    : `${siteUrl}${image.startsWith("/") ? "" : "/"}${image}`;
   return {
     title,
     description,
@@ -45,8 +48,8 @@ export function buildPageMeta({
     alternates: {
       canonical,
       languages: {
-        ja: `/ja${pathWithoutLocale}`,
-        en: `/en${pathWithoutLocale}`,
+        ja: `${siteUrl}/ja${pathWithoutLocale}`,
+        en: `${siteUrl}/en${pathWithoutLocale}`,
       },
     },
     openGraph: {
@@ -56,7 +59,7 @@ export function buildPageMeta({
       siteName: isJa ? "聚楽苑" : "Jurakuen",
       locale: isJa ? "ja_JP" : "en_US",
       type: "website",
-      images: [{ url: image, width: 1200, height: 630, alt: title }],
+      images: [{ url: imageUrl, width: 1200, height: 630, alt: title }],
     },
     twitter: {
       card: "summary_large_image",

@@ -12,6 +12,9 @@ function buildProductJsonLd(product: Product, locale: string, path: string) {
     ? product.image.url
     : `${siteUrl}${product.image.url}`;
 
+  const priceCurrency = isJa ? "JPY" : "USD";
+  const price = isJa ? Math.round(product.price * 150) : product.price;
+
   const productSchema = {
     "@context": "https://schema.org",
     "@type": "Product",
@@ -31,8 +34,8 @@ function buildProductJsonLd(product: Product, locale: string, path: string) {
     offers: {
       "@type": "Offer",
       url: `${siteUrl}${path}`,
-      priceCurrency: "USD",
-      price: product.price,
+      priceCurrency,
+      price,
       availability: "https://schema.org/InStock",
       seller: {
         "@type": "Organization",

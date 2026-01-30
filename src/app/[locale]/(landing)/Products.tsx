@@ -119,7 +119,7 @@ const Products = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="mt-20 text-center"
+          className="mt-20 text-center space-y-4"
         >
           <Link
             href="/products"
@@ -131,6 +131,14 @@ const Products = () => {
             <ArrowRight className="w-5 h-5 relative z-10 group-hover:translate-x-1 transition-transform" />
             <div className="absolute inset-0 bg-gradient-to-r from-matcha-medium to-matcha-dark opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
           </Link>
+          <p className="text-sm text-gray-600">
+            <Link
+              href="/matcha"
+              className="text-green-700 hover:text-green-800 hover:underline font-medium"
+            >
+              {tProducts("matchaLink")}
+            </Link>
+          </p>
         </motion.div>
       </div>
     </section>

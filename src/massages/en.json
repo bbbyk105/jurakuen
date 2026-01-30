@@ -10,6 +10,7 @@
         "home": "Home",
         "about": "About",
         "products": "Products",
+        "matcha": "Organic Matcha",
         "cart": "Cart",
         "jas": "JAS"
     },
@@ -84,6 +85,7 @@
         "description": "Information on new and limited products from Jurakuen is here.",
         "viewAll": "View All",
         "viewMore": "View More",
+        "matchaLink": "Organic Matcha",
         "items": {
             "premium_suirin": "Organic Premium Sencha - Chiyo no Tomo",
             "popular_matcha": "Organic Sencha - Ichie no Tomo",
@@ -507,7 +509,9 @@
                 "links": {
                     "home": "Home",
                     "about": "About",
-                    "products": "Products"
+                    "products": "Products",
+                    "matcha": "Organic Matcha",
+                    "shizuokaMatcha": "Recommended Matcha (Shizuoka)"
                 }
             },
             "contact": {

@@ -10,6 +10,7 @@
         "home": "ホーム",
         "about": "概要",
         "products": "商品",
+        "matcha": "有機抹茶",
         "cart": "カート",
         "jas": "JAS認証"
     },
@@ -51,6 +52,7 @@
         "description": "聚楽苑の新商品・限定商品の掲載情報はこちら。",
         "viewAll": "View All",
         "viewMore": "View More",
+        "matchaLink": "有機抹茶の通販はこちら",
         "items": {
             "premium_suirin": "有機上煎茶 千代の友",
             "popular_matcha": "有機煎茶 一会の友",
@@ -472,7 +474,9 @@
                 "links": {
                     "home": "ホーム",
                     "about": "概要",
-                    "products": "商品"
+                    "products": "商品",
+                    "matcha": "有機抹茶通販",
+                    "shizuokaMatcha": "静岡抹茶おすすめ"
                 }
             },
             "contact": {

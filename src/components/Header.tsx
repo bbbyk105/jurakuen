@@ -32,6 +32,7 @@ export default function Header() {
     { label: tNav("home"), href: "/" },
     { label: tNav("about"), href: "/about" },
     { label: tNav("products"), href: "/products" },
+    { label: tNav("matcha"), href: "/matcha" },
     { label: tNav("jas"), href: "/jas" },
   ];
 

@@ -79,6 +79,22 @@ export const Footer: React.FC = () => {
                     {t("sections.company.links.products")}
                   </Link>
                 </li>
+                <li>
+                  <Link
+                    href="/matcha"
+                    className="text-sm text-green-100 hover:text-white transition-colors"
+                  >
+                    {t("sections.company.links.matcha")}
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/recommend/shizuoka-matcha"
+                    className="text-sm text-green-100 hover:text-white transition-colors"
+                  >
+                    {t("sections.company.links.shizuokaMatcha")}
+                  </Link>
+                </li>
               </ul>
             </nav>
           </div>

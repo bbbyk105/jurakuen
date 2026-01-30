@@ -7,6 +7,16 @@ import { getMessages } from "next-intl/server";
 import { Noto_Serif_JP } from "next/font/google";
 import { CartProvider } from "../../store/cart";
 import { getSiteUrl, buildCanonical } from "@/lib/seo";
+import {
+  getSiteName,
+  TELEPHONE_DISPLAY,
+  getPostalAddressSchema,
+  GEO,
+  OPENING_HOURS_DISPLAY,
+  OPENING_HOURS_SPECIFICATION,
+  SAME_AS,
+  HAS_MAP,
+} from "@/lib/site-info";
 import "../globals.css";
 import Header from "@/components/Header";
 import { Footer } from "@/components/Footer";
@@ -119,8 +129,8 @@ export async function generateMetadata({
     alternates: {
       canonical: buildCanonical(`/${locale}`),
       languages: {
-        ja: "/ja",
-        en: "/en",
+        ja: `${siteUrl}/ja`,
+        en: `${siteUrl}/en`,
       },
     },
     robots: {
@@ -140,13 +150,13 @@ export async function generateMetadata({
     openGraph: {
       title: localizedMeta.openGraph.title,
       description: localizedMeta.openGraph.description,
-      url: `${getSiteUrl()}/${locale}`,
+      url: `${siteUrl}/${locale}`,
       siteName: locale === "ja" ? "聚楽苑" : "Jurakuen",
       locale: localizedMeta.openGraph.locale,
       type: "website",
       images: [
         {
-          url: "/images/logos/logo_horizontal.png",
+          url: `${siteUrl}/images/logos/logo_horizontal.png`,
           width: 1200,
           height: 630,
           alt:
@@ -160,7 +170,7 @@ export async function generateMetadata({
       card: "summary_large_image",
       title: localizedMeta.twitter.title,
       description: localizedMeta.twitter.description,
-      images: ["/images/logos/logo_horizontal.png"],
+      images: [`${siteUrl}/images/logos/logo_horizontal.png`],
     },
     other: {
       "application/ld+json": JSON.stringify([
@@ -168,7 +178,7 @@ export async function generateMetadata({
           "@context": "https://schema.org",
           "@type": "LocalBusiness",
           "@id": `${siteUrl}/#organization`,
-          name: locale === "ja" ? "聚楽苑" : "Jurakuen",
+          name: getSiteName(locale),
           alternateName: locale === "ja" ? "Jurakuen" : "聚楽苑",
           url: siteUrl,
           logo: `${siteUrl}/images/logos/logo_horizontal.png`,
@@ -177,36 +187,16 @@ export async function generateMetadata({
             locale === "ja"
               ? "静岡県富士市で初めて有機JAS認証を取得した茶園。富士市の有機抹茶・お茶専門店として、農薬不使用で育てた安心安全なお茶を販売しています。富士山麓の豊かな自然の中で育まれた有機茶を、富士市から全国へお届けします。"
               : "The first organic JAS certified tea farm in Fuji City, Shizuoka. We deliver organic tea (green tea & matcha) grown without pesticides or chemical fertilizers.",
-          telephone: "0545-34-0614",
-          address: {
-            "@type": "PostalAddress",
-            streetAddress: "境485-2",
-            addressLocality: "富士市",
-            addressRegion: "静岡県",
-            postalCode: "417-0812",
-            addressCountry: "JP",
-          },
+          telephone: TELEPHONE_DISPLAY,
+          address: getPostalAddressSchema(locale),
           geo: {
             "@type": "GeoCoordinates",
-            latitude: "35.1609",
-            longitude: "138.6760",
+            latitude: GEO.latitude,
+            longitude: GEO.longitude,
           },
-          openingHours: "Mo-Fr 10:00-18:00",
-          openingHoursSpecification: [
-            {
-              "@type": "OpeningHoursSpecification",
-              dayOfWeek: [
-                "Monday",
-                "Tuesday",
-                "Wednesday",
-                "Thursday",
-                "Friday",
-              ],
-              opens: "10:00",
-              closes: "18:00",
-            },
-          ],
-          sameAs: ["https://www.instagram.com/jurakuenfuji/"],
+          openingHours: OPENING_HOURS_DISPLAY,
+          openingHoursSpecification: OPENING_HOURS_SPECIFICATION,
+          sameAs: [...SAME_AS],
           areaServed: [
             {
               "@type": "City",
@@ -229,7 +219,7 @@ export async function generateMetadata({
             "https://schema.org/Store",
             "https://schema.org/OnlineStore",
           ],
-          hasMap: "https://maps.app.goo.gl/M4vN5pkKsyf4j5MH6",
+          hasMap: HAS_MAP,
           makesOffer: {
             "@type": "Offer",
             itemOffered: [
@@ -300,16 +290,9 @@ export async function generateMetadata({
               : "The first organic JAS certified matcha in Fuji City. Made from tea leaves grown with Mt. Fuji spring water without pesticides or chemical fertilizers.",
           manufacturer: {
             "@type": "Organization",
-            name: locale === "ja" ? "聚楽苑" : "Jurakuen",
+            name: getSiteName(locale),
             logo: `${siteUrl}/images/logos/logo_horizontal.png`,
-            address: {
-              "@type": "PostalAddress",
-              streetAddress: "境485-2",
-              addressLocality: "富士市",
-              addressRegion: "静岡県",
-              postalCode: "417-0812",
-              addressCountry: "JP",
-            },
+            address: getPostalAddressSchema(locale),
           },
           category: locale === "ja" ? "有機抹茶" : "Organic Matcha",
           productionLocation:
@@ -348,11 +331,6 @@ export async function generateMetadata({
             "@id": `${siteUrl}/#organization`,
           },
           inLanguage: locale === "ja" ? "ja-JP" : "en-US",
-          potentialAction: {
-            "@type": "SearchAction",
-            target: `${siteUrl}/${locale}/products?q={search_term_string}`,
-            "query-input": "required name=search_term_string",
-          },
         },
         // FAQPage構造化データ（富士市関連のQ&A）
         {

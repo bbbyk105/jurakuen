@@ -16,6 +16,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/about", priority: 0.8, changeFrequency: "monthly" },
     { path: "/commerce", priority: 0.9, changeFrequency: "weekly" },
     { path: "/products", priority: 0.9, changeFrequency: "weekly" },
+    { path: "/matcha", priority: 0.9, changeFrequency: "weekly" },
+    {
+      path: "/recommend/shizuoka-matcha",
+      priority: 0.8,
+      changeFrequency: "monthly",
+    },
     { path: "/jas", priority: 0.8, changeFrequency: "monthly" },
     { path: "/privacy", priority: 0.3, changeFrequency: "yearly" },
     { path: "/terms", priority: 0.3, changeFrequency: "yearly" },
