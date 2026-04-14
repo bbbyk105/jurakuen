@@ -20,6 +20,7 @@ import {
   getProductsByCategory,
   getSortOptions,
   sortProducts,
+  isAvailableForPurchase,
 } from "@/data/utils";
 import { Link } from "@/i18n/routing";
 
@@ -36,9 +37,12 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, locale }) => {
   const { addToCart } = useCart();
   const [isAdding, setIsAdding] = useState(false);
   const [justAdded, setJustAdded] = useState(false);
+  const tList = useTranslations("productList");
+  const canBuy = isAvailableForPurchase(product);
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.stopPropagation();
+    if (!canBuy) return;
     setIsAdding(true);
     addToCart(product, 1);
     setTimeout(() => {
@@ -65,21 +69,31 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, locale }) => {
             priority
           />
 
+          {!canBuy && (
+            <div className="absolute inset-0 bg-white/75 flex items-center justify-center pointer-events-none px-2">
+              <span className="text-[10px] sm:text-xs text-center font-medium text-gray-800 leading-snug">
+                {tList("soldOutSeasonal")}
+              </span>
+            </div>
+          )}
+
           {/* Add‑to‑Cart (hover で表示) */}
-          <Button
-            size="icon"
-            onClick={handleAddToCart}
-            disabled={isAdding}
-            className="absolute bottom-3 right-3 w-8 h-8 rounded-full bg-black text-white opacity-0 group-hover:opacity-100 transition-opacity"
-          >
-            {isAdding ? (
-              <div className="w-3 h-3 border-2 border-white border-t-transparent rounded-full animate-spin" />
-            ) : justAdded ? (
-              <Check className="w-4 h-4" />
-            ) : (
-              <Plus className="w-4 h-4" />
-            )}
-          </Button>
+          {canBuy && (
+            <Button
+              size="icon"
+              onClick={handleAddToCart}
+              disabled={isAdding}
+              className="absolute bottom-3 right-3 w-8 h-8 rounded-full bg-black text-white opacity-0 group-hover:opacity-100 transition-opacity"
+            >
+              {isAdding ? (
+                <div className="w-3 h-3 border-2 border-white border-t-transparent rounded-full animate-spin" />
+              ) : justAdded ? (
+                <Check className="w-4 h-4" />
+              ) : (
+                <Plus className="w-4 h-4" />
+              )}
+            </Button>
+          )}
         </div>
 
         {/* Details */}
@@ -100,7 +114,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, locale }) => {
           </div>
 
           <p className="mt-2 text-sm font-medium text-gray-900">
-            {formatPrice(product.price)}
+            {formatPrice(product.price, locale)}
           </p>
         </div>
       </CardContent>

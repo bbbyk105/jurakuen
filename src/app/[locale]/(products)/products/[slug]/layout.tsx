@@ -13,7 +13,7 @@ function buildProductJsonLd(product: Product, locale: string, path: string) {
     : `${siteUrl}${product.image.url}`;
 
   const priceCurrency = isJa ? "JPY" : "USD";
-  const price = isJa ? Math.round(product.price * 150) : product.price;
+  const price = isJa ? Math.round(product.price * 1.1) : product.price;
 
   const productSchema = {
     "@context": "https://schema.org",
@@ -36,7 +36,10 @@ function buildProductJsonLd(product: Product, locale: string, path: string) {
       url: `${siteUrl}${path}`,
       priceCurrency,
       price,
-      availability: "https://schema.org/InStock",
+      availability:
+        product.availableForPurchase === false
+          ? "https://schema.org/OutOfStock"
+          : "https://schema.org/InStock",
       seller: {
         "@type": "Organization",
         name: isJa ? "聚楽苑" : "Jurakuen",

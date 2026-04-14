@@ -71,9 +71,19 @@ export async function POST(req: NextRequest) {
 
     const items = session.line_items?.data || [];
     const subtotal = session.amount_subtotal || 0;
-    const shippingCost = session.total_details?.amount_shipping ?? 400;
+    const shippingCost = session.total_details?.amount_shipping ?? (isJapanese ? 660 : 1500);
     const tax = session.total_details?.amount_tax || 0;
     const total = session.amount_total || 0;
+    const sessionCurrency = (session.currency || (isJapanese ? "jpy" : "usd")).toUpperCase();
+    const isJPY = sessionCurrency === "JPY";
+
+    // 通貨フォーマット関数
+    const fmtAmount = (amount: number) => {
+      if (isJPY) {
+        return new Intl.NumberFormat("ja-JP", { style: "currency", currency: "JPY", maximumFractionDigits: 0 }).format(amount);
+      }
+      return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2 }).format(amount / 100);
+    };
 
     // メール内容を作成
     const subject = isJapanese
@@ -201,10 +211,10 @@ export async function POST(req: NextRequest) {
                     }</small>
                   </div>
                   <div style="text-align: right;">
-                    <div>$${(unitAmount / 100).toFixed(2)} ${
+                    <div>${fmtAmount(unitAmount)} ${
                       isJapanese ? "× " : "x "
                     }${item.quantity || 1}</div>
-                    <strong>$${(totalAmount / 100).toFixed(2)}</strong>
+                    <strong>${fmtAmount(totalAmount)}</strong>
                   </div>
                 </div>
               `;
@@ -216,24 +226,24 @@ export async function POST(req: NextRequest) {
           <div class="total-section">
             <div class="total-row">
               <span>${isJapanese ? "小計" : "Subtotal"}</span>
-              <span>$${(subtotal / 100).toFixed(2)}</span>
+              <span>${fmtAmount(subtotal)}</span>
             </div>
             <div class="total-row">
               <span>${isJapanese ? "送料" : "Shipping"}</span>
-              <span>$${(shippingCost / 100).toFixed(2)}</span>
+              <span>${fmtAmount(shippingCost)}</span>
             </div>
             ${
               tax > 0
                 ? `
             <div class="total-row">
               <span>${isJapanese ? "税金" : "Tax"}</span>
-              <span>$${(tax / 100).toFixed(2)}</span>
+              <span>${fmtAmount(tax)}</span>
             </div>`
                 : ""
             }
             <div class="total-row total-final">
               <span>${isJapanese ? "合計" : "Total"}</span>
-              <span>$${(total / 100).toFixed(2)}</span>
+              <span>${fmtAmount(total)}</span>
             </div>
           </div>
         </div>

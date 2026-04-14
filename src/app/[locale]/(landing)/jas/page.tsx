@@ -408,11 +408,7 @@ export default function JASPage() {
                 viewport={{ once: true }}
                 className="bg-gradient-to-br from-gray-50 to-white p-6 sm:p-8 md:p-10 rounded-2xl sm:rounded-3xl text-center hover:shadow-2xl transition-all duration-300 border border-gray-100"
               >
-                <div className="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-br from-green-100 to-green-50 rounded-xl sm:rounded-2xl mx-auto mb-6 sm:mb-8 shadow-sm">
-                  <span className="text-2xl sm:text-3xl font-light text-green-600">
-                    {benefit.number}
-                  </span>
-                </div>
+                <div className="w-16 h-4 sm:w-20 sm:h-4 mx-auto mb-6 sm:mb-8" />
                 <h3 className="text-lg sm:text-xl md:text-2xl font-light text-gray-900 mb-4 sm:mb-6 tracking-wide">
                   {t(benefit.titleKey)}
                 </h3>

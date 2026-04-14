@@ -26,6 +26,8 @@ export interface Product {
     harvestSeason?: string; // 収穫期 (例: "一番茶", "二番茶")
   };
   stock?: number;
+  /** false のときカート追加・決済不可（未指定は販売可） */
+  availableForPurchase?: boolean;
   stripeProductId?: string;
   stripePriceId?: string;
   colorClass?: string; // Tailwind用グラデーションクラス

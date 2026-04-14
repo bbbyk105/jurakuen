@@ -13,6 +13,7 @@ import {
   formatPrice,
   getProductDetails,
   getProductById,
+  isAvailableForPurchase,
 } from "@/data/utils";
 import { useTranslations } from "next-intl";
 
@@ -64,6 +65,8 @@ const ProductDetailPage = () => {
   }
 
   const handleAddToCart = async () => {
+    if (!isAvailableForPurchase(product)) return;
+
     setIsAdding(true);
 
     // 型エラーを回避するために、必要なプロパティを持つオブジェクトを作成
@@ -90,6 +93,7 @@ const ProductDetailPage = () => {
   };
 
   const productDetails = getProductDetails(product, locale);
+  const canBuy = isAvailableForPurchase(product);
 
   // 商品画像配列（メイン画像 + サブ画像があれば追加）
   const productImages = [product.image, ...(product.subImages || [])];
@@ -183,79 +187,87 @@ const ProductDetailPage = () => {
             <div className="space-y-2">
               <div className="flex items-center gap-3">
                 <span className="text-3xl font-bold text-gray-900">
-                  {formatPrice(product.price)}
+                  {formatPrice(product.price, locale)}
                 </span>
                 {product.originalPrice && (
                   <span className="text-xl text-gray-400 line-through">
-                    {formatPrice(product.originalPrice)}
+                    {formatPrice(product.originalPrice, locale)}
                   </span>
                 )}
               </div>
             </div>
 
-            {/* 数量選択 */}
-            <div className="space-y-4">
-              <span className="text-sm font-medium text-gray-900">
-                {t("quantity")}
-              </span>
-
-              <div className="flex items-center gap-3">
-                <div className="flex items-center border border-gray-300 rounded-lg">
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    onClick={() => handleQuantityChange(false)}
-                    disabled={quantity <= 1}
-                    className="w-10 h-10 p-0"
-                  >
-                    <Minus className="w-4 h-4" />
-                  </Button>
-                  <span className="w-12 text-center font-medium">
-                    {quantity}
+            {/* 数量選択・購入（販売不可のときは案内のみ） */}
+            {canBuy ? (
+              <>
+                <div className="space-y-4">
+                  <span className="text-sm font-medium text-gray-900">
+                    {t("quantity")}
                   </span>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    onClick={() => handleQuantityChange(true)}
-                    className="w-10 h-10 p-0"
-                  >
-                    <Plus className="w-4 h-4" />
-                  </Button>
+
+                  <div className="flex items-center gap-3">
+                    <div className="flex items-center border border-gray-300 rounded-lg">
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => handleQuantityChange(false)}
+                        disabled={quantity <= 1}
+                        className="w-10 h-10 p-0"
+                      >
+                        <Minus className="w-4 h-4" />
+                      </Button>
+                      <span className="w-12 text-center font-medium">
+                        {quantity}
+                      </span>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => handleQuantityChange(true)}
+                        className="w-10 h-10 p-0"
+                      >
+                        <Plus className="w-4 h-4" />
+                      </Button>
+                    </div>
+
+                    <div className="text-sm text-gray-600">
+                      {t("subtotal")}:{" "}
+                      {formatPrice(product.price * quantity, locale)}
+                    </div>
+                  </div>
                 </div>
 
-                <div className="text-sm text-gray-600">
-                  {t("subtotal")}: {formatPrice(product.price * quantity)}
-                </div>
+                <Button
+                  onClick={handleAddToCart}
+                  disabled={isAdding}
+                  className={`w-full h-12 text-base font-medium transition-all duration-300 ${
+                    justAdded
+                      ? "bg-green-600 hover:bg-green-700"
+                      : "bg-gray-900 hover:bg-gray-800"
+                  }`}
+                >
+                  {isAdding ? (
+                    <div className="flex items-center">
+                      <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin mr-2" />
+                      {t("adding")}
+                    </div>
+                  ) : justAdded ? (
+                    <div className="flex items-center">
+                      <Check className="w-5 h-5 mr-2" />
+                      {t("addedToCart")}
+                    </div>
+                  ) : (
+                    <div className="flex items-center">
+                      <ShoppingCart className="w-5 h-5 mr-2" />
+                      {t("addToCart")}
+                    </div>
+                  )}
+                </Button>
+              </>
+            ) : (
+              <div className="rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-900">
+                {t("unavailableNotice")}
               </div>
-            </div>
-
-            {/* カートに追加ボタン */}
-            <Button
-              onClick={handleAddToCart}
-              disabled={isAdding}
-              className={`w-full h-12 text-base font-medium transition-all duration-300 ${
-                justAdded
-                  ? "bg-green-600 hover:bg-green-700"
-                  : "bg-gray-900 hover:bg-gray-800"
-              }`}
-            >
-              {isAdding ? (
-                <div className="flex items-center">
-                  <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin mr-2" />
-                  {t("adding")}
-                </div>
-              ) : justAdded ? (
-                <div className="flex items-center">
-                  <Check className="w-5 h-5 mr-2" />
-                  {t("addedToCart")}
-                </div>
-              ) : (
-                <div className="flex items-center">
-                  <ShoppingCart className="w-5 h-5 mr-2" />
-                  {t("addToCart")}
-                </div>
-              )}
-            </Button>
+            )}
 
             {/* 商品詳細情報 */}
             <Card>
@@ -312,7 +324,7 @@ const ProductDetailPage = () => {
                         {relatedProduct.name}
                       </h3>
                       <p className="text-lg font-bold text-gray-900">
-                        {formatPrice(relatedProduct.price)}
+                        {formatPrice(relatedProduct.price, locale)}
                       </p>
                     </div>
                   </CardContent>

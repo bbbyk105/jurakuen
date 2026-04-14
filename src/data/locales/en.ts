@@ -148,6 +148,7 @@ export const products: Product[] = [
       origin: "Shizuoka Prefecture",
       harvestSeason: "flush",
     },
+    availableForPurchase: false,
     stripeProductId: "prod_T1m8TpYi0G0oYm",
     stripePriceId: "price_1S5iZmGWVrFqKZ5xBepROqGt",
     colorClass: "from-green-500 to-green-600",
