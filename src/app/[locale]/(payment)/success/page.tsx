@@ -122,10 +122,13 @@ export default function SuccessPage() {
   };
 
   const formatAmount = (amount: number, currency: string) => {
-    return new Intl.NumberFormat(isJapanese ? "ja-JP" : "en-US", {
+    const cur = currency.toUpperCase();
+    const isJPY = cur === "JPY";
+    return new Intl.NumberFormat(isJPY ? "ja-JP" : "en-US", {
       style: "currency",
-      currency: currency.toUpperCase(),
-    }).format(amount / 100);
+      currency: cur,
+      maximumFractionDigits: isJPY ? 0 : 2,
+    }).format(isJPY ? amount : amount / 100);
   };
 
   if (loading) {

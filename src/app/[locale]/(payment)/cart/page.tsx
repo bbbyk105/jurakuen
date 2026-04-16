@@ -4,7 +4,7 @@
 import { useCart } from "@/store/cart";
 import Image from "next/image";
 import { Link } from "@/i18n/routing";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import {
@@ -18,6 +18,7 @@ import {
   AlertTriangle,
 } from "lucide-react";
 import { formatPrice } from "@/data";
+import { getProductById } from "@/data/utils";
 import { useTranslations } from "next-intl";
 import { useParams } from "next/navigation";
 
@@ -42,8 +43,14 @@ export default function CartPage() {
   const t = useTranslations("cart");
   const tCommon = useTranslations("common");
 
-  // 送料設定（アメリカ向け15ドル、日本向け4ドル）
-  const SHIPPING_COST = locale === "en" ? 15 : 4;
+  // 現在のロケールの商品データから価格を解決（ロケール切替対応）
+  const resolvePrice = (productId: number): number => {
+    const localeProduct = getProductById(productId, locale);
+    return localeProduct?.price ?? 0;
+  };
+
+  // 送料設定（アメリカ向け$15、日本向け¥600）
+  const SHIPPING_COST = locale === "en" ? 15 : 600;
 
   const handleQuantityChange = (productId: number, newQuantity: number) => {
     if (newQuantity < 1) {
@@ -82,8 +89,23 @@ export default function CartPage() {
     setItemToDelete(null);
   };
 
-  // 価格計算
-  const subtotal = getTotalPrice();
+  // 販売終了・購入不可になった商品をカートから除去
+  useEffect(() => {
+    const toRemove = cartItems
+      .filter(
+        (item) =>
+          getProductById(item.product.id, locale)?.availableForPurchase ===
+          false,
+      )
+      .map((item) => item.product.id);
+    toRemove.forEach((id) => removeFromCart(id));
+  }, [cartItems, locale, removeFromCart]);
+
+  // 価格計算（現在のロケールの価格で計算）
+  const subtotal = cartItems.reduce(
+    (acc, item) => acc + resolvePrice(item.product.id) * item.quantity,
+    0,
+  );
   const shippingCost = SHIPPING_COST;
   const totalWithShipping = subtotal + shippingCost;
 
@@ -201,15 +223,17 @@ export default function CartPage() {
                 </Button>
               </div>
 
-              {cartItems.map((item) => (
+              {cartItems.map((item) => {
+                const localeProduct = getProductById(item.product.id, locale) ?? item.product;
+                return (
                 <Card key={item.product.id} className="overflow-hidden">
                   <CardContent className="p-3 sm:p-4 lg:p-6">
                     <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                       {/* 商品画像 */}
                       <div className="relative w-20 h-20 sm:w-20 sm:h-20 lg:w-24 lg:h-24 bg-gray-100 rounded-lg overflow-hidden flex-shrink-0">
                         <Image
-                          src={item.product.image.url}
-                          alt={item.product.image.alt}
+                          src={localeProduct.image.url}
+                          alt={localeProduct.image.alt}
                           fill
                           className="object-cover"
                           sizes="80px"
@@ -221,10 +245,10 @@ export default function CartPage() {
                         <div className="flex justify-between items-start mb-2 sm:mb-3">
                           <div className="flex-1 min-w-0 pr-2">
                             <h3 className="font-medium text-gray-900 line-clamp-2 text-sm sm:text-base">
-                              {item.product.name}
+                              {localeProduct.name}
                             </h3>
                             <p className="text-xs sm:text-sm text-gray-600 mt-1">
-                              {item.product.category}
+                              {localeProduct.category}
                             </p>
                           </div>
                           <Button
@@ -275,11 +299,11 @@ export default function CartPage() {
                           {/* 価格 */}
                           <div className="text-left sm:text-right">
                             <div className="font-medium text-gray-900 text-sm sm:text-base">
-                              {formatPrice(item.product.price * item.quantity)}
+                              {formatPrice(resolvePrice(item.product.id) * item.quantity, locale)}
                             </div>
                             {item.quantity > 1 && (
                               <div className="text-xs sm:text-sm text-gray-500">
-                                {formatPrice(item.product.price)} ×{" "}
+                                {formatPrice(resolvePrice(item.product.id), locale)} ×{" "}
                                 {item.quantity}
                               </div>
                             )}
@@ -289,7 +313,8 @@ export default function CartPage() {
                     </div>
                   </CardContent>
                 </Card>
-              ))}
+                );
+              })}
             </div>
 
             {/* 注文サマリー - モバイルでは下部に表示 */}
@@ -313,14 +338,14 @@ export default function CartPage() {
                       <span className="text-gray-600">
                         {t("summary.subtotal")}
                       </span>
-                      <span>{formatPrice(subtotal)}</span>
+                      <span>{formatPrice(subtotal, locale)}</span>
                     </div>
                     <div className="flex justify-between text-sm">
                       <span className="text-gray-600">
                         {t("summary.shipping")}
                       </span>
                       <span className="text-gray-900">
-                        {formatPrice(shippingCost)}
+                        {formatPrice(shippingCost, locale)}
                       </span>
                     </div>
 
@@ -328,7 +353,7 @@ export default function CartPage() {
                       <div className="flex justify-between font-medium text-base sm:text-lg">
                         <span>{t("summary.total")}</span>
                         <span className="text-gray-900">
-                          {formatPrice(totalWithShipping)}
+                          {formatPrice(totalWithShipping, locale)}
                         </span>
                       </div>
                     </div>

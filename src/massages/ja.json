@@ -29,7 +29,7 @@
         "recentProduct": {
             "title": "有機上煎茶 千代の友",
             "subtitle": "農薬不使用、富士山の湧水で育ったお茶です",
-            "price": "$10"
+            "price": "¥1,400"
         }
     },
     "hero": {
@@ -165,7 +165,8 @@
         "adding": "追加中...",
         "addedToCart": "カートに追加済み",
         "productDetails": "商品詳細",
-        "relatedProducts": "関連商品"
+        "relatedProducts": "関連商品",
+        "unavailableNotice": "季節限定商品のため、現在は売り切れておりご購入いただけません。"
     },
     "productList": {
         "cartInfo": "カート: {count}点",
@@ -174,7 +175,8 @@
         "showAllProducts": "すべての商品を表示",
         "adding": "追加中",
         "added": "追加済み",
-        "add": "追加"
+        "add": "追加",
+        "soldOutSeasonal": "季節限定・売り切れ（購入不可）"
     },
     "commerceLaw": {
         "title": "特定商取引法に基づく表記",
@@ -195,7 +197,7 @@
         "additionalFees": "商品代金以外の必要料金",
         "shipping": "送料：",
         "shippingFees": [
-            "全国一律 $4（税込）"
+            "全国一律 ¥660（税込）"
         ],
         "paymentMethods": "支払方法",
         "paymentMethodsList": [

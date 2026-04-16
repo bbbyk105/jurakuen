@@ -67,6 +67,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
   }, [cartItems, hydrated]);
 
   const addToCart = (product: Product, quantity = 1) => {
+    if (product.availableForPurchase === false) return;
     setCartItems((prev) => {
       const existing = prev.find((item) => item.product.id === product.id);
       if (existing) {

@@ -36,21 +36,39 @@ export const getSortOptions = (locale: string = "ja"): string[] => {
   return data.sortOptions;
 };
 
-// 価格フォーマット（USD表示）
-export const formatPrice = (price: number): string => {
-  return `$${price.toFixed(2)}`;
+// 価格フォーマット（ロケール対応：ja → JPY（税込）、en → USD）
+export const formatPrice = (price: number, locale: string = "ja"): string => {
+  if (locale === "ja") {
+    const taxIncluded = Math.round(price * 1.1);
+    const formatted = new Intl.NumberFormat("ja-JP", {
+      style: "currency",
+      currency: "JPY",
+      maximumFractionDigits: 0,
+    }).format(taxIncluded);
+    return `${formatted}(税込)`;
+  }
+  return new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+    minimumFractionDigits: 2,
+  }).format(price);
 };
 
 // 重量付き価格フォーマット（お茶用）
-export const formatPriceWithWeight = (product: Product): string => {
+export const formatPriceWithWeight = (
+  product: Product,
+  locale: string = "ja",
+): string => {
   const weight = product.details.weight || "20g";
-  return `${weight} $${product.price.toFixed(2)}`;
+  return `${weight} ${formatPrice(product.price, locale)}`;
 };
 
 // ボリューム付き価格フォーマット（エラー修正のため追加）
-export const formatPriceWithVolume = (product: Product): string => {
-  // weightをvolumeとして扱う場合
-  return formatPriceWithWeight(product);
+export const formatPriceWithVolume = (
+  product: Product,
+  locale: string = "ja",
+): string => {
+  return formatPriceWithWeight(product, locale);
 };
 
 // 商品詳細の取得（お茶用国際化対応）
@@ -106,6 +124,9 @@ export const getProductById = (
   const products = getProducts(locale);
   return products.find((product) => product.id === id);
 };
+
+export const isAvailableForPurchase = (product: Product): boolean =>
+  product.availableForPurchase !== false;
 
 // カテゴリ別商品取得（国際化対応）
 export const getProductsByCategory = (

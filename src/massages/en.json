@@ -198,7 +198,8 @@
         "adding": "Adding...",
         "addedToCart": "Added to Cart",
         "productDetails": "Product Details",
-        "relatedProducts": "Related Products"
+        "relatedProducts": "Related Products",
+        "unavailableNotice": "This seasonal item is currently sold out and cannot be purchased."
     },
     "productList": {
         "heroDescription": "Introducing traditional and innovative Japanese sake and specialty products brewed at the foot of Mount Fuji",
@@ -208,7 +209,8 @@
         "showAllProducts": "Show All Products",
         "adding": "Adding...",
         "added": "Added",
-        "add": "Add"
+        "add": "Add",
+        "soldOutSeasonal": "Seasonal — sold out"
     },
     "commerceLaw": {
         "title": "Legal Disclosure Based on Specified Commercial Transactions Act",
@@ -229,7 +231,7 @@
         "additionalFees": "Additional Fees Besides Product Price",
         "shipping": "Shipping:",
         "shippingFees": [
-            "Nationwide flat rate $4 (tax included)"
+            "Flat rate $15 (tax included)"
         ],
         "paymentMethods": "Payment Methods",
         "paymentMethodsList": [

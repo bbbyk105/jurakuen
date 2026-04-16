@@ -12,36 +12,13 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {});
 
 type Item = { id: number; quantity: number };
 
-async function findAndValidatePriceId(id: number): Promise<string> {
-  // 商品データからPrice IDを取得
-  const product =
-    enProducts.find((x) => x.id === id) ?? jaProducts.find((x) => x.id === id);
-
+function findProduct(id: number, locale: "ja" | "en") {
+  const products = locale === "ja" ? jaProducts : enProducts;
+  const product = products.find((x) => x.id === id);
   if (!product) {
     throw new Error(`商品ID ${id} が見つかりません`);
   }
-
-  if (!product.stripePriceId) {
-    throw new Error(
-      `商品 "${product.name}" (ID: ${id}) のStripe Price IDが設定されていません。` +
-        `商品データファイルでstripePriceIdを確認してください。`,
-    );
-  }
-
-  // Stripeで実際にPrice IDが存在するかチェック
-  try {
-    await stripe.prices.retrieve(product.stripePriceId);
-    return product.stripePriceId;
-  } catch (stripeError) {
-    if (stripeError instanceof Stripe.errors.StripeError) {
-      throw new Error(
-        `Stripe Price ID "${product.stripePriceId}" が存在しません。` +
-          `Stripeダッシュボードで価格を作成するか、商品データの stripePriceId を正しい値に更新してください。` +
-          `商品: "${product.name}" (ID: ${id})`,
-      );
-    }
-    throw stripeError;
-  }
+  return product;
 }
 
 function inferLocaleFromReferer(req: NextRequest): "ja" | "en" {
@@ -64,14 +41,44 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "カートが空です" }, { status: 400 });
     }
 
-    // 各商品のPrice IDを検証
+    const origin = req.nextUrl.origin;
+    const locale = inferLocaleFromReferer(req);
+    const currency = locale === "ja" ? "jpy" : "usd";
+
+    // 各商品のline_itemsを構築（price_dataで通貨を動的に設定）
     const line_items: Stripe.Checkout.SessionCreateParams.LineItem[] = [];
 
     for (const item of items) {
       try {
-        const priceId = await findAndValidatePriceId(item.id);
+        const product = findProduct(item.id, locale);
+        if (product.availableForPurchase === false) {
+          return NextResponse.json(
+            {
+              error:
+                locale === "ja"
+                  ? "この商品は季節限定のため、現在ご購入いただけません。"
+                  : "This seasonal item is currently sold out and unavailable for purchase.",
+              productId: item.id,
+            },
+            { status: 400 },
+          );
+        }
+        // JPYは税込（小数なし）、USDはセント単位
+        const unitAmount =
+          currency === "jpy"
+            ? Math.round(product.price * 1.1)
+            : Math.round(product.price * 100);
         line_items.push({
-          price: priceId,
+          price_data: {
+            currency,
+            product_data: {
+              name: product.name,
+              images: product.image?.url
+                ? [`${origin}${product.image.url}`]
+                : [],
+            },
+            unit_amount: unitAmount,
+          },
           quantity: item.quantity > 0 ? item.quantity : 1,
         });
       } catch (validationError) {
@@ -91,10 +98,7 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    const origin = req.nextUrl.origin;
-    const locale = inferLocaleFromReferer(req);
-
-    // 送料オプション（英語＝アメリカ向け15ドル、日本語＝日本向け4ドル）
+    // 送料オプション（英語＝アメリカ向け$15、日本語＝日本向け¥600）
     const isUS = locale === "en";
     const shippingOptions: Stripe.Checkout.SessionCreateParams.ShippingOption[] =
       [
@@ -102,8 +106,8 @@ export async function POST(req: NextRequest) {
           shipping_rate_data: {
             type: "fixed_amount",
             fixed_amount: {
-              amount: isUS ? 1500 : 400, // 15ドル or 4ドル
-              currency: "usd",
+              amount: isUS ? 1500 : 660, // $15 (cents) or ¥660（税込）
+              currency,
             },
             display_name: locale === "ja" ? "標準配送" : "Standard Shipping",
             delivery_estimate: {

@@ -23,6 +23,8 @@ export interface Product {
     weight?: string; // for matcha
   };
   stock?: number;
+  /** false のときカート追加・決済不可（未指定は販売可） */
+  availableForPurchase?: boolean;
   stripeProductId?: string;
   stripePriceId?: string;
   colorClass?: string; // for legacy compatibility
