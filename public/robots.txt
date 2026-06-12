@@ -5,6 +5,6 @@ Allow: /
 Sitemap: https://www.jurakuen.com/sitemap.xml
 
 # 不要なページをクロール対象外に
+# 注意: /_next/ はCSS/JSの配信パスなのでブロックしない（レンダリングに必要）
 Disallow: /api/
-Disallow: /_next/
 Disallow: /admin/

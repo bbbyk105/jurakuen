@@ -2,7 +2,7 @@
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
-import { useRouter, useParams } from "next/navigation";
+import { useParams } from "next/navigation";
 import { ShoppingCart, Check, Plus, ChevronDown } from "lucide-react";
 import { useTranslations } from "next-intl";
 
@@ -33,7 +33,6 @@ interface ProductCardProps {
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ product, locale }) => {
-  const router = useRouter();
   const { addToCart } = useCart();
   const [isAdding, setIsAdding] = useState(false);
   const [justAdded, setJustAdded] = useState(false);
@@ -41,6 +40,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, locale }) => {
   const canBuy = isAvailableForPurchase(product);
 
   const handleAddToCart = (e: React.MouseEvent) => {
+    // Link 内のボタンなので、カート追加時はカード遷移を止める
+    e.preventDefault();
     e.stopPropagation();
     if (!canBuy) return;
     setIsAdding(true);
@@ -53,11 +54,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, locale }) => {
   };
 
   return (
-    <Card
-      className="group bg-transparent border-none shadow-none cursor-pointer"
-      onClick={() => router.push(`/${locale}/products/${product.id}`)}
-    >
-      <CardContent className="p-0">
+    <Link href={`/products/${product.id}`} className="block">
+      <Card className="group bg-transparent border-none shadow-none cursor-pointer">
+        <CardContent className="p-0">
         {/* Image - 1.3倍拡大対応 */}
         <div className="relative aspect-square bg-[#eeedeb] overflow-hidden">
           <Image
@@ -117,8 +116,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, locale }) => {
             {formatPrice(product.price, locale)}
           </p>
         </div>
-      </CardContent>
-    </Card>
+        </CardContent>
+      </Card>
+    </Link>
   );
 };
 

@@ -28,7 +28,6 @@ export default function CartPage() {
     removeFromCart,
     updateQuantity,
     clearCart,
-    getTotalPrice,
     getTotalQuantity,
   } = useCart();
   const [loading, setLoading] = useState(false);

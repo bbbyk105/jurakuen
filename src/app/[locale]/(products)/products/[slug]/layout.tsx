@@ -4,6 +4,7 @@ import { buildPageMeta } from "@/lib/seo/meta";
 import { getSiteUrl } from "@/lib/seo/site-url";
 import { getProductById } from "@/data/utils";
 import type { Product } from "@/data/types";
+import { JsonLd } from "@/components/JsonLd";
 
 function buildProductJsonLd(product: Product, locale: string, path: string) {
   const siteUrl = getSiteUrl();
@@ -121,8 +122,6 @@ export async function generateMetadata({
       : `${siteUrl}${product.image.url}`,
   });
 
-  const jsonLd = buildProductJsonLd(product, locale, path);
-
   return {
     ...baseMeta,
     openGraph: {
@@ -131,16 +130,30 @@ export async function generateMetadata({
         { url: imageUrl, width: 400, height: 400, alt: product.image.alt },
       ],
     },
-    other: {
-      "application/ld+json": JSON.stringify(jsonLd),
-    },
   };
 }
 
-export default function ProductSlugLayout({
+export default async function ProductSlugLayout({
   children,
+  params,
 }: {
   children: React.ReactNode;
+  params: Promise<{ slug: string }>;
 }) {
-  return children;
+  const { slug } = await params;
+  const locale = await getLocale();
+  const product = getProductById(parseInt(slug, 10), locale);
+
+  if (!product) {
+    return children;
+  }
+
+  const path = `/${locale}/products/${slug}`;
+
+  return (
+    <>
+      <JsonLd data={buildProductJsonLd(product, locale, path)} />
+      {children}
+    </>
+  );
 }

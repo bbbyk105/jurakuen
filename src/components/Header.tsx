@@ -102,9 +102,9 @@ export default function Header() {
               {/* Recent Product */}
               <div className="relative pt-4 pb-8 px-6 bg-gradient-to-b from-emerald-800/80 to-transparent">
                 <div className="flex items-center justify-between mb-6">
-                  <h3 className="text-lg font-serif tracking-wide text-emerald-100">
+                  <p className="text-lg font-serif tracking-wide text-emerald-100">
                     {t("mobile.recentProduct")}
-                  </h3>
+                  </p>
                   <Link
                     href="/products"
                     className="text-sm flex items-center gap-1 hover:text-emerald-200 transition-colors text-emerald-300"
@@ -126,9 +126,9 @@ export default function Header() {
                     />
                   </div>
                   <div className="flex flex-col justify-center text-xs space-y-1">
-                    <h4 className="font-medium text-sm leading-snug text-emerald-100">
+                    <p className="font-medium text-sm leading-snug text-emerald-100">
                       {recentProduct.title}
-                    </h4>
+                    </p>
                     <p className="text-emerald-300">{recentProduct.subtitle}</p>
                     <p className="mt-1 text-emerald-200 font-medium">
                       {recentProduct.price}
