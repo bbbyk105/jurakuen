@@ -4,7 +4,9 @@ import React, { useState, useMemo } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import { useParams, useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
+import { notFound } from "next/navigation";
+import { Link } from "@/i18n/routing";
 import { ShoppingCart, ArrowLeft, Minus, Plus, Check } from "lucide-react";
 
 import { useCart } from "@/store/cart";
@@ -19,7 +21,6 @@ import { useTranslations } from "next-intl";
 
 const ProductDetailPage = () => {
   const params = useParams();
-  const router = useRouter();
   const { addToCart } = useCart();
 
   const locale = params.locale as string;
@@ -45,23 +46,9 @@ const ProductDetailPage = () => {
       .slice(0, 4);
   }, [product, locale]);
 
+  // 存在しない商品は HTTP 404 を返す（ソフト404にしない）
   if (!product) {
-    return (
-      <div className="min-h-screen bg-gray-50 pt-16 flex items-center justify-center">
-        <div className="text-center">
-          <h1 className="text-2xl font-bold text-gray-900 mb-4">
-            {t("productNotFound")}
-          </h1>
-          <Button
-            onClick={() => router.push(`/${locale}/products`)}
-            variant="outline"
-          >
-            <ArrowLeft className="w-4 h-4 mr-2" />
-            {t("backToProducts")}
-          </Button>
-        </div>
-      </div>
-    );
+    notFound();
   }
 
   const handleAddToCart = async () => {
@@ -104,13 +91,13 @@ const ProductDetailPage = () => {
       <div className="bg-white border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center gap-2 text-sm text-gray-600">
-            <button
-              onClick={() => router.push(`/${locale}/products`)}
+            <Link
+              href="/products"
               className="flex items-center hover:text-gray-900 transition-colors"
             >
               <ArrowLeft className="w-4 h-4 mr-1" />
               {t("productList")}
-            </button>
+            </Link>
             <span>/</span>
             <span className="text-gray-900">{product.name}</span>
           </div>
@@ -303,32 +290,32 @@ const ProductDetailPage = () => {
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {relatedProducts.map((relatedProduct) => (
-                <Card
+                <Link
                   key={relatedProduct.id}
-                  className="border-none shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02] cursor-pointer"
-                  onClick={() =>
-                    router.push(`/${locale}/products/${relatedProduct.id}`)
-                  }
+                  href={`/products/${relatedProduct.id}`}
+                  className="block"
                 >
-                  <CardContent className="p-0">
-                    <div className="relative aspect-square bg-gray-50 overflow-hidden">
-                      <Image
-                        src={relatedProduct.image.url}
-                        alt={relatedProduct.image.alt}
-                        fill
-                        className="object-cover scale-[1.3]"
-                      />
-                    </div>
-                    <div className="p-4 space-y-2">
-                      <h3 className="font-medium text-gray-900 text-sm line-clamp-2">
-                        {relatedProduct.name}
-                      </h3>
-                      <p className="text-lg font-bold text-gray-900">
-                        {formatPrice(relatedProduct.price, locale)}
-                      </p>
-                    </div>
-                  </CardContent>
-                </Card>
+                  <Card className="border-none shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02] cursor-pointer">
+                    <CardContent className="p-0">
+                      <div className="relative aspect-square bg-gray-50 overflow-hidden">
+                        <Image
+                          src={relatedProduct.image.url}
+                          alt={relatedProduct.image.alt}
+                          fill
+                          className="object-cover scale-[1.3]"
+                        />
+                      </div>
+                      <div className="p-4 space-y-2">
+                        <h3 className="font-medium text-gray-900 text-sm line-clamp-2">
+                          {relatedProduct.name}
+                        </h3>
+                        <p className="text-lg font-bold text-gray-900">
+                          {formatPrice(relatedProduct.price, locale)}
+                        </p>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </Link>
               ))}
             </div>
           </div>

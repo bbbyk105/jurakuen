@@ -50,6 +50,7 @@ export function buildPageMeta({
       languages: {
         ja: `${siteUrl}/ja${pathWithoutLocale}`,
         en: `${siteUrl}/en${pathWithoutLocale}`,
+        "x-default": `${siteUrl}/ja${pathWithoutLocale}`,
       },
     },
     openGraph: {

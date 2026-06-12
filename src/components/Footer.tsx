@@ -14,7 +14,7 @@ export const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
           {/* Company Info */}
           <div className="space-y-6">
-            <h3 className="text-xl font-semibold mb-4">{t("companyName")}</h3>
+            <p className="text-xl font-semibold mb-4">{t("companyName")}</p>
             <div className="space-y-3">
               <div className="flex items-start space-x-3 text-sm text-green-100">
                 <FaMapMarkerAlt className="w-4 h-4 mt-1 text-green-300 shrink-0" />
@@ -32,9 +32,9 @@ export const Footer: React.FC = () => {
 
           {/* Products Section */}
           <div className="space-y-6">
-            <h3 className="text-lg font-semibold mb-4">
+            <p className="text-lg font-semibold mb-4">
               {t("sections.products.title")}
-            </h3>
+            </p>
             <div>
               <Link
                 href="/products"
@@ -50,9 +50,9 @@ export const Footer: React.FC = () => {
 
           {/* Company Links */}
           <div className="space-y-6">
-            <h3 className="text-lg font-semibold mb-4">
+            <p className="text-lg font-semibold mb-4">
               {t("sections.company.title")}
-            </h3>
+            </p>
             <nav>
               <ul className="space-y-3">
                 <li>
@@ -101,9 +101,9 @@ export const Footer: React.FC = () => {
 
           {/* Contact & Social */}
           <div className="space-y-6">
-            <h3 className="text-lg font-semibold mb-4">
+            <p className="text-lg font-semibold mb-4">
               {t("sections.contact.title")}
-            </h3>
+            </p>
             <div className="space-y-4">
               <div>
                 <p className="text-sm text-green-200 mb-2">

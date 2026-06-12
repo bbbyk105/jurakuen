@@ -28,7 +28,8 @@ const FAQ = () => {
               <AccordionTrigger>
                 {tAboutPage(`faq.items.${key}.question`)}
               </AccordionTrigger>
-              <AccordionContent>
+              {/* forceMount: 閉じた回答も初期HTMLに含めてインデックス可能にする */}
+              <AccordionContent forceMount>
                 {tAboutPage(`faq.items.${key}.answer`)}
               </AccordionContent>
             </AccordionItem>
