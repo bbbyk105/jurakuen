@@ -91,7 +91,10 @@ const FujiHeritage = () => {
       </section>
 
       {/* Sacred Blessing with Logo */}
-      <section className="py-16 md:py-20 lg:py-24 bg-gray-900 text-white relative overflow-hidden">
+      <section
+        className="py-16 md:py-20 lg:py-24 text-white relative overflow-hidden"
+        style={{ backgroundColor: "#14241b" }}
+      >
         <div className="max-w-4xl mx-auto px-4 md:px-6 lg:px-0 text-center relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
