@@ -174,20 +174,6 @@ export default function Hero() {
         ))}
       </div>
 
-      {/* ------------------------------ 和風パターン（波模様） ------------------------------ */}
-      <div className="absolute bottom-0 left-0 w-full h-20 z-10 pointer-events-none">
-        <svg
-          className="w-full h-full text-white/5"
-          viewBox="0 0 1200 100"
-          preserveAspectRatio="none"
-        >
-          <path
-            d="M0,40 Q150,10 300,40 T600,40 T900,40 T1200,40 L1200,100 L0,100 Z"
-            fill="currentColor"
-          />
-        </svg>
-      </div>
-
       {/* ------------------------------ Styles ------------------------------ */}
       <style jsx>{`
         @import url("https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap");
