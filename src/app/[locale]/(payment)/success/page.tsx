@@ -69,6 +69,45 @@ export default function SuccessPage() {
     fetchSessionData();
   }, [fetchSessionData]);
 
+  // Webhook が領収書を送ったかどうかを確認する。ここでは送信しない。
+  useEffect(() => {
+    if (!sessionId || session?.payment_status !== "paid") return;
+
+    let cancelled = false;
+    let attempts = 0;
+    let timer: ReturnType<typeof setTimeout> | undefined;
+
+    const tick = async () => {
+      if (cancelled || attempts >= 6) return;
+      attempts += 1;
+      try {
+        const response = await fetch(
+          `/api/send-receipt?session_id=${encodeURIComponent(sessionId)}`,
+        );
+        if (response.ok) {
+          const data = (await response.json()) as {
+            customerReceipt?: string;
+          };
+          if (!cancelled && data.customerReceipt === "sent") {
+            setReceiptSent(true);
+            return;
+          }
+        }
+      } catch {
+        // 状態確認に失敗しても、ボタンからの送信は残す
+      }
+      if (!cancelled && attempts < 6) {
+        timer = setTimeout(tick, 2000);
+      }
+    };
+
+    void tick();
+    return () => {
+      cancelled = true;
+      if (timer) clearTimeout(timer);
+    };
+  }, [sessionId, session]);
+
   // リダイレクトのカウントダウンと実行
   useEffect(() => {
     if (redirectCountdown === null || redirectCountdown <= 0) return;
@@ -103,10 +142,13 @@ export default function SuccessPage() {
         throw new Error(errorData.error || "領収書の送信に失敗しました");
       }
 
+      const data = (await response.json()) as { alreadySent?: boolean };
       setReceiptSent(true);
 
-      // 3秒後にホームページへリダイレクト開始
-      setRedirectCountdown(3);
+      // 自動送信済みの確認ではページを閉じない。この操作で初めて送ったときだけ戻す。
+      if (!data.alreadySent) {
+        setRedirectCountdown(3);
+      }
     } catch (err) {
       console.error("領収書送信エラー:", err);
       alert(
@@ -247,9 +289,13 @@ export default function SuccessPage() {
 
             <div className="bg-blue-50 p-4 rounded-lg">
               <p className="text-sm text-blue-800 mb-3">
-                {isJapanese
-                  ? "領収書をメールでお送りします。下のボタンをクリックしてください。"
-                  : "We can send your receipt via email. Click the button below."}
+                {receiptSent
+                  ? isJapanese
+                    ? "領収書をご入力のメールアドレスへ送信しました。届かない場合は迷惑メールフォルダもご確認ください。"
+                    : "Your receipt has been sent to the email address you entered. Please also check your spam folder."
+                  : isJapanese
+                    ? "領収書はお支払い完了時に自動で送信されます。しばらく待っても届かないときだけ、下のボタンを押してください。同じ領収書が二重に送られることはありません。"
+                    : "Your receipt is sent automatically when payment completes. Use the button below only if it does not arrive. The same receipt will not be sent twice."}
               </p>
 
               <Button
@@ -271,8 +317,8 @@ export default function SuccessPage() {
                         ? `送信完了！ ${redirectCountdown}秒後にホームへ移動...`
                         : `Sent! Redirecting to home in ${redirectCountdown}s...`
                       : isJapanese
-                      ? "送信完了！"
-                      : "Sent!"}
+                      ? "送信済み"
+                      : "Already sent"}
                   </>
                 ) : (
                   <>
