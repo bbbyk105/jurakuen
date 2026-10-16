@@ -20,6 +20,13 @@ interface LanguageSelectorProps {
   onLanguageChange?: () => void;
 }
 
+function persistPreferredLocale(loc: string) {
+  document.cookie = `preferred-locale=${loc}; path=/; max-age=${
+    365 * 24 * 60 * 60
+  }; SameSite=Lax`;
+  localStorage.setItem("preferred-language", loc);
+}
+
 export const LanguageSelector = ({
   variant = "desktop",
   onLanguageChange,
@@ -49,10 +56,7 @@ export const LanguageSelector = ({
   const handleLanguageChange = (loc: string) => {
     // クッキーに保存（ミドルウェアと連携）
     if (typeof window !== "undefined") {
-      document.cookie = `preferred-locale=${loc}; path=/; max-age=${
-        365 * 24 * 60 * 60
-      }; SameSite=Lax`;
-      localStorage.setItem("preferred-language", loc);
+      persistPreferredLocale(loc);
     }
 
     router.replace(pathname, { locale: loc });

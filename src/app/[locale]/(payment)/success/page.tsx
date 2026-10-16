@@ -1,7 +1,7 @@
 // src/app/[locale]/success/page.tsx
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Mail, Check, Loader2 } from "lucide-react";
@@ -37,37 +37,38 @@ export default function SuccessPage() {
   // isJapaneseを安全に計算（sessionがnullの場合も考慮）
   const isJapanese = session?.metadata?.locale === "ja";
 
-  // fetchSessionDataをuseCallbackでメモ化
-  const fetchSessionData = useCallback(async () => {
-    if (!sessionId) {
-      setError("セッションIDが見つかりません");
-      setLoading(false);
-      return;
-    }
-
-    try {
-      setLoading(true);
-      const response = await fetch(`/api/checkout?session_id=${sessionId}`);
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(
-          errorData.error || "セッション情報の取得に失敗しました"
-        );
-      }
-
-      const data = await response.json();
-      setSession(data.session);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "エラーが発生しました");
-    } finally {
-      setLoading(false);
-    }
-  }, [sessionId]);
-
   useEffect(() => {
-    fetchSessionData();
-  }, [fetchSessionData]);
+    if (!sessionId) return;
+
+    let cancelled = false;
+
+    async function load() {
+      try {
+        const response = await fetch(`/api/checkout?session_id=${sessionId}`);
+
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(
+            errorData.error || "セッション情報の取得に失敗しました"
+          );
+        }
+
+        const data = await response.json();
+        if (!cancelled) setSession(data.session);
+      } catch (err) {
+        if (!cancelled) {
+          setError(err instanceof Error ? err.message : "エラーが発生しました");
+        }
+      } finally {
+        if (!cancelled) setLoading(false);
+      }
+    }
+
+    void load();
+    return () => {
+      cancelled = true;
+    };
+  }, [sessionId]);
 
   // Webhook が領収書を送ったかどうかを確認する。ここでは送信しない。
   useEffect(() => {
@@ -173,7 +174,10 @@ export default function SuccessPage() {
     }).format(isJPY ? amount : amount / 100);
   };
 
-  if (loading) {
+  const shownError = sessionId ? error : "セッションIDが見つかりません";
+  const shownLoading = Boolean(sessionId) && loading;
+
+  if (shownLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="flex items-center space-x-2">
@@ -184,13 +188,13 @@ export default function SuccessPage() {
     );
   }
 
-  if (error) {
+  if (shownError) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <Card className="w-full max-w-md">
           <CardContent className="pt-6">
             <div className="text-center">
-              <p className="text-red-600">{error}</p>
+              <p className="text-red-600">{shownError}</p>
             </div>
           </CardContent>
         </Card>

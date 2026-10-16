@@ -57,6 +57,8 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const [hydrated, setHydrated] = useState(false);
 
   useEffect(() => {
+    // localStorage はマウント後にしか読めない
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setCartItems(loadCartFromStorage());
     setHydrated(true);
   }, []);

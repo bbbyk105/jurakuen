@@ -8,7 +8,13 @@ import { products as jaProducts } from "@/data/locales/ja";
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {});
+let stripe: Stripe | undefined;
+
+// モジュール読み込み時に初期化すると、キー未設定のビルドで設定収集が落ちる。
+function getStripe(): Stripe {
+  stripe ??= new Stripe(process.env.STRIPE_SECRET_KEY!, {});
+  return stripe;
+}
 
 type Item = { id: number; quantity: number };
 
@@ -124,7 +130,7 @@ export async function POST(req: NextRequest) {
         },
       ];
 
-    const session = await stripe.checkout.sessions.create({
+    const session = await getStripe().checkout.sessions.create({
       mode: "payment",
       locale: locale === "ja" ? "ja" : "en",
       line_items,
@@ -213,7 +219,7 @@ export async function GET(req: NextRequest) {
       );
     }
 
-    const session = await stripe.checkout.sessions.retrieve(sessionId, {
+    const session = await getStripe().checkout.sessions.retrieve(sessionId, {
       expand: ["customer_details", "line_items"],
     });
 

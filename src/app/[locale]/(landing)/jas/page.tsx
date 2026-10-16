@@ -41,6 +41,25 @@ const Rule = ({ className = "" }: { className?: string }) => (
   />
 );
 
+// 有機JASマーク。描画関数の中で定義すると再作成される。
+const JASMark = ({
+  className = "w-20 h-12",
+  priority = false,
+}: {
+  className?: string;
+  priority?: boolean;
+}) => (
+  <div className={`relative ${className}`}>
+    <Image
+      src="/images/jas.webp"
+      alt="有機JASマーク"
+      fill
+      className="object-contain"
+      priority={priority}
+    />
+  </div>
+);
+
 export default function JASPage() {
   const t = useTranslations("jas");
 
@@ -62,19 +81,6 @@ export default function JASPage() {
     { titleKey: "benefits.nutrition.title", descriptionKey: "benefits.nutrition.description" },
     { titleKey: "benefits.safety.title", descriptionKey: "benefits.safety.description" },
   ];
-
-  // 有機JASマーク
-  const JASMark = ({ className = "w-20 h-12", priority = false }) => (
-    <div className={`relative ${className}`}>
-      <Image
-        src="/images/jas.webp"
-        alt="有機JASマーク"
-        fill
-        className="object-contain"
-        priority={priority}
-      />
-    </div>
-  );
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: WASHI }}>
