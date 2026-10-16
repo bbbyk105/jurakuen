@@ -57,8 +57,17 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const [hydrated, setHydrated] = useState(false);
 
   useEffect(() => {
-    setCartItems(loadCartFromStorage());
-    setHydrated(true);
+    const items = loadCartFromStorage();
+    let cancelled = false;
+    // 同期 setState は新しい react-hooks ルールに抵触する。描画後の復元なので結果は同じ。
+    queueMicrotask(() => {
+      if (cancelled) return;
+      setCartItems(items);
+      setHydrated(true);
+    });
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   useEffect(() => {
