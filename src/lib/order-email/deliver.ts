@@ -1,5 +1,5 @@
 import { randomUUID } from "node:crypto";
-import nodemailer from "nodemailer";
+import nodemailer, { type Transporter } from "nodemailer";
 import type Stripe from "stripe";
 
 import { getStripe } from "../stripe-client";
@@ -68,9 +68,9 @@ export type OrderEmailDeps = {
   sleep?: (ms: number) => Promise<void>;
 };
 
-let transporter: nodemailer.Transporter | null = null;
+let transporter: Transporter | null = null;
 
-function getTransporter(): nodemailer.Transporter {
+function getTransporter(): Transporter {
   if (!transporter) {
     const port = Number.parseInt(process.env.SMTP_PORT || "587", 10);
     transporter = nodemailer.createTransport({
