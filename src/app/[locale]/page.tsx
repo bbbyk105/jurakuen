@@ -84,7 +84,6 @@ const JurakuEnLanding = () => (
       urls={[
         "https://www.instagram.com/p/Dd8JCuQRUHf/",
         "https://www.instagram.com/p/Dc8VLT7xW8C/",
-        "https://www.instagram.com/p/DaM0cWNCe7F/",
       ]}
     />
     <Video />
