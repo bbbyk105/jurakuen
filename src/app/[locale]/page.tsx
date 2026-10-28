@@ -82,8 +82,8 @@ const JurakuEnLanding = () => (
     <StoryProducer />
     <InstagramShowcase
       urls={[
-        "https://www.instagram.com/p/DWx6vYPka7l/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
-        "https://www.instagram.com/p/DNiFe3yRC94/",
+        "https://www.instagram.com/p/Dd8JCuQRUHf/",
+        "https://www.instagram.com/p/Dc8VLT7xW8C/",
       ]}
     />
     <Video />
